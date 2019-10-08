@@ -16,44 +16,128 @@
             android:layout_height="50dp"
             android:layout_marginTop="10dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:orientation="horizontal">
+            <RelativeLayout
+                android:id="@+id/default_top_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30dp"
+                    android:text="App Name"
+                    android:textColor="#000"
+                    android:textSize="22sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/camera_btn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="25dp"
+                        android:src="@drawable/ic_camera" />
+
+                    <ImageView
+                        android:id="@+id/search_btn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="25dp"
+                        android:src="@drawable/ic_search" />
+
+                    <com.mikhaellopez.circularimageview.CircularImageView
+                        android:id="@+id/user_profile_btn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="15dp"
+                        android:src="@drawable/ic_user" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/camera_btn"
+                    android:id="@+id/back_btn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginRight="25dp"
-                    android:src="@drawable/ic_camera" />
+                    android:src="@drawable/ic_back"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"/>
 
-                <ImageView
-                    android:id="@+id/search_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="25dp"
-                    android:src="@drawable/ic_search" />
 
-                <com.mikhaellopez.circularimageview.CircularImageView
-                    android:id="@+id/user_profile_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/ic_user" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:cardBackgroundColor="@color/chat_list_item_select"
+                    app:cardCornerRadius="20dp"
+                    android:layout_toRightOf="@+id/back_btn"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp">
 
-            </LinearLayout>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="@color/chat_list_item_select_inner"
+                        app:cardCornerRadius="20dp"
+                        android:layout_toRightOf="@+id/back_btn"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="2dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="30dp"
-                android:text="App Name"
-                android:textColor="#000"
-                android:textSize="22sp" />
+                        <TextView
+                            android:id="@+id/selected_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="10"
+                            android:textSize="17sp"
+                            android:gravity="center"
+                            android:textColor="@color/chat_list_item_select"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="15dp">
+
+                    <ImageView
+                        android:id="@+id/delete_btn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_delete"
+                        android:layout_marginRight="30dp"/>
+
+                    <ImageView
+                        android:id="@+id/mute_btn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_mute"
+                        android:layout_marginRight="30dp"/>
+
+                    <ImageView
+                        android:id="@+id/more_btn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_more" />
+
+                </LinearLayout>
+                
+            </RelativeLayout>
 
         </RelativeLayout>
 
@@ -199,25 +283,19 @@
                 app:layout_constraintStart_toEndOf="@+id/cardView3"
                 app:layout_constraintWidth_percent="0.6"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/tabs_fix">
+                android:background="@drawable/tabs"
+                android:outlineSpotShadowColor="#000">
 
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     app:layout_constraintWidth_percent="0.5"
-                    android:background="@drawable/tab_selection_fix"
+                    android:background="@drawable/tab_selection"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
                     android:layout_marginLeft="20dp"
                     app:layout_constraintStart_toStartOf="@+id/cardView">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="CHATS"
-                        android:textColor="#2AC690"
-                        android:gravity="center"
-                        android:textSize="15sp"/>
 
                 </RelativeLayout>
 
@@ -226,11 +304,14 @@
                     android:layout_height="match_parent"
                     android:background="null"
                     app:tabIndicatorHeight="0dp"
-                    app:tabSelectedTextColor="#2AC690">
+                    app:tabSelectedTextColor="#2AC690"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="Chats" />
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
