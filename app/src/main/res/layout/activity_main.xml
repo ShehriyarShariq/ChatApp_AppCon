@@ -20,14 +20,14 @@
                 android:id="@+id/default_top_bar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="invisible">
+                android:visibility="visible">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="30dp"
-                    android:text="App Name"
+                    android:text="@string/app_name"
                     android:textColor="#000"
                     android:textSize="22sp" />
 
@@ -65,12 +65,13 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/back_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:src="@drawable/ic_back"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"/>
@@ -120,14 +121,21 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/ic_delete"
-                        android:layout_marginRight="30dp"/>
+                        android:layout_marginRight="22.5dp"/>
 
                     <ImageView
                         android:id="@+id/mute_btn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/ic_mute"
-                        android:layout_marginRight="30dp"/>
+                        android:layout_marginRight="22.5dp"/>
+
+                    <ImageView
+                        android:id="@+id/archive_btn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_archive"
+                        android:layout_marginRight="22.5dp"/>
 
                     <ImageView
                         android:id="@+id/more_btn"
@@ -176,27 +184,35 @@
                     android:orientation="vertical"
                     android:visibility="visible">
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
-                        android:gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="25dp"
+                            android:id="@+id/pin_img"
+                            android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:layout_marginRight="10dp"
-                            android:src="@drawable/ic_pin" />
+                            android:src="@drawable/ic_pin"
+                            android:gravity="center_vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Pinned"
                             android:textColor="#000"
-                            android:textSize="19sp" />
+                            android:textSize="15sp"
+                            android:gravity="center_vertical"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/pin_img"
+                            android:layout_marginLeft="10dp"/>
 
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/pinned_chats_list"
@@ -214,27 +230,35 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
-                        android:gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="25dp"
+                            android:id="@+id/msg_img"
+                            android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:layout_marginRight="10dp"
-                            android:src="@drawable/ic_msg" />
+                            android:src="@drawable/ic_msg"
+                            android:gravity="center_vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="All Chats"
                             android:textColor="#000"
-                            android:textSize="19sp" />
+                            android:textSize="15sp"
+                            android:gravity="center_vertical"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/msg_img"
+                            android:layout_marginLeft="10dp"/>
 
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/all_chats_list"
@@ -354,5 +378,190 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/dialog_background"
+            android:alpha="0.5"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                app:cardCornerRadius="15dp"
+                app:cardBackgroundColor="#FFF"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                android:layout_marginTop="15dp"
+                android:elevation="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/delete_conv_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/delete_heading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Delete X Selected Chat(s)"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="#000"
+                        android:layout_marginLeft="5dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="This action cannot be undone"
+                        android:textSize="17sp"
+                        android:layout_marginTop="12dp"
+                        android:textColor="#000"
+                        android:layout_marginLeft="5dp"/>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Delete Media"
+                            android:textStyle="bold"
+                            android:textSize="17sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="17sp"
+                            android:textColor="@color/chat_list_item_read"
+                            android:text="Cancel"
+                            android:layout_toLeftOf="@+id/confirm_delete_btn"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/confirm_delete_btn"
+                            android:layout_width="90dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            app:cardBackgroundColor="@color/chat_list_item_delete"
+                            app:cardCornerRadius="5dp"
+                            android:layout_centerVertical="true">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Delete"
+                                android:textColor="#FFF"
+                                android:textSize="17sp"
+                                android:layout_margin="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:translationY="-2dp"/>
+
+                        </androidx.cardview.widget.CardView>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/archive_conv_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/archive_heading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Archive X Selected Chat(s)"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="#000"
+                        android:layout_marginLeft="5dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Selected chat(s) will be hidden"
+                        android:textSize="17sp"
+                        android:layout_marginTop="12dp"
+                        android:textColor="#000"
+                        android:layout_marginLeft="5dp"/>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="17sp"
+                            android:textColor="@color/chat_list_item_read"
+                            android:text="Cancel"
+                            android:layout_toLeftOf="@+id/confirm_archive_btn"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/confirm_archive_btn"
+                            android:layout_width="90dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            app:cardBackgroundColor="@color/chat_list_item_select"
+                            app:cardCornerRadius="5dp"
+                            android:layout_centerVertical="true">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Archive"
+                                android:textColor="#FFF"
+                                android:textSize="17sp"
+                                android:layout_margin="10dp"
+                                android:layout_gravity="center_horizontal"
+                                android:translationY="-2dp"/>
+
+                        </androidx.cardview.widget.CardView>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

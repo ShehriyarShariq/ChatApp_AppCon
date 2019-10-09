@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">AppConChatApp</string>
+    <string name="app_name">AppCon</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="placeholder_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue neque gravida in fermentum et sollicitudin. A erat nam at lectus urna duis convallis. Pharetra magna ac placerat vestibulum lectus mauris ultrices. Nulla posuere sollicitudin aliquam ultrices sagittis orci a scelerisque purus. Tristique magna sit amet purus gravida quis. At erat pellentesque adipiscing commodo elit at imperdiet. Senectus et netus et malesuada fames ac. Morbi tristique senectus et netus et malesuada. Vivamus arcu felis bibendum ut tristique. Dolor sit amet consectetur adipiscing elit. Elementum nibh tellus molestie nunc non. Donec ac odio tempor orci dapibus ultrices in iaculis. Tempus quam pellentesque nec nam aliquam sem et tortor consequat.</string>
 </resources>

@@ -5,8 +5,12 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="chat_list_item_read">#0490E0</color>
+    <color name="chat_list_item_read_inner">#DDF1FB</color>
     <color name="chat_list_item_delete">#EB2E4A</color>
+    <color name="chat_list_item_delete_inner">#F3BEBE</color>
     <color name="chat_list_item_select">#42CC9C</color>
     <color name="chat_list_item_select_inner">#E3F5EF</color>
+
+    <color name="dialog_background">#585858</color>
 
 </resources>
