@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/others"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/other_img"
@@ -16,16 +18,280 @@
             android:layout_height="50dp"
             android:src="@drawable/ic_user"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/other_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17dp"
+                        android:text="+92 123 4567890"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.5"/>
+
+                    <TextView
+                        android:id="@+id/other_alt_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17dp"
+                        android:text="~Name"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                       android:layout_weight="0.5"
+                        android:textAlignment="viewEnd"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/other_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17dp"
+                    android:text="Name"
+                    android:layout_marginLeft="10dp"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/msg_bubble_top_other"
+                android:elevation="2dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
+                android:text="Hey Dude.. Sync this file for me please.."
+                android:textColor="#000"
+                android:textSize="17dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This is the mid bubble of msg"
+                android:background="@drawable/msg_bubble_mid_other"
+                android:textColor="#000"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:elevation="2dp"
+                android:textSize="17dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="2dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This is the bottom bubble of msg"
+                android:background="@drawable/msg_bubble_mid_other"
+                android:textColor="#000"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:elevation="2dp"
+                android:textSize="17dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="2dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/msg_bubble_mid_other"
+                android:layout_marginTop="2dp"
+                android:padding="4dp">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/sample_img"
+                    app:riv_corner_radius="20dp" />
+
+            </RelativeLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/msg_bubble_bot_other"
+                android:layout_marginTop="2dp"
+                android:padding="4dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/audio_control_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintHeight_percent="0.85"
+                    app:layout_constraintDimensionRatio="W, 1:1"
+                    app:cardCornerRadius="1000dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#000"
+                    android:layout_centerVertical="true"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="10dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_play"
+                        android:layout_margin="10dp"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <SeekBar
+                    android:id="@+id/audio_seekbar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@+id/audio_control_btn"
+                    app:layout_constraintEnd_toStartOf="@+id/audio_time"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:thumb="@drawable/seekbar_controller"
+                    android:progress="50"
+                    android:progressDrawable="@drawable/seekbar"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/audio_time"
+                    android:layout_width="60dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintHeight_percent="0.4"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:cardBackgroundColor="#000"
+                    android:layout_marginRight="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="00:42"
+                        android:textColor="#fff"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textAlignment="center"/>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="2:57AM"
+                android:layout_marginLeft="10dp"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/self"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="end">
+        android:orientation="vertical"
+        android:gravity="end"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This is a msg"
+            android:background="@drawable/msg_bubble_top_self"
+            android:textColor="#000"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:elevation="2dp"
+            android:textSize="17dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This is the mid bubble of msg"
+            android:background="@drawable/msg_bubble_mid_self"
+            android:textColor="#000"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:elevation="2dp"
+            android:textSize="17dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This is the bottom bubble of msg"
+            android:background="@drawable/msg_bubble_mid_self"
+            android:textColor="#000"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:elevation="2dp"
+            android:textSize="17dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="2dp"/>
+
+        <RelativeLayout
+            android:id="@+id/image_msg"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/msg_bubble_bot_self"
+            android:layout_marginStart="55dp"
+            android:layout_marginTop="2dp"
+            android:padding="4dp">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/sample_img"
+                    app:riv_corner_radius="20dp"/>
+
+        </RelativeLayout>
 
 
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="2:57AM"
+            android:layout_marginRight="10dp"/>
 
     </LinearLayout>
 

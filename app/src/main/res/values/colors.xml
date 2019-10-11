@@ -9,8 +9,40 @@
     <color name="chat_list_item_delete">#EB2E4A</color>
     <color name="chat_list_item_delete_inner">#F3BEBE</color>
     <color name="chat_list_item_select">#42CC9C</color>
-    <color name="chat_list_item_select_inner">#E3F5EF</color>
+    <color name="chat_list_item_select_inner">#9BE9CE</color>
 
     <color name="dialog_background">#585858</color>
+
+    <color name="gray">#D0D0D0</color>
+    <color name="gray_light">#F8F8F8</color>
+    <color name="gray_dark">#757575</color>
+
+    <!--    Message Colors-->
+    <color name="msg_self">#E3F5EF</color>
+    <color name="msg_other">#FFFFFF</color>
+
+    <color name="attachments_btn">#DDF1FB</color>
+    <color name="attachments_btn_border">#0490E0</color>
+
+    <color name="games_btn">#FFC107</color>
+    <color name="games_btn_border">#B98C04</color>
+
+    <color name="docs_btn">#CFCEEC</color>
+    <color name="docs_btn_border">#5E59A3</color>
+
+    <color name="camera_btn">#C5E7F8</color>
+    <color name="camera_btn_border">#3C6980</color>
+
+    <color name="gallery_btn">#F3BEBE</color>
+    <color name="gallery_btn_border">#EB3751</color>
+
+    <color name="audio_btn">#F7D5AC</color>
+    <color name="audio_btn_border">#E7840F</color>
+
+    <color name="location_btn">#E3F5EF</color>
+    <color name="location_btn_border">#47CD9F</color>
+
+    <color name="contacts_btn">#DDF1FB</color>
+    <color name="contacts_btn_border">#0490E0</color>
 
 </resources>

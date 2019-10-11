@@ -19,26 +19,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/back_btn"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/ic_back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/display_img"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="20dp"
                 android:src="@drawable/ic_user"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="W,1:1"
                 app:layout_constraintHeight_percent="0.7"
-                app:layout_constraintStart_toEndOf="@+id/back_btn"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,14 +81,21 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <ImageView
-                    android:id="@+id/delete_btn"
+                    android:id="@+id/games_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_game_bright"
+                    android:layout_marginRight="22.5dp"/>
+
+                <ImageView
+                    android:id="@+id/video_btn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/ic_video_blue"
                     android:layout_marginRight="22.5dp"/>
 
                 <ImageView
-                    android:id="@+id/mute_btn"
+                    android:id="@+id/call_btn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/ic_call_green"
@@ -139,6 +136,260 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.35"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/text_inp_layout">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/gray"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="1dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardElevation="10dp"
+                app:cardBackgroundColor="@color/gray_light"
+                app:cardCornerRadius="30dp"
+                android:layout_margin="1.5dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/additional_items_attachments_top_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintHeight_percent="0.3"
+                        android:gravity="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/additional_items_attachments_bottom_layout">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/attachments_docs_btn"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            app:layout_constraintDimensionRatio="W, 1:1"
+                            app:cardCornerRadius="1000dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/docs_btn_border"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/attachments_img_camera_btn">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="1000dp"
+                                app:cardElevation="0dp"
+                                android:layout_margin="1dp"
+                                app:cardBackgroundColor="@color/docs_btn">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_docs"
+                                    android:layout_margin="15dp"/>
+
+                            </androidx.cardview.widget.CardView>
+
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/attachments_img_camera_btn"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            app:layout_constraintDimensionRatio="W, 1:1"
+                            app:cardCornerRadius="1000dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/camera_btn_border"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/attachments_docs_btn"
+                            app:layout_constraintEnd_toStartOf="@+id/attachments_img_gallery_btn">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="1000dp"
+                                app:cardElevation="0dp"
+                                android:layout_margin="1dp"
+                                app:cardBackgroundColor="@color/camera_btn">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_camera_blue"
+                                    android:layout_margin="15dp"/>
+
+                            </androidx.cardview.widget.CardView>
+
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/attachments_img_gallery_btn"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            app:layout_constraintDimensionRatio="W, 1:1"
+                            app:cardCornerRadius="1000dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/gallery_btn_border"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/attachments_img_camera_btn"
+                            app:layout_constraintEnd_toEndOf="parent">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="1000dp"
+                                app:cardElevation="0dp"
+                                android:layout_margin="1dp"
+                                app:cardBackgroundColor="@color/gallery_btn">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_gallery"
+                                    android:layout_margin="15dp"/>
+
+                            </androidx.cardview.widget.CardView>
+
+
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/additional_items_attachments_bottom_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintHeight_percent="0.3"
+                        android:gravity="center"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/additional_items_attachments_top_layout">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/attachments_audio_btn"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintDimensionRatio="W, 1:1"
+                            app:cardCornerRadius="1000dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/audio_btn_border"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/attachments_location_btn">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="1000dp"
+                                app:cardElevation="0dp"
+                                android:layout_margin="1dp"
+                                app:cardBackgroundColor="@color/audio_btn">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_audio"
+                                    android:layout_margin="15dp"/>
+
+                            </androidx.cardview.widget.CardView>
+
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/attachments_location_btn"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintDimensionRatio="W, 1:1"
+                            app:cardCornerRadius="1000dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/location_btn_border"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/attachments_audio_btn"
+                            app:layout_constraintEnd_toStartOf="@+id/attachments_contact_btn">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="1000dp"
+                                app:cardElevation="0dp"
+                                android:layout_margin="1dp"
+                                app:cardBackgroundColor="@color/location_btn">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_location"
+                                    android:layout_margin="15dp"/>
+
+                            </androidx.cardview.widget.CardView>
+
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/attachments_contact_btn"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintDimensionRatio="W, 1:1"
+                            app:cardCornerRadius="1000dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/contacts_btn_border"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/attachments_location_btn"
+                            app:layout_constraintEnd_toEndOf="parent">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="1000dp"
+                                app:cardElevation="0dp"
+                                android:layout_margin="1dp"
+                                app:cardBackgroundColor="@color/contacts_btn">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_contacts"
+                                    android:layout_margin="15dp"/>
+
+                            </androidx.cardview.widget.CardView>
+
+
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/text_inp_layout"
         android:layout_width="match_parent"
@@ -160,7 +411,7 @@
             android:layout_marginRight="5dp"
             app:cardCornerRadius="30dp"
             app:cardElevation="0dp"
-            app:cardBackgroundColor="#D0D0D0">
+            app:cardBackgroundColor="@color/gray">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -175,41 +426,40 @@
                     android:minHeight="60dp"
                     android:maxHeight="140dp">
 
-                    <ImageView
+                    <androidx.cardview.widget.CardView
                         android:id="@+id/add_more_alt_btn"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:src="@drawable/ic_more_alt"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:cardCornerRadius="1000dp"
+                        app:cardBackgroundColor="#000"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginLeft="15dp"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="10dp">
 
-                    <ImageView
-                        android:id="@+id/add_emoji_btn"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:src="@drawable/ic_emoji"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/add_more_alt_btn"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginBottom="10dp"/>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_plus_white"
+                            android:layout_margin="5dp"/>
+
+                    </androidx.cardview.widget.CardView>
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_inp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/add_emoji_btn"
-                        app:layout_constraintEnd_toStartOf="@+id/add_image_btn"
+                        app:layout_constraintStart_toEndOf="@+id/add_more_alt_btn"
+                        app:layout_constraintEnd_toStartOf="@+id/add_emoji_btn"
                         android:backgroundTint="#fff"
-                        android:hint="Type a message"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:textSize="18sp"
                         android:inputType="textMultiLine"
                         android:textColor="#000"
-                        android:text="@string/placeholder_text"
+                        android:hint="Text message"
                         android:isScrollContainer="true"
                         android:focusable="true"
                         android:overScrollMode="always"/>
@@ -226,6 +476,17 @@
 <!--                        app:layout_constraintEnd_toStartOf="@+id/add_image_btn"-->
 <!--                        android:layout_marginRight="25dp"-->
 <!--                        android:rotation="-45"/>-->
+
+                    <ImageView
+                        android:id="@+id/add_emoji_btn"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/ic_emoji"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/text_inp"
+                        app:layout_constraintEnd_toStartOf="@+id/add_image_btn"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="10dp"/>
 
                     <ImageView
                         android:id="@+id/add_image_btn"
