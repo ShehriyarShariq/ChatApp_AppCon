@@ -168,108 +168,176 @@
                         android:id="@+id/additional_items_attachments_top_layout"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        app:layout_constraintHeight_percent="0.3"
+                        app:layout_constraintHeight_percent="0.4"
                         android:gravity="center"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toTopOf="@+id/additional_items_attachments_bottom_layout">
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/attachments_docs_btn"
-                            android:layout_width="0dp"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/attachments_docs_btn_layout"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            app:layout_constraintDimensionRatio="W, 1:1"
-                            app:cardCornerRadius="1000dp"
-                            app:cardElevation="0dp"
-                            app:cardBackgroundColor="@color/docs_btn_border"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/attachments_img_camera_btn">
+                            app:layout_constraintEnd_toStartOf="@+id/attachments_img_camera_btn_layout">
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:id="@+id/attachments_docs_btn"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintHeight_percent="0.68"
+                                app:layout_constraintDimensionRatio="W, 1:1"
                                 app:cardCornerRadius="1000dp"
                                 app:cardElevation="0dp"
-                                android:layout_margin="1dp"
-                                app:cardBackgroundColor="@color/docs_btn">
+                                app:cardBackgroundColor="@color/docs_btn_border"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent">
 
-                                <ImageView
+                                <androidx.cardview.widget.CardView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/ic_docs"
-                                    android:layout_margin="15dp"/>
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    android:layout_margin="1dp"
+                                    app:cardBackgroundColor="@color/docs_btn">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/ic_docs"
+                                        android:layout_margin="15dp"/>
+
+                                </androidx.cardview.widget.CardView>
 
                             </androidx.cardview.widget.CardView>
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:text="Docs"
+                                app:layout_constraintTop_toBottomOf="@+id/attachments_docs_btn"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginTop="15dp"/>
 
-                        </androidx.cardview.widget.CardView>
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/attachments_img_camera_btn"
-                            android:layout_width="0dp"
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/attachments_img_camera_btn_layout"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            app:layout_constraintDimensionRatio="W, 1:1"
-                            app:cardCornerRadius="1000dp"
-                            app:cardElevation="0dp"
-                            app:cardBackgroundColor="@color/camera_btn_border"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/attachments_docs_btn"
-                            app:layout_constraintEnd_toStartOf="@+id/attachments_img_gallery_btn">
+                            app:layout_constraintStart_toEndOf="@+id/attachments_docs_btn_layout"
+                            app:layout_constraintEnd_toStartOf="@+id/attachments_img_gallery_btn_layout">
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:id="@+id/attachments_img_camera_btn"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintHeight_percent="0.68"
+                                app:layout_constraintDimensionRatio="W, 1:1"
                                 app:cardCornerRadius="1000dp"
                                 app:cardElevation="0dp"
-                                android:layout_margin="1dp"
-                                app:cardBackgroundColor="@color/camera_btn">
+                                app:cardBackgroundColor="@color/camera_btn_border"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent">
 
-                                <ImageView
+                                <androidx.cardview.widget.CardView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/ic_camera_blue"
-                                    android:layout_margin="15dp"/>
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    android:layout_margin="1dp"
+                                    app:cardBackgroundColor="@color/camera_btn">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/ic_camera_blue"
+                                        android:layout_margin="15dp"/>
+
+                                </androidx.cardview.widget.CardView>
+
 
                             </androidx.cardview.widget.CardView>
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:text="Camera"
+                                app:layout_constraintTop_toBottomOf="@+id/attachments_img_camera_btn"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginTop="15dp"/>
 
-                        </androidx.cardview.widget.CardView>
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/attachments_img_gallery_btn"
-                            android:layout_width="0dp"
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/attachments_img_gallery_btn_layout"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            app:layout_constraintDimensionRatio="W, 1:1"
-                            app:cardCornerRadius="1000dp"
-                            app:cardElevation="0dp"
-                            app:cardBackgroundColor="@color/gallery_btn_border"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/attachments_img_camera_btn"
+                            app:layout_constraintStart_toEndOf="@+id/attachments_img_camera_btn_layout"
                             app:layout_constraintEnd_toEndOf="parent">
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:id="@+id/attachments_img_gallery_btn"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintHeight_percent="0.68"
+                                app:layout_constraintDimensionRatio="W, 1:1"
                                 app:cardCornerRadius="1000dp"
                                 app:cardElevation="0dp"
-                                android:layout_margin="1dp"
-                                app:cardBackgroundColor="@color/gallery_btn">
+                                app:cardBackgroundColor="@color/gallery_btn_border"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent">
 
-                                <ImageView
+                                <androidx.cardview.widget.CardView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/ic_gallery"
-                                    android:layout_margin="15dp"/>
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    android:layout_margin="1dp"
+                                    app:cardBackgroundColor="@color/gallery_btn">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/ic_gallery"
+                                        android:layout_margin="15dp"/>
+
+                                </androidx.cardview.widget.CardView>
+
 
                             </androidx.cardview.widget.CardView>
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:text="Gallery"
+                                app:layout_constraintTop_toBottomOf="@+id/attachments_img_gallery_btn"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginTop="15dp"/>
 
-                        </androidx.cardview.widget.CardView>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
