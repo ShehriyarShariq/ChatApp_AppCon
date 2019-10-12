@@ -345,108 +345,177 @@
                         android:id="@+id/additional_items_attachments_bottom_layout"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        app:layout_constraintHeight_percent="0.3"
+                        app:layout_constraintHeight_percent="0.4"
                         android:gravity="center"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/additional_items_attachments_top_layout">
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/attachments_audio_btn"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:layout_constraintDimensionRatio="W, 1:1"
-                            app:cardCornerRadius="1000dp"
-                            app:cardElevation="0dp"
-                            app:cardBackgroundColor="@color/audio_btn_border"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/attachments_audio_btn_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/attachments_location_btn">
+                            app:layout_constraintEnd_toStartOf="@+id/attachments_location_btn_layout">
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:id="@+id/attachments_audio_btn"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintHeight_percent="0.68"
+                                app:layout_constraintDimensionRatio="W, 1:1"
                                 app:cardCornerRadius="1000dp"
                                 app:cardElevation="0dp"
-                                android:layout_margin="1dp"
-                                app:cardBackgroundColor="@color/audio_btn">
+                                app:cardBackgroundColor="@color/audio_btn_border"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent">
 
-                                <ImageView
+                                <androidx.cardview.widget.CardView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/ic_audio"
-                                    android:layout_margin="15dp"/>
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    android:layout_margin="1dp"
+                                    app:cardBackgroundColor="@color/audio_btn">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/ic_audio"
+                                        android:layout_margin="15dp"/>
+
+                                </androidx.cardview.widget.CardView>
+
 
                             </androidx.cardview.widget.CardView>
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:text="Audio"
+                                app:layout_constraintTop_toBottomOf="@+id/attachments_audio_btn"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginTop="15dp"/>
 
-                        </androidx.cardview.widget.CardView>
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/attachments_location_btn"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:layout_constraintDimensionRatio="W, 1:1"
-                            app:cardCornerRadius="1000dp"
-                            app:cardElevation="0dp"
-                            app:cardBackgroundColor="@color/location_btn_border"
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/attachments_location_btn_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/attachments_audio_btn"
-                            app:layout_constraintEnd_toStartOf="@+id/attachments_contact_btn">
+                            app:layout_constraintStart_toEndOf="@+id/attachments_audio_btn_layout"
+                            app:layout_constraintEnd_toStartOf="@+id/attachments_contact_btn_layout">
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:id="@+id/attachments_location_btn"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintHeight_percent="0.68"
+                                app:layout_constraintDimensionRatio="W, 1:1"
                                 app:cardCornerRadius="1000dp"
                                 app:cardElevation="0dp"
-                                android:layout_margin="1dp"
-                                app:cardBackgroundColor="@color/location_btn">
+                                app:cardBackgroundColor="@color/location_btn_border"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent">
 
-                                <ImageView
+                                <androidx.cardview.widget.CardView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/ic_location"
-                                    android:layout_margin="15dp"/>
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    android:layout_margin="1dp"
+                                    app:cardBackgroundColor="@color/location_btn">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/ic_location"
+                                        android:layout_margin="15dp"/>
+
+                                </androidx.cardview.widget.CardView>
+
 
                             </androidx.cardview.widget.CardView>
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:text="Location"
+                                app:layout_constraintTop_toBottomOf="@+id/attachments_location_btn"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginTop="15dp"/>
 
-                        </androidx.cardview.widget.CardView>
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/attachments_contact_btn"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:layout_constraintDimensionRatio="W, 1:1"
-                            app:cardCornerRadius="1000dp"
-                            app:cardElevation="0dp"
-                            app:cardBackgroundColor="@color/contacts_btn_border"
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/attachments_contact_btn_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/attachments_location_btn"
+                            app:layout_constraintStart_toEndOf="@+id/attachments_location_btn_layout"
                             app:layout_constraintEnd_toEndOf="parent">
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:id="@+id/attachments_contact_btn"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintHeight_percent="0.68"
+                                app:layout_constraintDimensionRatio="W, 1:1"
                                 app:cardCornerRadius="1000dp"
                                 app:cardElevation="0dp"
-                                android:layout_margin="1dp"
-                                app:cardBackgroundColor="@color/contacts_btn">
+                                app:cardBackgroundColor="@color/contacts_btn_border"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent">
 
-                                <ImageView
+                                <androidx.cardview.widget.CardView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/ic_contacts"
-                                    android:layout_margin="15dp"/>
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    android:layout_margin="1dp"
+                                    app:cardBackgroundColor="@color/contacts_btn">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/ic_contacts"
+                                        android:layout_margin="15dp"/>
+
+                                </androidx.cardview.widget.CardView>
+
 
                             </androidx.cardview.widget.CardView>
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:text="Contact"
+                                app:layout_constraintTop_toBottomOf="@+id/attachments_location_btn"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginTop="15dp"/>
 
-                        </androidx.cardview.widget.CardView>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
