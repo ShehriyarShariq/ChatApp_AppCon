@@ -1,4 +1,4 @@
-package com.appcon.appconchatapp;
+package com.appcon.appconchatapp.views;
 
 
 import android.os.Bundle;
@@ -9,14 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.appcon.appconchatapp.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContactsFragment extends Fragment {
+public class ConversationsFragment extends Fragment {
 
 
-    public ContactsFragment() {
+    public ConversationsFragment() {
         // Required empty public constructor
     }
 
@@ -25,7 +27,7 @@ public class ContactsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contacts, container, false);
+        return inflater.inflate(R.layout.fragment_conversations, container, false);
     }
 
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatActivity">
+    tools:context=".views.ChatActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/top_bar"
@@ -120,6 +120,220 @@
         app:layout_constraintTop_toBottomOf="@+id/top_bar"
         app:layout_constraintBottom_toTopOf="@+id/chat_layout"
         android:background="#DDDDDD"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        android:elevation="0.5dp"
+        android:visibility="gone">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/gray"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="1dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardElevation="10dp"
+                app:cardBackgroundColor="@color/gray_light"
+                app:cardCornerRadius="30dp"
+                android:layout_margin="1.5dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintHeight_percent="0.75"
+                        android:gravity="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/game_rps_btn_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/game_ttt_btn_layout">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/game_rps_btn"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintHeight_percent="0.68"
+                                app:layout_constraintDimensionRatio="W, 1:1"
+                                app:cardCornerRadius="1000dp"
+                                app:cardElevation="0dp"
+                                app:cardBackgroundColor="@color/docs_btn_border"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    android:layout_margin="1dp"
+                                    app:cardBackgroundColor="@color/docs_btn">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/ic_docs"
+                                        android:layout_margin="15dp"/>
+
+                                </androidx.cardview.widget.CardView>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:text="Rock-Paper-Scissors"
+                                app:layout_constraintTop_toBottomOf="@+id/game_rps_btn"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginTop="10dp"/>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/game_ttt_btn_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/game_rps_btn_layout"
+                            app:layout_constraintEnd_toStartOf="@+id/game_hat_btn_layout">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/game_ttt_btn"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintHeight_percent="0.68"
+                                app:layout_constraintDimensionRatio="W, 1:1"
+                                app:cardCornerRadius="1000dp"
+                                app:cardElevation="0dp"
+                                app:cardBackgroundColor="@color/camera_btn_border"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    android:layout_margin="1dp"
+                                    app:cardBackgroundColor="@color/camera_btn">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/ic_camera_blue"
+                                        android:layout_margin="15dp"/>
+
+                                </androidx.cardview.widget.CardView>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:text="Tic-Tac-Toe"
+                                app:layout_constraintTop_toBottomOf="@+id/game_ttt_btn"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginTop="10dp"/>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/game_hat_btn_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/game_ttt_btn_layout"
+                            app:layout_constraintEnd_toEndOf="parent">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/game_hat_btn"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintHeight_percent="0.68"
+                                app:layout_constraintDimensionRatio="W, 1:1"
+                                app:cardCornerRadius="1000dp"
+                                app:cardElevation="0dp"
+                                app:cardBackgroundColor="@color/gallery_btn_border"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    android:layout_margin="1dp"
+                                    app:cardBackgroundColor="@color/gallery_btn">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/ic_gallery"
+                                        android:layout_margin="15dp"/>
+
+                                </androidx.cardview.widget.CardView>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:text="Heads and Tails"
+                                app:layout_constraintTop_toBottomOf="@+id/game_hat_btn"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginTop="10dp"/>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
     
     <RelativeLayout
         android:id="@+id/chat_layout"
@@ -142,7 +356,9 @@
         app:layout_constraintHeight_percent="0.35"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/text_inp_layout">
+        app:layout_constraintBottom_toTopOf="@id/text_inp_layout"
+        android:elevation="0.5dp"
+        android:visibility="gone">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -224,7 +440,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                android:layout_marginTop="15dp"/>
+                                android:layout_marginTop="10dp"/>
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -279,7 +495,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                android:layout_marginTop="15dp"/>
+                                android:layout_marginTop="10dp"/>
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -334,7 +550,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                android:layout_marginTop="15dp"/>
+                                android:layout_marginTop="10dp"/>
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -508,12 +724,11 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="14sp"
                                 android:text="Contact"
-                                app:layout_constraintTop_toBottomOf="@+id/attachments_location_btn"
+                                app:layout_constraintTop_toBottomOf="@+id/attachments_contact_btn"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 android:layout_marginTop="15dp"/>
-
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 

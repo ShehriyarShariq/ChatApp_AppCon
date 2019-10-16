@@ -1,8 +1,10 @@
-package com.appcon.appconchatapp;
+package com.appcon.appconchatapp.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.appcon.appconchatapp.R;
 
 public class SplashActivity extends AppCompatActivity {
 

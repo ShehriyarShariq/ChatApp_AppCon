@@ -1,14 +1,16 @@
-package com.appcon.appconchatapp;
+package com.appcon.appconchatapp.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ChatActivity extends AppCompatActivity {
+import com.appcon.appconchatapp.R;
+
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_main);
     }
 }

@@ -1,4 +1,4 @@
-package com.appcon.appconchatapp;
+package com.appcon.appconchatapp.views;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

@@ -1,0 +1,46 @@
+{
+    "users": {
+        "UserID": {
+            "displayName": "displayName",
+            "phoneNumber": "phoneNumber",
+            "displayPicture": "displayPicture",
+            "creationDate": "creationDate",
+            "about": "about",
+            "userGroups": {
+                "chatIDs": {
+                    "lastMessageSeen": "messageID"
+                }
+            },
+
+            "personalChats": {
+                "chatID": {
+                    "otherUser": "UserID",
+                    "lastMessageSeen": "messageID"
+                }
+            }
+        }
+    },
+
+    "groups": {
+        "chatID": {
+            "displayName": "displayName",
+            "displayPicture": "displayPicture",
+            "creationDate": "creationDate",
+            "description": "description",
+            "members": "UserIDs",
+            "lastMessageSent": "MessageID"
+
+        }
+    },
+
+    "messages": {
+        "chatID": {
+            "messageID": {
+                "type": "Game or Audio or Whatever",
+                "sentBy": "userID",
+                "timeStamp": "timeStamp",
+                "content": "content"
+            }
+        }
+    }
+}

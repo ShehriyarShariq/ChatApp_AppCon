@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".views.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -177,7 +177,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/pinned_chats"
+                    android:id="@+id/public_groups"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -188,13 +188,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
+                        android:layout_marginRight="10dp"
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:id="@+id/pin_img"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_pin"
+                            android:id="@+id/group_img"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/ic_group"
                             android:gravity="center_vertical"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -203,19 +204,30 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pinned"
+                            android:text="Public Groups"
                             android:textColor="#000"
-                            android:textSize="15sp"
+                            android:textSize="17sp"
                             android:gravity="center_vertical"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/pin_img"
+                            app:layout_constraintStart_toEndOf="@+id/group_img"
                             android:layout_marginLeft="10dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="View All"
+                            android:textColor="@color/chat_list_item_read"
+                            android:textSize="17sp"
+                            android:gravity="center_vertical"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/pinned_chats_list"
+                        android:id="@+id/public_groups_list"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -238,8 +250,8 @@
 
                         <ImageView
                             android:id="@+id/msg_img"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
                             android:src="@drawable/ic_msg"
                             android:gravity="center_vertical"
                             app:layout_constraintStart_toStartOf="parent"
@@ -251,7 +263,7 @@
                             android:layout_height="wrap_content"
                             android:text="All Chats"
                             android:textColor="#000"
-                            android:textSize="15sp"
+                            android:textSize="17sp"
                             android:gravity="center_vertical"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -367,8 +379,8 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_msg"
-                        android:layout_margin="18dp"/>
+                        android:src="@drawable/ic_add_black"
+                        android:layout_margin="15dp"/>
 
                 </androidx.cardview.widget.CardView>
 
