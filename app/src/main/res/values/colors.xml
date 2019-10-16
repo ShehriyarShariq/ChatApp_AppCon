@@ -45,4 +45,7 @@
     <color name="contacts_btn">#DDF1FB</color>
     <color name="contacts_btn_border">#0490E0</color>
 
+    <color name="first_time_images_selected">#E7840F</color>
+    <color name="yellow_bright">#FFC107</color>
+
 </resources>
