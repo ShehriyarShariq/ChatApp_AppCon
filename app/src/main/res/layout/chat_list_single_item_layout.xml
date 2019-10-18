@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="8dp"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/other_img"
@@ -475,6 +475,7 @@
         android:visibility="gone">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/text_msg_self"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/msg_bubble_top_self">
@@ -859,5 +860,27 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/common_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/gray"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This is a message common to all"
+            android:textSize="17dp"
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:textColor="#000"/>
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
