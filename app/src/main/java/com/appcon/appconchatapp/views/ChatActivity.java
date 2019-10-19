@@ -14,10 +14,14 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.appcon.appconchatapp.R;
 import com.appcon.appconchatapp.databinding.ActivityChatBinding;
 import com.appcon.appconchatapp.viewmodels.ChatActivityViewModel;
+import com.vanniktech.emoji.EmojiManager;
+import com.vanniktech.emoji.EmojiPopup;
+import com.vanniktech.emoji.google.GoogleEmojiProvider;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -25,22 +29,28 @@ public class ChatActivity extends AppCompatActivity {
     ActivityChatBinding binding;
     ChatActivityViewModel viewModel;
 
+    EmojiPopup emojiPopup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FontRequest fontRequest = new FontRequest(
-                "com.example.fontprovider",
-                "com.example",
-                "emoji compat Font Query",
-                R.array.com_google_android_gms_fonts_certs);
-        EmojiCompat.Config config = new FontRequestEmojiCompatConfig(this, fontRequest);
-        EmojiCompat.init(config);
+//        FontRequest fontRequest = new FontRequest(
+//                "com.example.fontprovider",
+//                "com.example",
+//                "emoji compat Font Query",
+//                R.array.com_google_android_gms_fonts_certs);
+//        EmojiCompat.Config config = new FontRequestEmojiCompatConfig(this, fontRequest);
+//        EmojiCompat.init(config);
+
+        EmojiManager.install(new GoogleEmojiProvider());
 
         setContentView(R.layout.activity_chat);
 
         viewModel = ViewModelProviders.of(this).get(ChatActivityViewModel.class);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat);
+
+        emojiPopup = EmojiPopup.Builder.fromRootView(binding.getRoot()).build(binding.textInp);
 
         // Open profile
         binding.profileBtn.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +68,11 @@ public class ChatActivity extends AppCompatActivity {
         binding.gamesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(binding.gameMenu.getVisibility() != View.VISIBLE){
+                    binding.gameMenu.setVisibility(View.VISIBLE);
+                } else {
+                    binding.gameMenu.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -122,7 +136,11 @@ public class ChatActivity extends AppCompatActivity {
         binding.addMoreAltBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(binding.additionalMenu.getVisibility() != View.VISIBLE){
+                    binding.additionalMenu.setVisibility(View.VISIBLE);
+                } else {
+                    binding.additionalMenu.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -155,6 +173,13 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 }
                 return false;
+            }
+        });
+
+        binding.addEmojiBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                emojiPopup.toggle();
             }
         });
 

@@ -183,6 +183,7 @@
             android:background="#DDDDDD"/>
 
         <RelativeLayout
+            android:id="@+id/gameMenu"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintHeight_percent="0.2"
@@ -237,30 +238,45 @@
                                     android:layout_height="0dp"
                                     app:layout_constraintHeight_percent="0.68"
                                     app:layout_constraintDimensionRatio="W, 1:1"
-                                    app:cardCornerRadius="1000dp"
                                     app:cardElevation="0dp"
+                                    app:cardCornerRadius="1000dp"
                                     app:cardBackgroundColor="@color/docs_btn_border"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent">
 
                                     <com.google.android.material.card.MaterialCardView
+                                        android:id="@+id/gameRpsBtnInner"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        app:cardCornerRadius="1000dp"
                                         app:cardElevation="0dp"
+                                        app:cardCornerRadius="1000dp"
                                         android:layout_margin="1dp"
-                                        app:cardBackgroundColor="@color/docs_btn">
+                                        app:cardBackgroundColor="@color/docs_btn"/>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="1dp">
 
                                         <ImageView
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
-                                            android:src="@drawable/ic_docs"
-                                            android:layout_margin="15dp"/>
+                                            android:src="@drawable/rps_icon"
+                                            android:layout_margin="7dp"/>
 
-                                    </com.google.android.material.card.MaterialCardView>
+                                    </LinearLayout>
 
-                                </com.google.android.material.card.MaterialCardView>
+                                </RelativeLayout>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -296,6 +312,15 @@
                                     app:cardBackgroundColor="@color/camera_btn_border"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent">
 
                                     <com.google.android.material.card.MaterialCardView
@@ -304,18 +329,22 @@
                                         app:cardCornerRadius="1000dp"
                                         app:cardElevation="0dp"
                                         android:layout_margin="1dp"
-                                        app:cardBackgroundColor="@color/camera_btn">
+                                        app:cardBackgroundColor="@color/camera_btn"/>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="1dp">
 
                                         <ImageView
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
-                                            android:src="@drawable/ic_camera_blue"
-                                            android:layout_margin="15dp"/>
+                                            android:src="@drawable/ttt_icon"
+                                            android:layout_margin="7dp"/>
 
-                                    </com.google.android.material.card.MaterialCardView>
+                                    </LinearLayout>
 
-
-                                </com.google.android.material.card.MaterialCardView>
+                                </RelativeLayout>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -351,6 +380,15 @@
                                     app:cardBackgroundColor="@color/gallery_btn_border"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent">
 
                                     <com.google.android.material.card.MaterialCardView
@@ -359,18 +397,22 @@
                                         app:cardCornerRadius="1000dp"
                                         app:cardElevation="0dp"
                                         android:layout_margin="1dp"
-                                        app:cardBackgroundColor="@color/gallery_btn">
+                                        app:cardBackgroundColor="@color/gallery_btn"/>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="1dp">
 
                                         <ImageView
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
-                                            android:src="@drawable/ic_gallery"
-                                            android:layout_margin="15dp"/>
+                                            android:src="@drawable/ht_icon"
+                                            android:layout_margin="10dp"/>
 
-                                    </com.google.android.material.card.MaterialCardView>
+                                    </LinearLayout>
 
-
-                                </com.google.android.material.card.MaterialCardView>
+                                </RelativeLayout>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -473,6 +515,15 @@
                                     app:cardBackgroundColor="@color/docs_btn_border"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent">
 
                                     <com.google.android.material.card.MaterialCardView
@@ -481,7 +532,12 @@
                                         app:cardCornerRadius="1000dp"
                                         app:cardElevation="0dp"
                                         android:layout_margin="1dp"
-                                        app:cardBackgroundColor="@color/docs_btn">
+                                        app:cardBackgroundColor="@color/docs_btn"/>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="1dp">
 
                                         <ImageView
                                             android:layout_width="match_parent"
@@ -489,9 +545,9 @@
                                             android:src="@drawable/ic_docs"
                                             android:layout_margin="15dp"/>
 
-                                    </com.google.android.material.card.MaterialCardView>
+                                    </LinearLayout>
 
-                                </com.google.android.material.card.MaterialCardView>
+                                </RelativeLayout>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -527,6 +583,18 @@
                                     app:cardBackgroundColor="@color/camera_btn_border"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    app:cardBackgroundColor="@color/camera_btn_border"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent">
 
                                     <com.google.android.material.card.MaterialCardView
@@ -535,7 +603,12 @@
                                         app:cardCornerRadius="1000dp"
                                         app:cardElevation="0dp"
                                         android:layout_margin="1dp"
-                                        app:cardBackgroundColor="@color/camera_btn">
+                                        app:cardBackgroundColor="@color/camera_btn"/>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="1dp">
 
                                         <ImageView
                                             android:layout_width="match_parent"
@@ -543,10 +616,9 @@
                                             android:src="@drawable/ic_camera_blue"
                                             android:layout_margin="15dp"/>
 
-                                    </com.google.android.material.card.MaterialCardView>
+                                    </LinearLayout>
 
-
-                                </com.google.android.material.card.MaterialCardView>
+                                </RelativeLayout>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -582,6 +654,15 @@
                                     app:cardBackgroundColor="@color/gallery_btn_border"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent">
 
                                     <com.google.android.material.card.MaterialCardView
@@ -590,7 +671,12 @@
                                         app:cardCornerRadius="1000dp"
                                         app:cardElevation="0dp"
                                         android:layout_margin="1dp"
-                                        app:cardBackgroundColor="@color/gallery_btn">
+                                        app:cardBackgroundColor="@color/gallery_btn"/>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="1dp">
 
                                         <ImageView
                                             android:layout_width="match_parent"
@@ -598,10 +684,9 @@
                                             android:src="@drawable/ic_gallery"
                                             android:layout_margin="15dp"/>
 
-                                    </com.google.android.material.card.MaterialCardView>
+                                    </LinearLayout>
 
-
-                                </com.google.android.material.card.MaterialCardView>
+                                </RelativeLayout>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -650,6 +735,15 @@
                                     app:cardBackgroundColor="@color/audio_btn_border"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent">
 
                                     <com.google.android.material.card.MaterialCardView
@@ -658,7 +752,12 @@
                                         app:cardCornerRadius="1000dp"
                                         app:cardElevation="0dp"
                                         android:layout_margin="1dp"
-                                        app:cardBackgroundColor="@color/audio_btn">
+                                        app:cardBackgroundColor="@color/audio_btn"/>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="1dp">
 
                                         <ImageView
                                             android:layout_width="match_parent"
@@ -666,10 +765,9 @@
                                             android:src="@drawable/ic_audio"
                                             android:layout_margin="15dp"/>
 
-                                    </com.google.android.material.card.MaterialCardView>
+                                    </LinearLayout>
 
-
-                                </com.google.android.material.card.MaterialCardView>
+                                </RelativeLayout>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -705,6 +803,15 @@
                                     app:cardBackgroundColor="@color/location_btn_border"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent">
 
                                     <com.google.android.material.card.MaterialCardView
@@ -713,7 +820,12 @@
                                         app:cardCornerRadius="1000dp"
                                         app:cardElevation="0dp"
                                         android:layout_margin="1dp"
-                                        app:cardBackgroundColor="@color/location_btn">
+                                        app:cardBackgroundColor="@color/location_btn"/>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="1dp">
 
                                         <ImageView
                                             android:layout_width="match_parent"
@@ -721,10 +833,9 @@
                                             android:src="@drawable/ic_location"
                                             android:layout_margin="15dp"/>
 
-                                    </com.google.android.material.card.MaterialCardView>
+                                    </LinearLayout>
 
-
-                                </com.google.android.material.card.MaterialCardView>
+                                </RelativeLayout>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -760,6 +871,15 @@
                                     app:cardBackgroundColor="@color/contacts_btn_border"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent">
 
                                     <com.google.android.material.card.MaterialCardView
@@ -768,7 +888,12 @@
                                         app:cardCornerRadius="1000dp"
                                         app:cardElevation="0dp"
                                         android:layout_margin="1dp"
-                                        app:cardBackgroundColor="@color/contacts_btn">
+                                        app:cardBackgroundColor="@color/contacts_btn"/>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="1dp">
 
                                         <ImageView
                                             android:layout_width="match_parent"
@@ -776,10 +901,9 @@
                                             android:src="@drawable/ic_contacts"
                                             android:layout_margin="15dp"/>
 
-                                    </com.google.android.material.card.MaterialCardView>
+                                    </LinearLayout>
 
-
-                                </com.google.android.material.card.MaterialCardView>
+                                </RelativeLayout>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -1520,7 +1644,7 @@
 
                         </com.google.android.material.card.MaterialCardView>
 
-                        <android.support.text.emoji.widget.EmojiEditText
+                        <com.vanniktech.emoji.EmojiEditText
                             android:id="@+id/textInp"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -1531,13 +1655,14 @@
                             android:backgroundTint="#fff"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:textSize="18sp"
+                            android:textSize="19sp"
                             android:inputType="textMultiLine"
                             android:textColor="#000"
                             android:hint="Text message"
                             android:isScrollContainer="true"
                             android:focusable="true"
-                            android:overScrollMode="always"/>
+                            android:overScrollMode="always"
+                            app:emojiSize="28sp"/>
 
                         <ImageView
                             android:id="@+id/addEmojiBtn"
