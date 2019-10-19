@@ -116,7 +116,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/image_layout_other"
                 android:layout_width="match_parent"
-                android:layout_height="235dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/msg_bubble_mid_other"
                 android:layout_marginTop="2dp">
 
@@ -124,12 +124,26 @@
                     android:id="@+id/image_other"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:layout_margin="4dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/sample_img"
-                    app:riv_corner_radius="20dp"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_margin="4dp"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:riv_corner_radius="20dp" />
+
+                <TextView
+                    android:id="@+id/img_txt_other"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="sgdfdfdsf sadvfserf"
+                    app:layout_constraintTop_toBottomOf="@+id/image_other"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:textSize="17sp"
+                    android:textColor="#000"/>
 
                 <TextView
                     android:id="@+id/img_msg_other_time"
@@ -138,7 +152,7 @@
                     android:textSize="15sp"
                     android:text="2:57AM"
                     android:layout_marginRight="20dp"
-                    app:layout_constraintTop_toBottomOf="@+id/image_other"
+                    app:layout_constraintTop_toBottomOf="@+id/img_txt_other"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="5dp"/>
 
@@ -472,7 +486,7 @@
         android:gravity="end"
         android:layout_marginRight="15dp"
         android:layout_marginTop="8dp"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/text_msg_self"
@@ -513,7 +527,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/image_msg_self"
             android:layout_width="match_parent"
-            android:layout_height="235dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/msg_bubble_mid_self"
             android:layout_marginStart="55dp"
             android:layout_marginTop="2dp">
@@ -530,13 +544,27 @@
                 android:layout_margin="4dp"/>
 
             <TextView
+                android:id="@+id/img_txt_self"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="sgdfdfdsf sadvfserf"
+                app:layout_constraintTop_toBottomOf="@+id/image_self"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="17sp"
+                android:textColor="#000"
+                android:textAlignment="viewEnd"/>
+
+            <TextView
                 android:id="@+id/img_msg_self_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:text="2:57AM"
                 android:layout_marginRight="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/image_self"
+                app:layout_constraintTop_toBottomOf="@+id/img_txt_self"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="5dp"/>
 
@@ -566,7 +594,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_margin="4dp">
