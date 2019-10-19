@@ -17,6 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -52,10 +55,6 @@ dependencies {
 
     // UCrop for cropping images
     implementation 'com.github.yalantis:ucrop:2.2.4-native'
-
-    //Butterknife
-    implementation 'com.jakewharton:butterknife:10.1.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 
     //dexter permissions
     implementation "com.karumi:dexter:5.0.0"

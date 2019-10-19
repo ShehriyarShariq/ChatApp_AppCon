@@ -1,938 +1,1364 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".views.ChatActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/top_bar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/default_top_bar"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/topBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible">
-
-            <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/display_img"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/ic_user"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="W,1:1"
-                app:layout_constraintHeight_percent="0.7"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/person_details"
-                android:layout_width="0dp"
+                android:id="@+id/defaultTopBar"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/side_menu"
-                app:layout_constraintStart_toEndOf="@+id/display_img"
-                app:layout_constraintTop_toTopOf="parent">
+                android:visibility="visible">
 
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Friend Name"
-                    android:textSize="17sp"
-                    app:layout_constraintBottom_toTopOf="@+id/last_msg"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="10dp"
-                    android:textStyle="bold"
-                    android:textColor="#000"/>
-
-                <TextView
-                    android:id="@+id/last_msg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Online"
-                    android:textSize="14sp"
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/displayImg"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_user"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="W,1:1"
+                    app:layout_constraintHeight_percent="0.7"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/name"
-                    android:layout_marginBottom="10dp"
-                    android:textColor="#000"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <LinearLayout
-                android:id="@+id/side_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginRight="15dp"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <ImageView
-                    android:id="@+id/games_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_game_bright"
-                    android:layout_marginRight="22.5dp"/>
-
-                <ImageView
-                    android:id="@+id/video_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_video_blue"
-                    android:layout_marginRight="22.5dp"/>
-
-                <ImageView
-                    android:id="@+id/call_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_call_green"
-                    android:layout_marginRight="22.5dp"/>
-
-                <ImageView
-                    android:id="@+id/more_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_more" />
-
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginLeft="15dp"/>
-
-            <ImageView
-                android:id="@+id/selected_decrypt_btn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_decrypt"
-                app:layout_constraintEnd_toStartOf="@+id/selected_delete_btn"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginRight="22.5dp" />
-
-            <ImageView
-                android:id="@+id/selected_delete_btn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_delete_black"
-                app:layout_constraintEnd_toStartOf="@+id/selected_more_btn"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginRight="22.5dp" />
-
-            <ImageView
-                android:id="@+id/selected_more_btn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_more"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginRight="15dp"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar"
-        app:layout_constraintBottom_toTopOf="@+id/chat_layout"
-        android:background="#DDDDDD"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider"
-        android:elevation="0.5dp"
-        android:visibility="gone">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:cardCornerRadius="30dp"
-            app:cardBackgroundColor="@color/gray"
-            app:cardUseCompatPadding="true"
-            app:cardElevation="1dp">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:cardElevation="10dp"
-                app:cardBackgroundColor="@color/gray_light"
-                app:cardCornerRadius="30dp"
-                android:layout_margin="1.5dp">
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        app:layout_constraintHeight_percent="0.75"
-                        android:gravity="center"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/game_rps_btn_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/game_ttt_btn_layout">
-
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/game_rps_btn"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                app:layout_constraintHeight_percent="0.68"
-                                app:layout_constraintDimensionRatio="W, 1:1"
-                                app:cardCornerRadius="1000dp"
-                                app:cardElevation="0dp"
-                                app:cardBackgroundColor="@color/docs_btn_border"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    app:cardCornerRadius="1000dp"
-                                    app:cardElevation="0dp"
-                                    android:layout_margin="1dp"
-                                    app:cardBackgroundColor="@color/docs_btn">
-
-                                    <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/ic_docs"
-                                        android:layout_margin="15dp"/>
-
-                                </androidx.cardview.widget.CardView>
-
-                            </androidx.cardview.widget.CardView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:text="Rock-Paper-Scissors"
-                                app:layout_constraintTop_toBottomOf="@+id/game_rps_btn"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                android:layout_marginTop="10dp"/>
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/game_ttt_btn_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/game_rps_btn_layout"
-                            app:layout_constraintEnd_toStartOf="@+id/game_hat_btn_layout">
-
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/game_ttt_btn"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                app:layout_constraintHeight_percent="0.68"
-                                app:layout_constraintDimensionRatio="W, 1:1"
-                                app:cardCornerRadius="1000dp"
-                                app:cardElevation="0dp"
-                                app:cardBackgroundColor="@color/camera_btn_border"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    app:cardCornerRadius="1000dp"
-                                    app:cardElevation="0dp"
-                                    android:layout_margin="1dp"
-                                    app:cardBackgroundColor="@color/camera_btn">
-
-                                    <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/ic_camera_blue"
-                                        android:layout_margin="15dp"/>
-
-                                </androidx.cardview.widget.CardView>
-
-
-                            </androidx.cardview.widget.CardView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:text="Tic-Tac-Toe"
-                                app:layout_constraintTop_toBottomOf="@+id/game_ttt_btn"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                android:layout_marginTop="10dp"/>
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/game_hat_btn_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/game_ttt_btn_layout"
-                            app:layout_constraintEnd_toEndOf="parent">
-
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/game_hat_btn"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                app:layout_constraintHeight_percent="0.68"
-                                app:layout_constraintDimensionRatio="W, 1:1"
-                                app:cardCornerRadius="1000dp"
-                                app:cardElevation="0dp"
-                                app:cardBackgroundColor="@color/gallery_btn_border"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    app:cardCornerRadius="1000dp"
-                                    app:cardElevation="0dp"
-                                    android:layout_margin="1dp"
-                                    app:cardBackgroundColor="@color/gallery_btn">
-
-                                    <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/ic_gallery"
-                                        android:layout_margin="15dp"/>
-
-                                </androidx.cardview.widget.CardView>
-
-
-                            </androidx.cardview.widget.CardView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:text="Heads and Tails"
-                                app:layout_constraintTop_toBottomOf="@+id/game_hat_btn"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                android:layout_marginTop="10dp"/>
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-        </androidx.cardview.widget.CardView>
-
-    </RelativeLayout>
-    
-    <RelativeLayout
-        android:id="@+id/chat_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        app:layout_constraintBottom_toTopOf="@+id/text_inp_layout"
-        android:layout_marginTop="5dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/chat_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/additional_menu"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.35"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/text_inp_layout"
-        android:elevation="0.5dp"
-        android:visibility="gone">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:cardCornerRadius="30dp"
-            app:cardBackgroundColor="@color/gray"
-            app:cardUseCompatPadding="true"
-            app:cardElevation="1dp">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:cardElevation="10dp"
-                app:cardBackgroundColor="@color/gray_light"
-                app:cardCornerRadius="30dp"
-                android:layout_margin="1.5dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/additional_items_attachments_top_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        app:layout_constraintHeight_percent="0.4"
-                        android:gravity="center"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toTopOf="@+id/additional_items_attachments_bottom_layout">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/attachments_docs_btn_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/attachments_img_camera_btn_layout">
-
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/attachments_docs_btn"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                app:layout_constraintHeight_percent="0.68"
-                                app:layout_constraintDimensionRatio="W, 1:1"
-                                app:cardCornerRadius="1000dp"
-                                app:cardElevation="0dp"
-                                app:cardBackgroundColor="@color/docs_btn_border"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    app:cardCornerRadius="1000dp"
-                                    app:cardElevation="0dp"
-                                    android:layout_margin="1dp"
-                                    app:cardBackgroundColor="@color/docs_btn">
-
-                                    <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/ic_docs"
-                                        android:layout_margin="15dp"/>
-
-                                </androidx.cardview.widget.CardView>
-
-                            </androidx.cardview.widget.CardView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:text="Docs"
-                                app:layout_constraintTop_toBottomOf="@+id/attachments_docs_btn"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                android:layout_marginTop="10dp"/>
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/attachments_img_camera_btn_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/attachments_docs_btn_layout"
-                            app:layout_constraintEnd_toStartOf="@+id/attachments_img_gallery_btn_layout">
-
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/attachments_img_camera_btn"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                app:layout_constraintHeight_percent="0.68"
-                                app:layout_constraintDimensionRatio="W, 1:1"
-                                app:cardCornerRadius="1000dp"
-                                app:cardElevation="0dp"
-                                app:cardBackgroundColor="@color/camera_btn_border"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    app:cardCornerRadius="1000dp"
-                                    app:cardElevation="0dp"
-                                    android:layout_margin="1dp"
-                                    app:cardBackgroundColor="@color/camera_btn">
-
-                                    <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/ic_camera_blue"
-                                        android:layout_margin="15dp"/>
-
-                                </androidx.cardview.widget.CardView>
-
-
-                            </androidx.cardview.widget.CardView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:text="Camera"
-                                app:layout_constraintTop_toBottomOf="@+id/attachments_img_camera_btn"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                android:layout_marginTop="10dp"/>
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/attachments_img_gallery_btn_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/attachments_img_camera_btn_layout"
-                            app:layout_constraintEnd_toEndOf="parent">
-
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/attachments_img_gallery_btn"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                app:layout_constraintHeight_percent="0.68"
-                                app:layout_constraintDimensionRatio="W, 1:1"
-                                app:cardCornerRadius="1000dp"
-                                app:cardElevation="0dp"
-                                app:cardBackgroundColor="@color/gallery_btn_border"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    app:cardCornerRadius="1000dp"
-                                    app:cardElevation="0dp"
-                                    android:layout_margin="1dp"
-                                    app:cardBackgroundColor="@color/gallery_btn">
-
-                                    <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/ic_gallery"
-                                        android:layout_margin="15dp"/>
-
-                                </androidx.cardview.widget.CardView>
-
-
-                            </androidx.cardview.widget.CardView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:text="Gallery"
-                                app:layout_constraintTop_toBottomOf="@+id/attachments_img_gallery_btn"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                android:layout_marginTop="10dp"/>
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/additional_items_attachments_bottom_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        app:layout_constraintHeight_percent="0.4"
-                        android:gravity="center"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/additional_items_attachments_top_layout">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/attachments_audio_btn_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/attachments_location_btn_layout">
-
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/attachments_audio_btn"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                app:layout_constraintHeight_percent="0.68"
-                                app:layout_constraintDimensionRatio="W, 1:1"
-                                app:cardCornerRadius="1000dp"
-                                app:cardElevation="0dp"
-                                app:cardBackgroundColor="@color/audio_btn_border"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    app:cardCornerRadius="1000dp"
-                                    app:cardElevation="0dp"
-                                    android:layout_margin="1dp"
-                                    app:cardBackgroundColor="@color/audio_btn">
-
-                                    <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/ic_audio"
-                                        android:layout_margin="15dp"/>
-
-                                </androidx.cardview.widget.CardView>
-
-
-                            </androidx.cardview.widget.CardView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:text="Audio"
-                                app:layout_constraintTop_toBottomOf="@+id/attachments_audio_btn"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                android:layout_marginTop="15dp"/>
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/attachments_location_btn_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/attachments_audio_btn_layout"
-                            app:layout_constraintEnd_toStartOf="@+id/attachments_contact_btn_layout">
-
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/attachments_location_btn"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                app:layout_constraintHeight_percent="0.68"
-                                app:layout_constraintDimensionRatio="W, 1:1"
-                                app:cardCornerRadius="1000dp"
-                                app:cardElevation="0dp"
-                                app:cardBackgroundColor="@color/location_btn_border"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    app:cardCornerRadius="1000dp"
-                                    app:cardElevation="0dp"
-                                    android:layout_margin="1dp"
-                                    app:cardBackgroundColor="@color/location_btn">
-
-                                    <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/ic_location"
-                                        android:layout_margin="15dp"/>
-
-                                </androidx.cardview.widget.CardView>
-
-
-                            </androidx.cardview.widget.CardView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:text="Location"
-                                app:layout_constraintTop_toBottomOf="@+id/attachments_location_btn"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                android:layout_marginTop="15dp"/>
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/attachments_contact_btn_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/attachments_location_btn_layout"
-                            app:layout_constraintEnd_toEndOf="parent">
-
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/attachments_contact_btn"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                app:layout_constraintHeight_percent="0.68"
-                                app:layout_constraintDimensionRatio="W, 1:1"
-                                app:cardCornerRadius="1000dp"
-                                app:cardElevation="0dp"
-                                app:cardBackgroundColor="@color/contacts_btn_border"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    app:cardCornerRadius="1000dp"
-                                    app:cardElevation="0dp"
-                                    android:layout_margin="1dp"
-                                    app:cardBackgroundColor="@color/contacts_btn">
-
-                                    <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/ic_contacts"
-                                        android:layout_margin="15dp"/>
-
-                                </androidx.cardview.widget.CardView>
-
-
-                            </androidx.cardview.widget.CardView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="14sp"
-                                android:text="Contact"
-                                app:layout_constraintTop_toBottomOf="@+id/attachments_contact_btn"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                android:layout_marginTop="15dp"/>
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-        </androidx.cardview.widget.CardView>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/game_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/text_inp_layout"
-        android:elevation="0.5dp"
-        android:visibility="gone">
-
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/close_game_btn"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/ic_close"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:elevation="2dp"
-            android:background="#00000000"
-            android:outlineProvider="none"/>
-        
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:cardCornerRadius="30dp"
-            app:cardBackgroundColor="@color/gray"
-            app:cardUseCompatPadding="true"
-            app:cardElevation="1dp">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:cardElevation="10dp"
-                app:cardBackgroundColor="@color/gray_light"
-                app:cardCornerRadius="30dp"
-                android:layout_margin="1.5dp">
-
-                <LinearLayout
-                    android:id="@+id/start_confirmation_layout"
-                    android:layout_width="match_parent"
+                    android:id="@+id/personDetails"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:visibility="gone">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/sideMenu"
+                    app:layout_constraintStart_toEndOf="@+id/display_img"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="22sp"
-                        android:text="Waiting for other player to\n start the game..."
-                        android:textAlignment="center"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Friend Name"
+                        android:textSize="17sp"
+                        app:layout_constraintBottom_toTopOf="@+id/last_msg"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:textStyle="bold"/>
+                        android:layout_marginTop="10dp"
+                        android:textStyle="bold"
+                        android:textColor="#000"/>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:orientation="horizontal"
-                        android:weightSum="2"
-                        android:layout_marginTop="50dp">
+                    <TextView
+                        android:id="@+id/lastMsg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Online"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/name"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="#000"/>
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cancel_game_req_btn"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/chat_list_item_delete"
-                            app:cardCornerRadius="10dp"
-                            android:layout_margin="2dp">
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textAlignment="center"
-                                android:gravity="center"
-                                android:text="Cancel"
-                                android:textColor="#fff"
-                                android:textSize="17sp"/>
+                <LinearLayout
+                    android:id="@+id/sideMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="15dp"
+                    app:layout_constraintEnd_toEndOf="parent">
 
-                        </androidx.cardview.widget.CardView>
+                    <ImageView
+                        android:id="@+id/gamesBtn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_game_bright"
+                        android:layout_marginRight="22.5dp"/>
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/retry_game_req_btn"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/chat_list_item_read"
-                            app:cardCornerRadius="10dp"
-                            android:layout_margin="2dp"
-                            android:alpha="1">
+                    <ImageView
+                        android:id="@+id/videoBtn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_video_blue"
+                        android:layout_marginRight="22.5dp"/>
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textAlignment="center"
-                                android:gravity="center"
-                                android:text="Retry in 10s"
-                                android:textColor="#fff"
-                                android:textSize="17sp"/>
+                    <ImageView
+                        android:id="@+id/callBtn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_call_green"
+                        android:layout_marginRight="22.5dp"/>
 
-                        </androidx.cardview.widget.CardView>
-
-                    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/moreBtn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_more" />
 
                 </LinearLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/rock_paper_scissors"
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/msgSelection"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/msgSelectionBackBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_back"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginLeft="15dp"/>
+
+                <ImageView
+                    android:id="@+id/selectedDecryptBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_decrypt"
+                    app:layout_constraintEnd_toStartOf="@+id/selectedDeleteBtn"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginRight="22.5dp" />
+
+                <ImageView
+                    android:id="@+id/selectedDeleteBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_delete_black"
+                    app:layout_constraintEnd_toStartOf="@+id/selectedMoreBtn"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginRight="22.5dp" />
+
+                <ImageView
+                    android:id="@+id/selectedMoreBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_more"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginRight="15dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            app:layout_constraintTop_toBottomOf="@+id/topBar"
+            app:layout_constraintBottom_toTopOf="@+id/chatLayout"
+            android:background="#DDDDDD"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            android:elevation="0.5dp"
+            android:visibility="gone">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="30dp"
+                app:cardBackgroundColor="@color/gray"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="1dp">
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="gone">
+                    app:cardElevation="10dp"
+                    app:cardBackgroundColor="@color/gray_light"
+                    app:cardCornerRadius="30dp"
+                    android:layout_margin="1.5dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/game_area_rps"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        app:layout_constraintHeight_percent="0.75"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent">
+                        android:layout_height="match_parent">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintHeight_percent="0.75"
+                            android:gravity="center"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/rps_game_center">
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent">
 
-                            <LinearLayout
-                                android:id="@+id/enemy_score_rps_layout"
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/gameRpsBtnLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/gameTttBtnLayout">
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/gameRpsBtn"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    app:cardBackgroundColor="@color/docs_btn_border"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:cardCornerRadius="1000dp"
+                                        app:cardElevation="0dp"
+                                        android:layout_margin="1dp"
+                                        app:cardBackgroundColor="@color/docs_btn">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/ic_docs"
+                                            android:layout_margin="15dp"/>
+
+                                    </androidx.cardview.widget.CardView>
+
+                                </androidx.cardview.widget.CardView>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:text="Rock-Paper-Scissors"
+                                    app:layout_constraintTop_toBottomOf="@+id/gameRpsBtn"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    android:layout_marginTop="10dp"/>
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/gameTttBtnLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/gameRpsBtnLayout"
+                                app:layout_constraintEnd_toStartOf="@+id/gameHatBtnLayout">
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/gameTttBtn"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    app:cardBackgroundColor="@color/camera_btn_border"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:cardCornerRadius="1000dp"
+                                        app:cardElevation="0dp"
+                                        android:layout_margin="1dp"
+                                        app:cardBackgroundColor="@color/camera_btn">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/ic_camera_blue"
+                                            android:layout_margin="15dp"/>
+
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </androidx.cardview.widget.CardView>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:text="Tic-Tac-Toe"
+                                    app:layout_constraintTop_toBottomOf="@+id/gameTttBtn"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    android:layout_marginTop="10dp"/>
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/gameHatBtnLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/gameTttBtnLayout"
+                                app:layout_constraintEnd_toEndOf="parent">
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/gameHatBtn"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    app:cardBackgroundColor="@color/gallery_btn_border"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:cardCornerRadius="1000dp"
+                                        app:cardElevation="0dp"
+                                        android:layout_margin="1dp"
+                                        app:cardBackgroundColor="@color/gallery_btn">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/ic_gallery"
+                                            android:layout_margin="15dp"/>
+
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </androidx.cardview.widget.CardView>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:text="Heads and Tails"
+                                    app:layout_constraintTop_toBottomOf="@+id/gameHatBtn"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    android:layout_marginTop="10dp"/>
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/chatLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            app:layout_constraintBottom_toTopOf="@+id/textInpLayout"
+            android:layout_marginTop="5dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/chatList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/additionalMenu"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.35"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/textInpLayout"
+            android:elevation="0.5dp"
+            android:visibility="gone">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="30dp"
+                app:cardBackgroundColor="@color/gray"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="1dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardElevation="10dp"
+                    app:cardBackgroundColor="@color/gray_light"
+                    app:cardCornerRadius="30dp"
+                    android:layout_margin="1.5dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/additionalItemsAttachmentsTopLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintHeight_percent="0.4"
+                            android:gravity="center"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toTopOf="@+id/additionalItemsAttachmentsBottomLayout">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/attachmentsDocsBtnLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/attachmentsImgCameraBtnLayout">
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/attachmentsDocsBtn"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    app:cardBackgroundColor="@color/docs_btn_border"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:cardCornerRadius="1000dp"
+                                        app:cardElevation="0dp"
+                                        android:layout_margin="1dp"
+                                        app:cardBackgroundColor="@color/docs_btn">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/ic_docs"
+                                            android:layout_margin="15dp"/>
+
+                                    </androidx.cardview.widget.CardView>
+
+                                </androidx.cardview.widget.CardView>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:text="Docs"
+                                    app:layout_constraintTop_toBottomOf="@+id/attachmentsDocsBtn"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    android:layout_marginTop="10dp"/>
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/attachmentsImgCameraBtnLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/attachmentsDocsBtnLayout"
+                                app:layout_constraintEnd_toStartOf="@+id/attachmentsImgGalleryBtnLayout">
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/attachmentsImgCameraBtn"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    app:cardBackgroundColor="@color/camera_btn_border"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:cardCornerRadius="1000dp"
+                                        app:cardElevation="0dp"
+                                        android:layout_margin="1dp"
+                                        app:cardBackgroundColor="@color/camera_btn">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/ic_camera_blue"
+                                            android:layout_margin="15dp"/>
+
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </androidx.cardview.widget.CardView>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:text="Camera"
+                                    app:layout_constraintTop_toBottomOf="@+id/attachmentsImgCameraBtn"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    android:layout_marginTop="10dp"/>
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/attachmentsImgGalleryBtnLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/attachmentsImgCameraBtnLayout"
+                                app:layout_constraintEnd_toEndOf="parent">
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/attachmentsImgGalleryBtn"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    app:cardBackgroundColor="@color/gallery_btn_border"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:cardCornerRadius="1000dp"
+                                        app:cardElevation="0dp"
+                                        android:layout_margin="1dp"
+                                        app:cardBackgroundColor="@color/gallery_btn">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/ic_gallery"
+                                            android:layout_margin="15dp"/>
+
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </androidx.cardview.widget.CardView>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:text="Gallery"
+                                    app:layout_constraintTop_toBottomOf="@+id/attachmentsImgGalleryBtn"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    android:layout_marginTop="10dp"/>
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/additionalItemsAttachmentsBottomLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintHeight_percent="0.4"
+                            android:gravity="center"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/additionalItemsAttachmentsTopLayout">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/attachmentsAudioBtnLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/attachmentsLocationBtnLayout">
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/attachmentsAudioBtn"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    app:cardBackgroundColor="@color/audio_btn_border"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:cardCornerRadius="1000dp"
+                                        app:cardElevation="0dp"
+                                        android:layout_margin="1dp"
+                                        app:cardBackgroundColor="@color/audio_btn">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/ic_audio"
+                                            android:layout_margin="15dp"/>
+
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </androidx.cardview.widget.CardView>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:text="Audio"
+                                    app:layout_constraintTop_toBottomOf="@+id/attachmentsAudioBtn"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    android:layout_marginTop="15dp"/>
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/attachmentsLocationBtnLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/attachmentsAudioBtnLayout"
+                                app:layout_constraintEnd_toStartOf="@+id/attachmentsContactBtnLayout">
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/attachmentsLocationBtn"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    app:cardBackgroundColor="@color/location_btn_border"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:cardCornerRadius="1000dp"
+                                        app:cardElevation="0dp"
+                                        android:layout_margin="1dp"
+                                        app:cardBackgroundColor="@color/location_btn">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/ic_location"
+                                            android:layout_margin="15dp"/>
+
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </androidx.cardview.widget.CardView>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:text="Location"
+                                    app:layout_constraintTop_toBottomOf="@+id/attachmentsLocationBtn"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    android:layout_marginTop="15dp"/>
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/attachmentsContactBtnLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/attachmentsLocationBtnLayout"
+                                app:layout_constraintEnd_toEndOf="parent">
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/attachmentsContactBtn"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.68"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp"
+                                    app:cardBackgroundColor="@color/contacts_btn_border"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:cardCornerRadius="1000dp"
+                                        app:cardElevation="0dp"
+                                        android:layout_margin="1dp"
+                                        app:cardBackgroundColor="@color/contacts_btn">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/ic_contacts"
+                                            android:layout_margin="15dp"/>
+
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </androidx.cardview.widget.CardView>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:text="Contact"
+                                    app:layout_constraintTop_toBottomOf="@+id/attachmentsContactBtn"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    android:layout_marginTop="15dp"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/gameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/textInpLayout"
+            android:elevation="0.5dp"
+            android:visibility="gone">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/closeGameBtn"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/ic_close"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:elevation="2dp"
+                android:background="#00000000"
+                android:outlineProvider="none"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="30dp"
+                app:cardBackgroundColor="@color/gray"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="1dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardElevation="10dp"
+                    app:cardBackgroundColor="@color/gray_light"
+                    app:cardCornerRadius="30dp"
+                    android:layout_margin="1.5dp">
+
+                    <LinearLayout
+                        android:id="@+id/startConfirmationLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="22sp"
+                            android:text="Waiting for other player to\n start the game..."
+                            android:textAlignment="center"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:textStyle="bold"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:layout_marginTop="50dp">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cancelGameReqBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                app:cardBackgroundColor="@color/chat_list_item_delete"
+                                app:cardCornerRadius="10dp"
+                                android:layout_margin="2dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:textAlignment="center"
+                                    android:gravity="center"
+                                    android:text="Cancel"
+                                    android:textColor="#fff"
+                                    android:textSize="17sp"/>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/retryGameReqBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                app:cardBackgroundColor="@color/chat_list_item_read"
+                                app:cardCornerRadius="10dp"
+                                android:layout_margin="2dp"
+                                android:alpha="1">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:textAlignment="center"
+                                    android:gravity="center"
+                                    android:text="Retry in 10s"
+                                    android:textColor="#fff"
+                                    android:textSize="17sp"/>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/rockPaperScissors"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/gameAreaRps"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintHeight_percent="0.75"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/rpsGameCenter">
+
+                                <LinearLayout
+                                    android:id="@+id/enemyScoreRpsLayout"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.45"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toTopOf="@+id/selfScoreRpsLayout"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:orientation="vertical"
+                                    android:gravity="center">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Enemy"
+                                        android:textAlignment="center"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold"/>
+
+                                    <TextView
+                                        android:id="@+id/enemyScoreRps"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="2"
+                                        android:textAlignment="center"
+                                        android:textSize="24sp"
+                                        android:layout_marginTop="5dp"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/selfScoreRpsLayout"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.45"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/enemyScoreRpsLayout"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:orientation="vertical"
+                                    android:gravity="center">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="You"
+                                        android:textAlignment="center"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold"/>
+
+                                    <TextView
+                                        android:id="@+id/selfScoreRps"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="1"
+                                        android:textAlignment="center"
+                                        android:textSize="24sp"
+                                        android:layout_marginTop="5dp"/>
+
+                                </LinearLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/rpsGameCenter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent">
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/enemyMoveRpsLayout"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.4"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toTopOf="@+id/dividerRps"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:cardCornerRadius="1000dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    app:cardBackgroundColor="@color/gray">
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:cardCornerRadius="1000dp"
+                                        app:cardBackgroundColor="@color/gray_light"
+                                        android:layout_margin="5dp">
+
+                                        <ImageView
+                                            android:id="@+id/enemyMoveRps"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/ic_rock"
+                                            android:layout_margin="10dp"/>
+
+                                    </androidx.cardview.widget.CardView>
+
+                                </androidx.cardview.widget.CardView>
+
+                                <RelativeLayout
+                                    android:id="@+id/dividerRps"
+                                    android:layout_width="0dp"
+                                    android:layout_height="2dp"
+                                    app:layout_constraintWidth_percent="0.95"
+                                    android:background="@color/gray"
+                                    app:layout_constraintTop_toBottomOf="@+id/enemyMoveRpsLayout"
+                                    app:layout_constraintBottom_toTopOf="@+id/selfMoveRpsLayout"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/selfMoveRpsLayout"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintHeight_percent="0.4"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/dividerRps"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:cardCornerRadius="1000dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_marginTop="5dp"
+                                    app:cardBackgroundColor="@color/gray">
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:cardCornerRadius="1000dp"
+                                        app:cardBackgroundColor="@color/gray_light"
+                                        android:layout_margin="5dp">
+
+                                        <ImageView
+                                            android:id="@+id/selfMoveRps"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/ic_paper"
+                                            android:layout_margin="10dp"/>
+
+                                    </androidx.cardview.widget.CardView>
+
+                                </androidx.cardview.widget.CardView>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/rpsGameDetails"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/rpsGameCenter"
+                                android:layout_margin="5dp">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/rpsWaitLayout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintBottom_toTopOf="@+id/timerRpsLayout"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="5dp">
+
+                                    <ImageView
+                                        android:id="@+id/icWaitRps"
+                                        android:layout_width="0dp"
+                                        android:layout_height="0dp"
+                                        app:layout_constraintWidth_percent="0.26"
+                                        app:layout_constraintDimensionRatio="H, 1:1"
+                                        android:src="@drawable/ic_wait"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Waiting..."
+                                        android:textSize="18sp"
+                                        android:textAlignment="center"
+                                        android:gravity="center"
+                                        app:layout_constraintTop_toBottomOf="@+id/icWaitRps"
+                                        android:layout_marginTop="3dp"/>
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/timerRpsLayout"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintWidth_percent="0.7"
+                                    app:layout_constraintDimensionRatio="H, 1:1"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/rpsWaitLayout"
+                                    app:cardBackgroundColor="#00000000"
+                                    android:padding="0dp"
+                                    app:cardElevation="0dp">
+
+                                    <ProgressBar
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:padding="0dp"
+                                        android:layout_margin="0dp"/>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:textAlignment="center"
+                                        android:gravity="center"
+                                        android:text="10s"
+                                        android:textSize="26sp"
+                                        android:textStyle="bold"/>
+
+                                </androidx.cardview.widget.CardView>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintTop_toBottomOf="@+id/gameAreaRps"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@color/gray"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                app:layout_constraintTop_toTopOf="parent"/>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/rockBtn"
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
-                                app:layout_constraintHeight_percent="0.45"
                                 app:layout_constraintDimensionRatio="W, 1:1"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/paperBtn"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toTopOf="@+id/self_score_rps_layout"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:cardCornerRadius="1000dp"
+                                app:cardBackgroundColor="@color/chat_list_item_read"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="4dp"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardBackgroundColor="@color/chat_list_item_read_inner">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/ic_rock"
+                                        android:layout_margin="10dp"/>
+
+                                </androidx.cardview.widget.CardView>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/paperBtn"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintDimensionRatio="W, 1:1"
+                                app:layout_constraintStart_toEndOf="@+id/rockBtn"
+                                app:layout_constraintEnd_toStartOf="@+id/scissorsBtn"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:cardCornerRadius="1000dp"
+                                app:cardBackgroundColor="@color/chat_list_item_delete"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="4dp"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardBackgroundColor="@color/chat_list_item_delete_inner">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/ic_paper"
+                                        android:layout_margin="10dp"/>
+
+                                </androidx.cardview.widget.CardView>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/scissorsBtn"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintDimensionRatio="W, 1:1"
+                                app:layout_constraintStart_toEndOf="@+id/paperBtn"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:cardCornerRadius="1000dp"
+                                app:cardBackgroundColor="@color/chat_list_item_select"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="4dp"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardBackgroundColor="@color/chat_list_item_select_inner">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/ic_scissors"
+                                        android:layout_margin="10dp"/>
+
+                                </androidx.cardview.widget.CardView>
+
+                            </androidx.cardview.widget.CardView>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ticTacTow"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/tttGame"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginLeft="10dp">
+
+                            <GridLayout
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintHeight_percent="0.75"
+                                app:layout_constraintDimensionRatio="W, 1:1"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginBottom="5dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:columnCount="3"
+                                android:rowCount="3"/>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintHeight_percent="0.75"
+                                app:layout_constraintDimensionRatio="W, 1:1"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <View
+                                    android:id="@+id/vertDivider1"
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:background="#000"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@+id/vertDivider2"/>
+
+                                <View
+                                    android:id="@+id/vertDivider2"
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:background="#000"
+                                    app:layout_constraintStart_toEndOf="@+id/vertDivider1"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                                <View
+                                    android:id="@+id/horiDivider1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:background="#000"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toTopOf="@+id/horiDivider2"/>
+
+                                <View
+                                    android:id="@+id/horiDivider2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:background="#000"
+                                    app:layout_constraintTop_toBottomOf="@+id/horiDivider1"
+                                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/tttGameDetails"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/tttGame"
+                            android:layout_margin="5dp">
+
+                            <LinearLayout
+                                android:id="@+id/tttPlayerDetails"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:gravity="center">
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toTopOf="@+id/timerTttLayout">
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -943,30 +1369,13 @@
                                     android:textStyle="bold"/>
 
                                 <TextView
-                                    android:id="@+id/enemy_score_rps"
+                                    android:id="@+id/enemyScoreTtt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="2"
                                     android:textAlignment="center"
                                     android:textSize="24sp"
-                                    android:layout_marginTop="5dp"/>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/self_score_rps_layout"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                app:layout_constraintHeight_percent="0.45"
-                                app:layout_constraintDimensionRatio="W, 1:1"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/enemy_score_rps_layout"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                android:layout_marginBottom="5dp"
-                                android:layout_marginTop="5dp"
-                                android:orientation="vertical"
-                                android:gravity="center">
+                                    android:layout_marginTop="2dp"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -974,151 +1383,22 @@
                                     android:text="You"
                                     android:textAlignment="center"
                                     android:textSize="20sp"
-                                    android:textStyle="bold"/>
+                                    android:textStyle="bold"
+                                    android:layout_marginTop="10dp"/>
 
                                 <TextView
-                                    android:id="@+id/self_score_rps"
+                                    android:id="@+id/selfScoreTtt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="1"
                                     android:textAlignment="center"
                                     android:textSize="24sp"
-                                    android:layout_marginTop="5dp"/>
+                                    android:layout_marginTop="2dp"/>
 
                             </LinearLayout>
 
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/rps_game_center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent">
-
                             <androidx.cardview.widget.CardView
-                                android:id="@+id/enemy_move_rps_layout"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                app:layout_constraintHeight_percent="0.4"
-                                app:layout_constraintDimensionRatio="W, 1:1"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toTopOf="@+id/divider_rps"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:cardCornerRadius="1000dp"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginBottom="5dp"
-                                app:cardBackgroundColor="@color/gray">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    app:cardCornerRadius="1000dp"
-                                    app:cardBackgroundColor="@color/gray_light"
-                                    android:layout_margin="5dp">
-
-                                    <ImageView
-                                        android:id="@+id/enemy_move_rps"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/ic_rock"
-                                        android:layout_margin="10dp"/>
-
-                                </androidx.cardview.widget.CardView>
-
-                            </androidx.cardview.widget.CardView>
-
-                            <RelativeLayout
-                                android:id="@+id/divider_rps"
-                                android:layout_width="0dp"
-                                android:layout_height="2dp"
-                                app:layout_constraintWidth_percent="0.95"
-                                android:background="@color/gray"
-                                app:layout_constraintTop_toBottomOf="@+id/enemy_move_rps_layout"
-                                app:layout_constraintBottom_toTopOf="@+id/self_move_rps_layout"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"/>
-
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/self_move_rps_layout"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                app:layout_constraintHeight_percent="0.4"
-                                app:layout_constraintDimensionRatio="W, 1:1"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/divider_rps"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:cardCornerRadius="1000dp"
-                                android:layout_marginBottom="5dp"
-                                android:layout_marginTop="5dp"
-                                app:cardBackgroundColor="@color/gray">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    app:cardCornerRadius="1000dp"
-                                    app:cardBackgroundColor="@color/gray_light"
-                                    android:layout_margin="5dp">
-
-                                    <ImageView
-                                        android:id="@+id/self_move_rps"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:src="@drawable/ic_paper"
-                                        android:layout_margin="10dp"/>
-
-                                </androidx.cardview.widget.CardView>
-
-                            </androidx.cardview.widget.CardView>
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                        
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/rps_game_details"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/rps_game_center"
-                            android:layout_margin="5dp">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/rps_wait_layout"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintBottom_toTopOf="@+id/timer_rps_layout"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="5dp">
-
-                                <ImageView
-                                    android:id="@+id/ic_wait_rps"
-                                    android:layout_width="0dp"
-                                    android:layout_height="0dp"
-                                    app:layout_constraintWidth_percent="0.26"
-                                    app:layout_constraintDimensionRatio="H, 1:1"
-                                    android:src="@drawable/ic_wait"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Waiting..."
-                                    android:textSize="18sp"
-                                    android:textAlignment="center"
-                                    android:gravity="center"
-                                    app:layout_constraintTop_toBottomOf="@+id/ic_wait_rps"
-                                    android:layout_marginTop="3dp"/>
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/timer_rps_layout"
+                                android:id="@+id/timerTttLayout"
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
                                 app:layout_constraintWidth_percent="0.7"
@@ -1126,8 +1406,8 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/rps_wait_layout"
-                                app:cardBackgroundColor="null"
+                                app:layout_constraintTop_toBottomOf="@+id/tttPlayerDetails"
+                                app:cardBackgroundColor="#00000000"
                                 android:padding="0dp"
                                 app:cardElevation="0dp">
 
@@ -1143,7 +1423,7 @@
                                     android:textAlignment="center"
                                     android:gravity="center"
                                     android:text="10s"
-                                    android:textSize="26sp"
+                                    android:textSize="22sp"
                                     android:textStyle="bold"/>
 
                             </androidx.cardview.widget.CardView>
@@ -1153,427 +1433,141 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/headTails"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toBottomOf="@+id/game_area_rps"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent">
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:background="@color/gray"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            app:layout_constraintTop_toTopOf="parent"/>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/rock_btn"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:layout_constraintDimensionRatio="W, 1:1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/paper_btn"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:cardCornerRadius="1000dp"
-                            app:cardBackgroundColor="@color/chat_list_item_read"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_margin="4dp"
-                                app:cardCornerRadius="1000dp"
-                                app:cardBackgroundColor="@color/chat_list_item_read_inner">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:src="@drawable/ic_rock"
-                                    android:layout_margin="10dp"/>
-
-                            </androidx.cardview.widget.CardView>
-
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/paper_btn"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:layout_constraintDimensionRatio="W, 1:1"
-                            app:layout_constraintStart_toEndOf="@+id/rock_btn"
-                            app:layout_constraintEnd_toStartOf="@+id/scissors_btn"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:cardCornerRadius="1000dp"
-                            app:cardBackgroundColor="@color/chat_list_item_delete"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_margin="4dp"
-                                app:cardCornerRadius="1000dp"
-                                app:cardBackgroundColor="@color/chat_list_item_delete_inner">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:src="@drawable/ic_paper"
-                                    android:layout_margin="10dp"/>
-
-                            </androidx.cardview.widget.CardView>
-
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/scissors_btn"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:layout_constraintDimensionRatio="W, 1:1"
-                            app:layout_constraintStart_toEndOf="@+id/paper_btn"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:cardCornerRadius="1000dp"
-                            app:cardBackgroundColor="@color/chat_list_item_select"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_margin="4dp"
-                                app:cardCornerRadius="1000dp"
-                                app:cardBackgroundColor="@color/chat_list_item_select_inner">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:src="@drawable/ic_scissors"
-                                    android:layout_margin="10dp"/>
-
-                            </androidx.cardview.widget.CardView>
-
-                        </androidx.cardview.widget.CardView>
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/tic_tac_tow"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="visible">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/ttt_game"
-                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginLeft="10dp">
+                        android:visibility="gone">
 
-                        <GridLayout
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:layout_constraintHeight_percent="0.75"
-                            app:layout_constraintDimensionRatio="W, 1:1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:columnCount="3"
-                            android:rowCount="3"/>
-                        
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:layout_constraintHeight_percent="0.75"
-                            app:layout_constraintDimensionRatio="W, 1:1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-                            
-                            <View
-                                android:id="@+id/vert_divider_1"
-                                android:layout_width="2dp"
-                                android:layout_height="match_parent"
-                                android:background="#000"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/vert_divider_2"/>
-
-                            <View
-                                android:id="@+id/vert_divider_2"
-                                android:layout_width="2dp"
-                                android:layout_height="match_parent"
-                                android:background="#000"
-                                app:layout_constraintStart_toEndOf="@+id/vert_divider_1"
-                                app:layout_constraintEnd_toEndOf="parent"/>
-
-                            <View
-                                android:id="@+id/hori_divider_1"
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:background="#000"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toTopOf="@+id/hori_divider_2"/>
-
-                            <View
-                                android:id="@+id/hori_divider_2"
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:background="#000"
-                                app:layout_constraintTop_toBottomOf="@+id/hori_divider_1"
-                                app:layout_constraintBottom_toBottomOf="parent"/>
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/ttt_game_details"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/ttt_game"
-                        android:layout_margin="5dp">
-
-                        <LinearLayout
-                            android:id="@+id/ttt_player_details"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintBottom_toTopOf="@+id/timer_ttt_layout">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Enemy"
-                                android:textAlignment="center"
-                                android:textSize="20sp"
-                                android:textStyle="bold"/>
-
-                            <TextView
-                                android:id="@+id/enemy_score_ttt"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="2"
-                                android:textAlignment="center"
-                                android:textSize="24sp"
-                                android:layout_marginTop="2dp"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="You"
-                                android:textAlignment="center"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                android:layout_marginTop="10dp"/>
-
-                            <TextView
-                                android:id="@+id/self_score_ttt"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="1"
-                                android:textAlignment="center"
-                                android:textSize="24sp"
-                                android:layout_marginTop="2dp"/>
-
-                        </LinearLayout>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/timer_ttt_layout"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:layout_constraintWidth_percent="0.7"
-                            app:layout_constraintDimensionRatio="H, 1:1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/ttt_player_details"
-                            app:cardBackgroundColor="null"
-                            android:padding="0dp"
-                            app:cardElevation="0dp">
-
-                            <ProgressBar
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:padding="0dp"
-                                android:layout_margin="0dp"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textAlignment="center"
-                                android:gravity="center"
-                                android:text="10s"
-                                android:textSize="22sp"
-                                android:textStyle="bold"/>
-
-                        </androidx.cardview.widget.CardView>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/head_tails"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone">
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
             </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
-    </RelativeLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/text_inp_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/textInpLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/audio_btn"
-            android:layout_marginRight="5dp"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="0dp"
-            app:cardBackgroundColor="@color/gray">
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="1.5dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/audioBtn"
+                android:layout_marginRight="5dp"
                 app:cardCornerRadius="30dp"
-                app:cardElevation="0dp">
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/gray">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:minHeight="60dp"
-                    android:maxHeight="140dp">
+                    android:layout_margin="1.5dp"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="0dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/add_more_alt_btn"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        app:cardCornerRadius="1000dp"
-                        app:cardBackgroundColor="#000"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginBottom="10dp">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:minHeight="60dp"
+                        android:maxHeight="140dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/addMoreAltBtn"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            app:cardCornerRadius="1000dp"
+                            app:cardBackgroundColor="#000"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginBottom="10dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_plus_white"
+                                android:layout_margin="5dp"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/textInp"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/addMoreAltBtn"
+                            app:layout_constraintEnd_toStartOf="@+id/addEmojiBtn"
+                            android:backgroundTint="#fff"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:textSize="18sp"
+                            android:inputType="textMultiLine"
+                            android:textColor="#000"
+                            android:hint="Text message"
+                            android:isScrollContainer="true"
+                            android:focusable="true"
+                            android:overScrollMode="always"/>
 
                         <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_plus_white"
-                            android:layout_margin="5dp"/>
+                            android:id="@+id/addEmojiBtn"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/ic_emoji"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textInp"
+                            app:layout_constraintEnd_toStartOf="@+id/addImageBtn"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginBottom="10dp"/>
 
-                    </androidx.cardview.widget.CardView>
+                        <ImageView
+                            android:id="@+id/addImageBtn"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/ic_camera_gray"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginBottom="10dp"/>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/text_inp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/add_more_alt_btn"
-                        app:layout_constraintEnd_toStartOf="@+id/add_emoji_btn"
-                        android:backgroundTint="#fff"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:textSize="18sp"
-                        android:inputType="textMultiLine"
-                        android:textColor="#000"
-                        android:hint="Text message"
-                        android:isScrollContainer="true"
-                        android:focusable="true"
-                        android:overScrollMode="always"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/add_attachment_btn"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="0dp"-->
-<!--                        android:src="@drawable/ic_attachment"-->
-<!--                        app:layout_constraintTop_toTopOf="parent"-->
-<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                        app:layout_constraintHeight_percent="0.6"-->
-<!--                        app:layout_constraintDimensionRatio="W, 1:1"-->
-<!--                        app:layout_constraintEnd_toStartOf="@+id/add_image_btn"-->
-<!--                        android:layout_marginRight="25dp"-->
-<!--                        android:rotation="-45"/>-->
-
-                    <ImageView
-                        android:id="@+id/add_emoji_btn"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:src="@drawable/ic_emoji"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/text_inp"
-                        app:layout_constraintEnd_toStartOf="@+id/add_image_btn"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginBottom="10dp"/>
-
-                    <ImageView
-                        android:id="@+id/add_image_btn"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:src="@drawable/ic_camera_gray"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginBottom="10dp"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
             </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/audioBtn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:cardCornerRadius="1000dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/chat_list_item_select">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/audio_btn"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            app:cardCornerRadius="1000dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:cardElevation="0dp"
-            app:cardBackgroundColor="@color/chat_list_item_select">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_mic"
+                    android:layout_margin="10dp"/>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_mic"
-                android:layout_margin="10dp"/>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
