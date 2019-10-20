@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/imageFeatures"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -26,9 +26,9 @@
                 app:tabBackground="@drawable/images_tabs_selector"
                 app:tabGravity="center"
                 app:tabIndicatorHeight="0dp"
-                android:layout_alignParentBottom="true"/>
+                android:layout_gravity="bottom"/>
 
-        </RelativeLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/defaultLayout"

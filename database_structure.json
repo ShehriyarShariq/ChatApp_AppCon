@@ -1,0 +1,74 @@
+{
+    "users": {
+        "UserID": {
+            "displayName": "displayName",
+            "phoneNumber": "phoneNumber",
+            "displayPicture": "displayPicture",
+            "creationDate": "creationDate",
+            "score": "upvotes",
+            "about": "about",
+            "userGroups": {
+                "chatIDs": {
+                    "lastMessageSeen": "messageID",
+                    "muted": "bool"
+                }
+            },
+            "personalChats": {
+                "chatID": {
+                    "otherUser": "UserID",
+                    "lastMessageSeen": "messageID",
+                    "muted": "bool"
+                }
+            },
+
+            "status": {
+                "lastLoggedIn": "time"
+            }
+        }
+    },
+
+    "groups": {
+        "chatID": {
+            "displayName": "displayName",
+            "displayPicture": "displayPicture",
+            "creationDate": "creationDate",
+            "description": "description",
+            "admins": "userIDs",
+            "members": "UserIDs",
+            "permissions": "permissions",
+            "lastMessageSent": "MessageID"  
+        }
+    },
+
+    "publicGroups": {
+        "chatID": {
+            "displayName": "displayName",
+            "displayPicture": "displayPicture",
+            "creationDate": "creationDate",
+            "description": "description",
+            "admins": "userIDs",
+            "members": "UserIDs",
+            "permissions": "permissions",
+            "lastMessageSent": "MessageID"  
+        }
+    },
+
+    "messages": {
+        "chatID": {
+            "messageID": {
+                "type": "Game or Audio or Whatever",
+                "sentBy": "userID",
+                "timeStamp": "timeStamp",
+                "content": "content"
+            }
+        }
+    },
+
+    "stories": {
+        "statusID": {
+            "type": "text/audio/video",
+            "sentBy": "userID"
+        }
+
+    }
+}

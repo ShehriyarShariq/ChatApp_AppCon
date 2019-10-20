@@ -5,9 +5,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -24,6 +26,8 @@ import com.appcon.appconchatapp.databinding.ActivityLoginBinding;
 import com.appcon.appconchatapp.viewmodels.LoginActivityViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -62,12 +66,17 @@ public class LoginActivity extends AppCompatActivity {
             binding.defaultLayout.setVisibility(View.GONE);
             binding.imageFeatures.setVisibility(View.VISIBLE);
 
-            ArrayList<Drawable> allFeaturesImageResource = new ArrayList<>();
-            allFeaturesImageResource.add(getResources().getDrawable(R.drawable.social_feature_screen));
-            allFeaturesImageResource.add(getResources().getDrawable(R.drawable.games_feature_screen));
-            allFeaturesImageResource.add(getResources().getDrawable(R.drawable.security_feature_screen));
+            ArrayList<Integer> allImageResources = new ArrayList<>();
+            allImageResources.add(R.drawable.social_feature_screen);
+            allImageResources.add(R.drawable.games_feature_screen);
+            allImageResources.add(R.drawable.security_feature_screen);
 
-            FeaturesImagesViewPagerAdapter featuresImagesViewPagerAdapter = new FeaturesImagesViewPagerAdapter(getApplicationContext(), allFeaturesImageResource);
+
+            binding.tabs.addTab(binding.tabs.newTab());
+            binding.tabs.addTab(binding.tabs.newTab());
+            binding.tabs.addTab(binding.tabs.newTab());
+
+            FeaturesImagesViewPagerAdapter featuresImagesViewPagerAdapter = new FeaturesImagesViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, 3);
             binding.imagesPager.setAdapter(featuresImagesViewPagerAdapter);
         } else {
             loadDefaultLayout();
