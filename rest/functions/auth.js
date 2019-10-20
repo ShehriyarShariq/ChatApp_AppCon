@@ -1,6 +1,5 @@
 const successID = "202";
 const failureID = "402";
-const failureID = "404";
 
 var express = require("express");
 var bodyParser = require("body-parser");
@@ -10,13 +9,6 @@ var admin = require("firebase-admin");
 var firebaseDatabase = admin.database();
 var firebaseAuth = admin.auth();
 var router = express.Router();
-
-var result = {
-	"result" : "status",
-	"resultID" : "404/202",
-	"message" : "message"
-};
-
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended : true})); 
@@ -29,17 +21,18 @@ router.put("/api/auth/login", function(req, res){
                 if(userRecord.customClaims.user === true){
                         firebaseAuth.createCustomToken(userRecord.uid)
                         .then(function(customToken){
-                                res.json(setResult("success", successID, customToken));
+                                res.json(setResult(successID, customToken));
                         })
                         .catch(function(error){
-                                res.json(setResult("error", failureID, "Token creation failed"));
+                                console.log(error);
+                                res.json(setResult(failureID, "Token creation failed"));
                         });
                 } else {
-                        res.json(setResult("failure", failureID, "Access Denied!"));
+                        res.json(setResult(failureID, "Access Denied!"));
                 }
         })
         .catch(function(error){
-                res.json(setResult("error", failureID, "User not found!"));
+                res.json(setResult(failureID, "User not found!"));
         });
 });
 
@@ -50,21 +43,21 @@ router.put("/api/auth/signup", function(req, res){
         .then(function(userRecord){
                 firebaseAuth.setCustomUserClaims(userRecord.uid, {user : true})
                 .then(function(){
-                        var newUserRef = firebaseDatabase.ref("");
+                        var newUserRef = firebaseDatabase.ref("users/" + userRecord.uid);
                         newUserRef.set(dbMap, function(error){
                                 if(error){
-                                        res.json(setResult("error", failureID, "Failed to create user in database!"));
+                                        res.json(setResult(failureID, "Failed to create user in database!"));
                                 } else {
-                                        res.json(setResult("error", failureID, "Failed to create user in database!"));
+                                        res.json(setResult(successID, "Creation success!"));
                                 }
                         });
                 })
                 .catch(function(error){
-                        res.json(setResult("error", failureID, "Failed to set user claims!"));
+                        res.json(setResult(failureID, "Failed to set user claims!"));
                 });
         })
         .catch(function(error){
-                res.json(setResult("error", failureID, "Failed to create user!"));
+                res.json(setResult(failureID, "Failed to create user!"));
         });
 });
 
@@ -72,8 +65,13 @@ router.put("/api/auth/signup", function(req, res){
 module.exports = router;
 
 // FUNCTIONS
-function setResult(res, code, message){
-	result["result"] = res;
-	result["resultID"] = code;
-	result["message"] = message;
+function setResult(code, message){
+	var result = {
+		"resultID" : code,
+		"result" : {
+			"message" : message
+		}
+	}
+
+	return result;
 }

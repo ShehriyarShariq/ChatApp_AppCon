@@ -1,16 +1,18 @@
 package com.appcon.appconchatapp.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class User {
 
-    String userID, displayName, phoneNumber, profilePicture, about;
+    String userID, displayName, phoneNumber, profilePicture, about, dateOfCreation, status;
     List<String> partOfGroups;
     boolean muted;
     int score;
 
-    public User(String userID, String displayName, String phoneNumber, String profilePicture, int score, String about) {
+
+    public User(String userID, String displayName, String phoneNumber, String profilePicture, int score, String about, String status) {
         this.userID = userID;
         this.displayName = displayName;
         this.phoneNumber = phoneNumber;
@@ -18,6 +20,7 @@ public class User {
         this.score = score;
         this.about = about;
         partOfGroups = new ArrayList<>();
+        this.status = status;
     }
 
     public String getUserID() {
@@ -74,6 +77,45 @@ public class User {
 
     public void addGroup(String groupID) {
         partOfGroups.add(groupID);
+    }
+
+    public HashMap<String, String> getAuthMap(){
+        HashMap<String, String> authMap = new HashMap<>();
+        authMap.put("phoneNumber", phoneNumber);
+        authMap.put("displayName", displayName);
+        return authMap;
+    }
+
+    public HashMap<String, Object> getDBMap(){
+        HashMap<String, Object> dbMap = new HashMap<>();
+
+        dbMap.put("displayName", displayName);
+        dbMap.put("phoneNumber", phoneNumber);
+        dbMap.put("displayPicture", profilePicture);
+        dbMap.put("creationDate", dateOfCreation);
+        dbMap.put("score", score);
+        dbMap.put("about", about);
+
+        HashMap<String, Object> userGroups = new HashMap<>();
+        Chat dummyGroupChat = new Chat("chatID", "messageID", false, "UserID");
+        userGroups.put(dummyGroupChat.getChatID(), dummyGroupChat.getDBMap("group"));
+        dbMap.put("userGroups", userGroups);
+
+        HashMap<String, Object> personalChats = new HashMap<>();
+        Chat dummyChat = new Chat("chatID", "messageID", false, "UserID");
+        personalChats.put(dummyChat.getChatID(), dummyChat.getDBMap("personal"));
+        dbMap.put("personalChats", personalChats);
+
+        dbMap.put("status", status);
+
+        return dbMap;
+    }
+
+    public HashMap<String, Object> newUserMaps(){
+        HashMap<String, Object> newUserMap = new HashMap<>();
+        newUserMap.put("auth", getAuthMap());
+        newUserMap.put("db", getDBMap());
+        return newUserMap;
     }
 
 }
