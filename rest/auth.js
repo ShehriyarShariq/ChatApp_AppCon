@@ -22,7 +22,7 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended : true})); 
 
 // Login User
-router.put("/api/login", function(req, res){
+router.put("/api/auth/login", function(req, res){
         var phoneNum = req.body.phoneNum;
         firebaseAuth.getUserByPhoneNumber(phoneNum)
         .then(function(userRecord){
@@ -43,7 +43,7 @@ router.put("/api/login", function(req, res){
         });
 });
 
-router.put("/api/signup", function(req, res){
+router.put("/api/auth/signup", function(req, res){
         var authMap = req.body.auth;
         var dbMap = req.body.db;
         firebaseAuth.createUser(authMap)
@@ -51,23 +51,17 @@ router.put("/api/signup", function(req, res){
                 firebaseAuth.setCustomUserClaims(userRecord.uid, {user : true})
                 .then(function(){
                         var newUserRef = firebaseDatabase.ref("");
-                        newUserRef.set(dbMap);
+                        newUserRef.set(dbMap, function(error){
+                                if(error){
+                                        res.json(setResult("error", failureID, "Failed to create user in database!"));
+                                } else {
+                                        res.json(setResult("error", failureID, "Failed to create user in database!"));
+                                }
+                        });
                 })
                 .catch(function(error){
                         res.json(setResult("error", failureID, "Failed to set user claims!"));
                 });
-
-                if(userRecord.customClaims.user === true){
-                        firebaseAuth.createCustomToken(userRecord.uid)
-                        .then(function(customToken){
-                                res.json(setResult("success", successID, customToken));
-                        })
-                        .catch(function(error){
-                                res.json(setResult("error", failureID, "Token creation failed"));
-                        });
-                } else {
-                        res.json(setResult("failure", failureID, "Access Denied!"));
-                }
         })
         .catch(function(error){
                 res.json(setResult("error", failureID, "Failed to create user!"));
