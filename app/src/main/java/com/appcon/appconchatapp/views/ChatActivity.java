@@ -61,10 +61,12 @@ public class ChatActivity extends AppCompatActivity {
         emojiPopup = EmojiPopup.Builder.fromRootView(binding.getRoot()).build(binding.textInp);
 
         messages = new ArrayList<>();
-        chatMessagesListAdapter = new ChatMessagesListAdapter(messages);
+        chatMessagesListAdapter = new ChatMessagesListAdapter(this, messages);
 
         binding.chatList.setHasFixedSize(true);
         LinearLayoutManager chatMessagesListLinearLayoutManager = new LinearLayoutManager(this);
+        chatMessagesListLinearLayoutManager.setItemPrefetchEnabled(true);
+        chatMessagesListLinearLayoutManager.setStackFromEnd(true);
         binding.chatList.setLayoutManager(chatMessagesListLinearLayoutManager);
 
         binding.chatList.setAdapter(chatMessagesListAdapter);
@@ -98,6 +100,14 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Coming soon dialog
+
+                TextMessage msg = new TextMessage("messageID", "user02", "Ali", firebaseAuth.getCurrentUser().getPhoneNumber(), "10:03 pm", binding.textInp.getText().toString());
+                messages.add(msg);
+                chatMessagesListAdapter.refreshMessagesList(messages);
+                binding.textInp.setText("");
+
+                clearTextInpFocus(v);
+                binding.chatList.scrollToPosition(messages.size() - 1);
             }
         });
 
@@ -106,6 +116,14 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Coming soon dialog
+
+                TextMessage msg = new TextMessage("messageID", "user01", "Ali", firebaseAuth.getCurrentUser().getPhoneNumber(), "10:03 pm", binding.textInp.getText().toString());
+                messages.add(msg);
+                chatMessagesListAdapter.refreshMessagesList(messages);
+                binding.textInp.setText("");
+
+                clearTextInpFocus(v);
+                binding.chatList.scrollToPosition(messages.size() - 1);
             }
         });
 
@@ -235,9 +253,9 @@ public class ChatActivity extends AppCompatActivity {
                     chatMessagesListAdapter.refreshMessagesList(messages);
                     binding.textInp.setText("");
 
-                    binding.textInp.clearFocus();
-                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    clearTextInpFocus(v);
+
+                    binding.chatList.scrollToPosition(messages.size() - 1);
                 }
             }
         });
@@ -245,5 +263,11 @@ public class ChatActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void clearTextInpFocus(View v){
+        binding.textInp.clearFocus();
+        InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 }

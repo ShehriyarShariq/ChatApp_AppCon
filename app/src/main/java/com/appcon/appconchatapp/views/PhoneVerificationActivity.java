@@ -49,10 +49,9 @@ public class PhoneVerificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_phone_verification);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_phone_verification);
-
-        setContentView(R.layout.activity_phone_verification);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
