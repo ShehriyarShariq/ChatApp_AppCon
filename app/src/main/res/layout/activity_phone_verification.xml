@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".views.PhoneVerificationActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/focusDeflectionView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true" />
+
+        <TextView
+            android:id="@+id/verificationCodeHeaderTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:text="Verification Code"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/verificationCodeBodyTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/verificationCodeHeaderTxt"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:text="A 6-digit code has been sent on your given number. Enter the code below to continue ..."
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:id="@+id/codeInpLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/verificationCodeBodyTxt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/codeInpFirstLayout"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp">
+
+                <EditText
+                    android:id="@+id/firstDigitInp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:selectAllOnFocus="true"
+                    android:textAlignment="center"
+                    android:textSize="28sp"
+                    tools:text="6" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/codeInpSecondLayout"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@+id/codeInpFirstLayout">
+
+                <EditText
+                    android:id="@+id/secondDigitInp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:selectAllOnFocus="true"
+                    android:textAlignment="center"
+                    android:textSize="28sp"
+                    tools:text="6" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/codeInpThirdLayout"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@+id/codeInpSecondLayout">
+
+                <EditText
+                    android:id="@+id/thirdDigitInp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:selectAllOnFocus="true"
+                    android:textAlignment="center"
+                    android:textSize="28sp"
+                    tools:text="6" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/codeInpFourthLayout"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@+id/codeInpThirdLayout">
+
+                <EditText
+                    android:id="@+id/fourthDigitInp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:selectAllOnFocus="true"
+                    android:textAlignment="center"
+                    android:textSize="28sp"
+                    tools:text="6" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/codeInpFifthLayout"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@+id/codeInpFourthLayout">
+
+                <EditText
+                    android:id="@+id/fifthDigitInp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:selectAllOnFocus="true"
+                    android:textAlignment="center"
+                    android:textSize="28sp"
+                    tools:text="6" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/codeInpSixthLayout"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@+id/codeInpFifthLayout">
+
+                <EditText
+                    android:id="@+id/sixthDigitInp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:selectAllOnFocus="true"
+                    android:textAlignment="center"
+                    android:textSize="28sp"
+                    tools:text="6" />
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/codeErrorLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/codeInpLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/warning_img"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_warning" />
+
+            <TextView
+                android:id="@+id/codeInpErrorStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/warning_img"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/warning_img"
+                android:text="Incorrect Code!"
+                android:textColor="@color/chat_list_item_delete"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/resendCodeBtnTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/codeInpLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:text="Resend Code"
+            android:textColor="#00ddff"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+</layout>

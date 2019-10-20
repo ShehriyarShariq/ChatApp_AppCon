@@ -20,16 +20,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SplashActivityViewModel extends AndroidViewModel {
+public class LoginActivityViewModel extends AndroidViewModel {
 
     private MutableLiveData<String> authToken = new MutableLiveData<>();
     private MutableLiveData<Boolean> loginFailed = new MutableLiveData<>();
+    private MutableLiveData<Boolean> accCreationSuccess = new MutableLiveData<>();
+    private MutableLiveData<Boolean> accCreationFailed = new MutableLiveData<>();
 
-    public SplashActivityViewModel(@NonNull Application application) {
+    public LoginActivityViewModel(@NonNull Application application) {
         super(application);
 
         setAuthToken("none");
         setLoginFailed(false);
+        setAccCreationSuccess(false);
+        setAccCreationFailed(false);
     }
 
     public MutableLiveData<String> getAuthToken() {
@@ -46,6 +50,22 @@ public class SplashActivityViewModel extends AndroidViewModel {
 
     private void setLoginFailed(boolean loginFailedBool) {
         loginFailed.postValue(loginFailedBool);
+    }
+
+    public MutableLiveData<Boolean> getAccCreationSuccess() {
+        return accCreationSuccess;
+    }
+
+    private void setAccCreationSuccess(boolean accCreationSuccessBool) {
+        accCreationSuccess.postValue(accCreationSuccessBool);
+    }
+
+    public MutableLiveData<Boolean> getAccCreationFailed() {
+        return accCreationFailed;
+    }
+
+    private void setAccCreationFailed(boolean accCreationFailedBool) {
+        accCreationFailed.postValue(accCreationFailedBool);
     }
 
     public void sendLoginRequest(HashMap<String, String> credentials){
@@ -80,4 +100,35 @@ public class SplashActivityViewModel extends AndroidViewModel {
         });
     }
 
+    public void sendAccCreationRequest(HashMap<String, Object> authAndDBMap){
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(CONSTANTS.AUTH_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson));
+
+        Retrofit retrofit = builder.build();
+
+        ServerAPI server = retrofit.create(ServerAPI.class);
+        Call<Result> call = server.signUpUser(authAndDBMap);
+
+        call.enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                if (response.body().isResultSuccessful()) {
+                    // Get back Custom token
+                    setAccCreationSuccess(true);
+                } else {
+                    setAccCreationFailed(true);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+                setAccCreationFailed(true);
+            }
+        });
+    }
 }
