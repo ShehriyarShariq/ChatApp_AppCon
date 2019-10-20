@@ -77,8 +77,12 @@ public class LoginActivity extends AppCompatActivity {
             allImageResources.add(R.drawable.social_feature_screen);
             allImageResources.add(R.drawable.games_feature_screen);
             allImageResources.add(R.drawable.security_feature_screen);
+            allImageResources.add(R.drawable.bio_feature_screen);
+            allImageResources.add(R.drawable.upvotes_feature_screen);
 
 
+            binding.tabs.addTab(binding.tabs.newTab());
+            binding.tabs.addTab(binding.tabs.newTab());
             binding.tabs.addTab(binding.tabs.newTab());
             binding.tabs.addTab(binding.tabs.newTab());
             binding.tabs.addTab(binding.tabs.newTab());

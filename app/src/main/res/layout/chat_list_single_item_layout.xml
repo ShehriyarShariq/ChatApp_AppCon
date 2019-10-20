@@ -1,199 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
-        android:id="@+id/others"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp"
-        android:visibility="gone">
+        android:layout_height="wrap_content">
 
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/other_img"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_user"/>
-
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/others"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
+            android:visibility="visible">
 
-            android:layout_marginRight="15dp">
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/otherImg"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_user"
+                android:layout_alignParentLeft="true"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="2dp">
+                android:orientation="vertical"
+                android:layout_marginLeft="55dp"
+                android:layout_marginRight="15dp"
+                android:layout_alignParentLeft="true">
 
                 <LinearLayout
+                    android:id="@+id/otherDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="2dp"
+                    android:visibility="gone">
 
-                    <TextView
-                        android:id="@+id/other_number"
+                    <LinearLayout
+                        android:id="@+id/otherDetailsNotSaved"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="17dp"
-                        android:text="+92 123 4567890"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.5"/>
+                        android:weightSum="1"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
-                    <TextView
-                        android:id="@+id/other_alt_name"
+                        <TextView
+                            android:id="@+id/otherNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:text="+92 123 4567890"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="0.5"/>
+
+                        <com.vanniktech.emoji.EmojiTextView
+                            android:id="@+id/otherAltName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:text="~Name"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:layout_weight="0.5"
+                            android:textAlignment="viewEnd"
+                            app:emojiSize="24sp"/>
+
+                    </LinearLayout>
+
+                    <com.vanniktech.emoji.EmojiTextView
+                        android:id="@+id/otherName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="17dp"
-                        android:text="~Name"
+                        android:textSize="18sp"
+                        android:text="Name"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                       android:layout_weight="0.5"
-                        android:textAlignment="viewEnd"/>
+                        android:visibility="gone"
+                        app:emojiSize="24sp"/>
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/other_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="17dp"
-                    android:text="Name"
-                    android:layout_marginLeft="10dp"
-                    android:visibility="gone"/>
-
-            </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/msg_bubble_top_other">
-
-                <TextView
-                    android:id="@+id/text_other"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/textMsgOther"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="2dp"
-                    android:elevation="2dp"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="10dp"
-                    android:text="Hey Dude.. Sync thi"
-                    android:textColor="#000"
-                    android:textSize="17dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    android:background="@drawable/msg_bubble_top_other"
+                    android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/txt_msg_other_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:text="2:57AM"
-                    android:layout_marginRight="20dp"
-                    android:layout_below="@+id/text_other"
-                    app:layout_constraintTop_toBottomOf="@+id/text_other"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:translationY="-5dp"/>
+                    <com.vanniktech.emoji.EmojiTextView
+                        android:id="@+id/textOther"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="2dp"
+                        android:elevation="2dp"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="10dp"
+                        android:text="Hey Dude.. Sync thi"
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:emojiSize="24sp"/>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/txtMsgOtherTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:text="2:57AM"
+                        android:layout_marginRight="20dp"
+                        android:layout_below="@+id/textOther"
+                        app:layout_constraintTop_toBottomOf="@+id/textOther"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:translationY="-5dp"/>
 
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/image_layout_other"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/msg_bubble_mid_other"
-                android:layout_marginTop="2dp">
-
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/image_other"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_margin="4dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/sample_img"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:riv_corner_radius="20dp" />
-
-                <TextView
-                    android:id="@+id/img_txt_other"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="sgdfdfdsf sadvfserf"
-                    app:layout_constraintTop_toBottomOf="@+id/image_other"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="5dp"
-                    android:textSize="17sp"
-                    android:textColor="#000"/>
-
-                <TextView
-                    android:id="@+id/img_msg_other_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:text="2:57AM"
-                    android:layout_marginRight="20dp"
-                    app:layout_constraintTop_toBottomOf="@+id/img_txt_other"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="5dp"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/audio_other"
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:background="@drawable/msg_bubble_mid_other"
-                android:layout_marginTop="2dp">
-
-                <TextView
-                    android:id="@+id/audio_msg_other_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:text="2:57AM"
-                    android:layout_marginRight="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginTop="5dp"
-                    android:elevation="2dp"
-                    android:layout_marginBottom="5dp"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/imageLayoutOther"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_margin="4dp">
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/msg_bubble_mid_other"
+                    android:layout_marginTop="2dp"
+                    android:visibility="gone">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/imageOther"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/sample_img"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:riv_corner_radius="20dp" />
+
+                    <com.vanniktech.emoji.EmojiTextView
+                        android:id="@+id/imgTxtOther"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="sgdfdfdsf sadvfserf"
+                        app:layout_constraintTop_toBottomOf="@+id/imageOther"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:textSize="17sp"
+                        android:textColor="#000"
+                        android:visibility="gone"
+                        app:emojiSize="24sp"/>
+
+                    <TextView
+                        android:id="@+id/imgMsgOtherTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:text="2:57AM"
+                        android:layout_marginRight="20dp"
+                        app:layout_constraintTop_toBottomOf="@+id/imgTxtOther"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="5dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/audioOther"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:background="@drawable/msg_bubble_mid_other"
+                    android:layout_marginTop="2dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/audioMsgOtherTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:text="2:57AM"
+                        android:layout_marginRight="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginTop="5dp"
+                        android:elevation="2dp"
+                        android:layout_marginBottom="5dp"
+                        android:visibility="gone"/>
+
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/audio_already_downloaded_other"
+                        android:id="@+id/audioAlreadyDownloadedOther"
                         android:layout_width="match_parent"
                         android:layout_height="62dp"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent">
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_margin="4dp"
+                        android:visibility="gone">
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/audio_control_btn_other"
+                            android:id="@+id/audioControlBtnOther"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             app:layout_constraintHeight_percent="0.85"
@@ -216,11 +227,11 @@
                         </androidx.cardview.widget.CardView>
 
                         <SeekBar
-                            android:id="@+id/audio_seekbar_other"
+                            android:id="@+id/audioSeekbarOther"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            app:layout_constraintStart_toEndOf="@+id/audio_control_btn_other"
-                            app:layout_constraintEnd_toStartOf="@+id/audio_time_other"
+                            app:layout_constraintStart_toEndOf="@+id/audioControlBtnOther"
+                            app:layout_constraintEnd_toStartOf="@+id/audioTimeOther"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             android:thumb="@drawable/seekbar_controller"
@@ -228,7 +239,7 @@
                             android:progressDrawable="@drawable/seekbar"/>
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/audio_time_other"
+                            android:id="@+id/audioTimeOther"
                             android:layout_width="60dp"
                             android:layout_height="0dp"
                             app:layout_constraintHeight_percent="0.4"
@@ -240,6 +251,7 @@
                             android:layout_marginRight="5dp">
 
                             <TextView
+                                android:id="@+id/audioLengthOther"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:text="00:42"
@@ -252,73 +264,502 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/downloadAudioOther"
+                        android:layout_width="match_parent"
+                        android:layout_height="62dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_margin="4dp"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/audioIcDownloadOther"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintDimensionRatio="W, 1:1"
+                            app:layout_constraintHeight_percent="0.45"
+                            android:src="@drawable/ic_audio_black"
+                            android:layout_marginLeft="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Audio"
+                            android:textSize="17sp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@+id/audioIcDownloadOther"
+                            android:layout_marginLeft="10dp"
+                            android:textStyle="bold"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/downloadAudioBtnOther"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintHeight_percent="0.75"
+                            app:layout_constraintDimensionRatio="W, 1:1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginRight="20dp"
+                            app:cardElevation="0dp"
+                            app:cardCornerRadius="1000dp"
+                            app:cardBackgroundColor="#000">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_download"
+                                android:layout_margin="8dp"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/download_audio_other"
+                    android:id="@+id/replyOther"
                     android:layout_width="match_parent"
-                    android:layout_height="62dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                    <ImageView
-                        android:id="@+id/audio_ic_download_other"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintDimensionRatio="W, 1:1"
-                        app:layout_constraintHeight_percent="0.45"
-                        android:src="@drawable/ic_audio_black"
-                        android:layout_marginLeft="10dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="Audio"
-                        android:textSize="17sp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/audio_ic_download_other"
-                        android:layout_marginLeft="10dp"
-                        android:textStyle="bold"/>
+                    android:layout_height="135dp"
+                    android:background="@drawable/msg_bubble_bot_other"
+                    android:layout_marginTop="2dp"
+                    android:visibility="gone">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/download_audio_btn_other"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintHeight_percent="0.75"
-                        app:layout_constraintDimensionRatio="W, 1:1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginRight="20dp"
+                        android:id="@+id/replyOtherInner"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_margin="9dp"
                         app:cardElevation="0dp"
-                        app:cardCornerRadius="1000dp"
-                        app:cardBackgroundColor="#000">
+                        app:cardCornerRadius="20dp"
+                        app:cardBackgroundColor="@color/gray_light"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
 
-                        <ImageView
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_download"
-                            android:layout_margin="8dp"/>
+                            android:layout_height="match_parent">
+
+                            <com.vanniktech.emoji.EmojiTextView
+                                android:id="@+id/senderNameOther"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="Name"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="5dp"
+                                android:textSize="18sp"
+                                app:emojiSize="24sp"/>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/imageReplyOther"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                app:layout_constraintTop_toBottomOf="@+id/senderNameOther"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:gravity="center_vertical"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:id="@+id/imageIcOther"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:layout_constraintHeight_percent="0.6"
+                                    android:src="@drawable/ic_gallery_black"
+                                    android:layout_marginLeft="10dp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="Image"
+                                    android:textSize="17sp"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toRightOf="@+id/imageIcOther"
+                                    android:layout_marginLeft="10dp"
+                                    android:textStyle="bold"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/audioReplyOther"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                app:layout_constraintTop_toBottomOf="@+id/senderNameOther"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:gravity="center_vertical"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:id="@+id/audioIcOther"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    app:layout_constraintDimensionRatio="W, 1:1"
+                                    app:layout_constraintHeight_percent="0.6"
+                                    android:src="@drawable/ic_audio_black"
+                                    android:layout_marginLeft="10dp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="Audio"
+                                    android:textSize="17sp"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toRightOf="@+id/audioIcOther"
+                                    android:layout_marginLeft="10dp"
+                                    android:textStyle="bold"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/textReplyReply"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                app:layout_constraintTop_toBottomOf="@+id/senderNameOther"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:gravity="center_vertical"
+                                android:visibility="gone">
+
+                                <com.vanniktech.emoji.EmojiTextView
+                                    android:id="@+id/textReplyMsgOther"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="This is a message that is supposed to span over two lines. If this doesn't ellipsize after two line"
+                                    android:textSize="17sp"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:maxLines="2"
+                                    android:ellipsize="end"
+                                    app:emojiSize="24sp"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/replyMsgOtherTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:text="2:57AM"
+                        android:layout_marginRight="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/replyOtherInner"
+                        android:layout_marginTop="5dp"
+                        android:elevation="2dp"
+                        android:layout_marginBottom="5dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/self"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="8dp"
+            android:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/textMsgSelf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/msg_bubble_top_self"
+                android:visibility="gone">
+
+                <com.vanniktech.emoji.EmojiTextView
+                    android:id="@+id/textSelf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This is a msg"
+                    android:textColor="#000"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:elevation="2dp"
+                    android:textSize="18sp"
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:emojiSize="24sp"/>
+
+                <TextView
+                    android:id="@+id/txtMsgSelfTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:text="2:57AM"
+                    android:layout_marginRight="20dp"
+                    android:layout_below="@+id/textSelf"
+                    app:layout_constraintTop_toBottomOf="@+id/textSelf"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:translationY="-5dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/imageMsgSelf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/msg_bubble_mid_self"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="2dp"
+                android:visibility="visible">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/imageSelf"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/sample_img"
+                    app:riv_corner_radius="20dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_margin="4dp"/>
+
+                <com.vanniktech.emoji.EmojiTextView
+                    android:id="@+id/imgTxtSelf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="sgdfdfdsf sadvfserf"
+                    app:layout_constraintTop_toBottomOf="@+id/imageSelf"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="17sp"
+                    android:textColor="#000"
+                    android:textAlignment="viewEnd"
+                    app:emojiSize="24sp"/>
+
+                <TextView
+                    android:id="@+id/imgMsgSelfTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:text="2:57AM"
+                    android:layout_marginRight="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/imgTxtSelf"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="5dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/audioSelf"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="@drawable/msg_bubble_mid_self"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="55dp"
+                android:visibility="gone">
+
+                <com.vanniktech.emoji.EmojiTextView
+                    android:id="@+id/audioMsgSelfTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:text="2:57AM"
+                    android:layout_marginRight="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="5dp"
+                    android:elevation="2dp"
+                    android:layout_marginBottom="5dp"
+                    app:emojiSize="24sp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_margin="4dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/audioAlreadyDownloadedSelf"
+                        android:layout_width="match_parent"
+                        android:layout_height="62dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:visibility="gone">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/audioControlBtnSelf"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintHeight_percent="0.85"
+                            app:layout_constraintDimensionRatio="W, 1:1"
+                            app:cardCornerRadius="1000dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="#000"
+                            android:layout_centerVertical="true"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginLeft="10dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_play"
+                                android:layout_margin="10dp"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <SeekBar
+                            android:id="@+id/audioSeekbarSelf"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            app:layout_constraintStart_toEndOf="@+id/audioControlBtnSelf"
+                            app:layout_constraintEnd_toStartOf="@+id/audioTimeSelf"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:thumb="@drawable/seekbar_controller"
+                            android:progress="50"
+                            android:progressDrawable="@drawable/seekbar"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/audioTimeSelf"
+                            android:layout_width="60dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintHeight_percent="0.4"
+                            app:cardCornerRadius="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:cardBackgroundColor="#000"
+                            android:layout_marginRight="5dp">
+
+                            <TextView
+                                android:id="@+id/audioLengthSelf"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="00:42"
+                                android:textColor="#fff"
+                                android:gravity="center"
+                                android:textSize="14sp"
+                                android:textAlignment="center"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/downloadAudioSelf"
+                        android:layout_width="match_parent"
+                        android:layout_height="62dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/audioIcDownloadSelf"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintDimensionRatio="W, 1:1"
+                            app:layout_constraintHeight_percent="0.45"
+                            android:src="@drawable/ic_audio_black"
+                            android:layout_marginLeft="10dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Audio"
+                            android:textSize="17sp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@+id/audioIcDownloadSelf"
+                            android:layout_marginLeft="10dp"
+                            android:textStyle="bold"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/downloadAudioBtnSelf"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintHeight_percent="0.75"
+                            app:layout_constraintDimensionRatio="W, 1:1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginRight="20dp"
+                            app:cardElevation="0dp"
+                            app:cardCornerRadius="1000dp"
+                            app:cardBackgroundColor="#000">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_download"
+                                android:layout_margin="8dp"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/reply_other"
+                android:id="@+id/replySelf"
                 android:layout_width="match_parent"
                 android:layout_height="135dp"
-                android:background="@drawable/msg_bubble_bot_other"
-                android:layout_marginTop="2dp">
+                android:background="@drawable/msg_bubble_bot_self"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="55dp"
+                android:visibility="gone">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/reply_other_inner"
+                    android:id="@+id/replySelfInner"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_margin="9dp"
@@ -326,14 +767,14 @@
                     app:cardCornerRadius="20dp"
                     app:cardBackgroundColor="@color/gray_light"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <TextView
-                            android:id="@+id/sender_name_self"
+                        <com.vanniktech.emoji.EmojiTextView
+                            android:id="@+id/senderNameSelf"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:layout_constraintStart_toStartOf="parent"
@@ -342,13 +783,14 @@
                             tools:text="Name"
                             android:layout_marginLeft="20dp"
                             android:layout_marginTop="5dp"
-                            android:textSize="17dp"/>
+                            android:textSize="18sp"
+                            app:emojiSize="24sp"/>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/image_reply_self"
+                            android:id="@+id/imageReplySelf"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            app:layout_constraintTop_toBottomOf="@+id/sender_name_self"
+                            app:layout_constraintTop_toBottomOf="@+id/senderNameSelf"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -360,7 +802,7 @@
                             android:visibility="gone">
 
                             <ImageView
-                                android:id="@+id/image_ic_self"
+                                android:id="@+id/imageIc"
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
                                 app:layout_constraintDimensionRatio="W, 1:1"
@@ -378,17 +820,17 @@
                                 android:textSize="17sp"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintLeft_toRightOf="@+id/image_ic_self"
+                                app:layout_constraintLeft_toRightOf="@+id/imageIc"
                                 android:layout_marginLeft="10dp"
                                 android:textStyle="bold"/>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/audio_reply_self"
+                            android:id="@+id/audioReplySelf"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            app:layout_constraintTop_toBottomOf="@+id/sender_name_self"
+                            app:layout_constraintTop_toBottomOf="@+id/senderNameSelf"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -397,10 +839,10 @@
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
                             android:gravity="center_vertical"
-                            android:visibility="visible">
+                            android:visibility="gone">
 
                             <ImageView
-                                android:id="@+id/audio_ic_self"
+                                android:id="@+id/audioIc"
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
                                 app:layout_constraintDimensionRatio="W, 1:1"
@@ -418,17 +860,17 @@
                                 android:textSize="17sp"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintLeft_toRightOf="@+id/audio_ic_self"
+                                app:layout_constraintLeft_toRightOf="@+id/audioIc"
                                 android:layout_marginLeft="10dp"
                                 android:textStyle="bold"/>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/text_reply_reply"
+                            android:id="@+id/textReplyReplySelf"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            app:layout_constraintTop_toBottomOf="@+id/sender_name_self"
+                            app:layout_constraintTop_toBottomOf="@+id/senderNameSelf"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -439,7 +881,8 @@
                             android:gravity="center_vertical"
                             android:visibility="gone">
 
-                            <TextView
+                            <com.vanniktech.emoji.EmojiTextView
+                                android:id="@+id/textReplyMsgSelf"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 tools:text="This is a message that is supposed to span over two lines. If this doesn't ellipsize after two line"
@@ -451,7 +894,8 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
                                 android:maxLines="2"
-                                android:ellipsize="end"/>
+                                android:ellipsize="end"
+                                app:emojiSize="24sp"/>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -460,14 +904,14 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:id="@+id/reply_msg_other_time"
+                    android:id="@+id/replyMsgSelfTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:text="2:57AM"
                     android:layout_marginRight="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/reply_other_inner"
+                    app:layout_constraintTop_toBottomOf="@+id/replySelfInner"
                     android:layout_marginTop="5dp"
                     android:elevation="2dp"
                     android:layout_marginBottom="5dp"/>
@@ -476,439 +920,31 @@
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/self"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="end"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="8dp"
-        android:visibility="visible">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/text_msg_self"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/msg_bubble_top_self">
-
-            <TextView
-                android:id="@+id/text_self"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is a msg"
-                android:textColor="#000"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:elevation="2dp"
-                android:textSize="17dp"
-                android:layout_marginTop="2dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <TextView
-                android:id="@+id/txt_msg_self_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="2:57AM"
-                android:layout_marginRight="20dp"
-                android:layout_below="@+id/text_self"
-                app:layout_constraintTop_toBottomOf="@+id/text_self"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:translationY="-5dp"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/image_msg_self"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/commonMsg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/msg_bubble_mid_self"
-            android:layout_marginStart="55dp"
-            android:layout_marginTop="2dp">
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@color/gray"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone">
 
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/image_self"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/sample_img"
-                app:riv_corner_radius="20dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_margin="4dp"/>
-
-            <TextView
-                android:id="@+id/img_txt_self"
+            <com.vanniktech.emoji.EmojiTextView
+                android:id="@+id/commonMsgTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="sgdfdfdsf sadvfserf"
-                app:layout_constraintTop_toBottomOf="@+id/image_self"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"
-                android:textSize="17sp"
+                android:text="This is a message common to all"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:layout_margin="5dp"
                 android:textColor="#000"
-                android:textAlignment="viewEnd"/>
+                app:emojiSize="24sp"/>
 
-            <TextView
-                android:id="@+id/img_msg_self_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="2:57AM"
-                android:layout_marginRight="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/img_txt_self"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="5dp"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/audio_self"
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:background="@drawable/msg_bubble_mid_self"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="55dp">
-
-            <TextView
-                android:id="@+id/audio_msg_self_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="2:57AM"
-                android:layout_marginRight="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginTop="5dp"
-                android:elevation="2dp"
-                android:layout_marginBottom="5dp"/>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="visible"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_margin="4dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="62dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/audio_control_btn_self"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintHeight_percent="0.85"
-                        app:layout_constraintDimensionRatio="W, 1:1"
-                        app:cardCornerRadius="1000dp"
-                        app:cardElevation="0dp"
-                        app:cardBackgroundColor="#000"
-                        android:layout_centerVertical="true"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginLeft="10dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_play"
-                            android:layout_margin="10dp"/>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <SeekBar
-                        android:id="@+id/audio_seekbar_self"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        app:layout_constraintStart_toEndOf="@+id/audio_control_btn_self"
-                        app:layout_constraintEnd_toStartOf="@+id/audio_time_self"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:thumb="@drawable/seekbar_controller"
-                        android:progress="50"
-                        android:progressDrawable="@drawable/seekbar"/>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/audio_time_self"
-                        android:layout_width="60dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintHeight_percent="0.4"
-                        app:cardCornerRadius="10dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:cardBackgroundColor="#000"
-                        android:layout_marginRight="5dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="00:42"
-                            android:textColor="#fff"
-                            android:gravity="center"
-                            android:textSize="14sp"
-                            android:textAlignment="center"/>
-
-                    </androidx.cardview.widget.CardView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="62dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
-
-                    <ImageView
-                        android:id="@+id/audio_ic_download_self"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintDimensionRatio="W, 1:1"
-                        app:layout_constraintHeight_percent="0.45"
-                        android:src="@drawable/ic_audio_black"
-                        android:layout_marginLeft="10dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="Audio"
-                        android:textSize="17sp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/audio_ic_download_self"
-                        android:layout_marginLeft="10dp"
-                        android:textStyle="bold"/>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/download_audio_btn_self"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintHeight_percent="0.75"
-                        app:layout_constraintDimensionRatio="W, 1:1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginRight="20dp"
-                        app:cardElevation="0dp"
-                        app:cardCornerRadius="1000dp"
-                        app:cardBackgroundColor="#000">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_download"
-                            android:layout_margin="8dp"/>
-
-                    </androidx.cardview.widget.CardView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/reply_self"
-            android:layout_width="match_parent"
-            android:layout_height="135dp"
-            android:background="@drawable/msg_bubble_bot_self"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="55dp">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/reply_self_inner"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_margin="9dp"
-                app:cardElevation="0dp"
-                app:cardCornerRadius="20dp"
-                app:cardBackgroundColor="@color/gray_light"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/sender_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="Name"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="5dp"
-                        android:textSize="17dp"/>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/image_reply"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toBottomOf="@+id/sender_name"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:gravity="center_vertical"
-                        android:visibility="gone">
-
-                        <ImageView
-                            android:id="@+id/image_ic"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:layout_constraintDimensionRatio="W, 1:1"
-                            app:layout_constraintHeight_percent="0.6"
-                            android:src="@drawable/ic_gallery_black"
-                            android:layout_marginLeft="10dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            tools:text="Image"
-                            android:textSize="17sp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toRightOf="@+id/image_ic"
-                            android:layout_marginLeft="10dp"
-                            android:textStyle="bold"/>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/audio_reply"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toBottomOf="@+id/sender_name"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:gravity="center_vertical"
-                        android:visibility="gone">
-
-                        <ImageView
-                            android:id="@+id/audio_ic"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:layout_constraintDimensionRatio="W, 1:1"
-                            app:layout_constraintHeight_percent="0.6"
-                            android:src="@drawable/ic_audio_black"
-                            android:layout_marginLeft="10dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            tools:text="Audio"
-                            android:textSize="17sp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toRightOf="@+id/audio_ic"
-                            android:layout_marginLeft="10dp"
-                            android:textStyle="bold"/>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/text_reply"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toBottomOf="@+id/sender_name"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:gravity="center_vertical"
-                        android:visibility="visible">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            tools:text="This is a message that is supposed to span over two lines. If this doesn't ellipsize after two line"
-                            android:textSize="17sp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:maxLines="2"
-                            android:ellipsize="end"/>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/reply_msg_self_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="2:57AM"
-                android:layout_marginRight="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/reply_self_inner"
-                android:layout_marginTop="5dp"
-                android:elevation="2dp"
-                android:layout_marginBottom="5dp"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/common_msg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="@color/gray"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="This is a message common to all"
-            android:textSize="17dp"
-            android:textAlignment="center"
-            android:layout_margin="5dp"
-            android:textColor="#000"/>
-
-    </androidx.cardview.widget.CardView>
-
-</LinearLayout>
+</layout>

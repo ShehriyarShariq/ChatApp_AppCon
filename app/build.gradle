@@ -42,7 +42,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.2.0'
     implementation 'com.google.firebase:firebase-storage:19.1.0'
     implementation 'com.google.firebase:firebase-messaging:20.0.0'
+    implementation 'com.firebaseui:firebase-ui-storage:6.0.2'
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+
+    // Socket IO
+    implementation 'com.github.nkzawa:socket.io-client:0.3.0'
 
     // Room
     def room_version = "2.2.0" // 2.1.0 for latest stable version

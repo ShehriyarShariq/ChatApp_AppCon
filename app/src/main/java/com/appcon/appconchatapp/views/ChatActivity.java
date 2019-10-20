@@ -8,6 +8,7 @@ import androidx.emoji.text.EmojiCompat;
 import androidx.emoji.text.FontRequestEmojiCompatConfig;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -20,40 +21,53 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.appcon.appconchatapp.R;
+import com.appcon.appconchatapp.adapters.ChatMessagesListAdapter;
 import com.appcon.appconchatapp.databinding.ActivityChatBinding;
+import com.appcon.appconchatapp.model.Message;
+import com.appcon.appconchatapp.model.TextMessage;
 import com.appcon.appconchatapp.viewmodels.ChatActivityViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 import com.vanniktech.emoji.EmojiManager;
 import com.vanniktech.emoji.EmojiPopup;
 import com.vanniktech.emoji.google.GoogleEmojiProvider;
 
-public class ChatActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class ChatActivity extends AppCompatActivity {
 
     ActivityChatBinding binding;
     ChatActivityViewModel viewModel;
 
     EmojiPopup emojiPopup;
 
+    ArrayList<Message> messages;
+    ChatMessagesListAdapter chatMessagesListAdapter;
+
+    FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        FontRequest fontRequest = new FontRequest(
-//                "com.example.fontprovider",
-//                "com.example",
-//                "emoji compat Font Query",
-//                R.array.com_google_android_gms_fonts_certs);
-//        EmojiCompat.Config config = new FontRequestEmojiCompatConfig(this, fontRequest);
-//        EmojiCompat.init(config);
 
         EmojiManager.install(new GoogleEmojiProvider());
 
         setContentView(R.layout.activity_chat);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         viewModel = ViewModelProviders.of(this).get(ChatActivityViewModel.class);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat);
 
         emojiPopup = EmojiPopup.Builder.fromRootView(binding.getRoot()).build(binding.textInp);
+
+        messages = new ArrayList<>();
+        chatMessagesListAdapter = new ChatMessagesListAdapter(messages);
+
+        binding.chatList.setHasFixedSize(true);
+        LinearLayoutManager chatMessagesListLinearLayoutManager = new LinearLayoutManager(this);
+        binding.chatList.setLayoutManager(chatMessagesListLinearLayoutManager);
+
+        binding.chatList.setAdapter(chatMessagesListAdapter);
 
         // Open profile
         binding.profileBtn.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +81,7 @@ public class ChatActivity extends AppCompatActivity {
         binding.name.setText("Friend Name");
         binding.status.setText("Online");
 
-        // Opem game menu
+        // Open game menu
         binding.gamesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +97,7 @@ public class ChatActivity extends AppCompatActivity {
         binding.videoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // Coming soon dialog
             }
         });
 
@@ -91,7 +105,7 @@ public class ChatActivity extends AppCompatActivity {
         binding.callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // Coming soon dialog
             }
         });
 
@@ -171,7 +185,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(s.length() == 0){ // Audio btn
-                    binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_audio));
+                    binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_mic));
                 } else { // Send btn
                     binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_send));
                 }
@@ -216,7 +230,14 @@ public class ChatActivity extends AppCompatActivity {
                 if(binding.textInp.getText().length() == 0){ // Audio Btn
 
                 } else { // Send Btn
+                    TextMessage msg = new TextMessage("messageID", firebaseAuth.getUid(), firebaseAuth.getCurrentUser().getDisplayName(), firebaseAuth.getCurrentUser().getPhoneNumber(), "10:03 pm", binding.textInp.getText().toString());
+                    messages.add(msg);
+                    chatMessagesListAdapter.refreshMessagesList(messages);
+                    binding.textInp.setText("");
 
+                    binding.textInp.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
             }
         });
