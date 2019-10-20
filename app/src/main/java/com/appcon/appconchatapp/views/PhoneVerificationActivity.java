@@ -40,7 +40,7 @@ public class PhoneVerificationActivity extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken resendToken;
     private String verificationId;
 
-    private String phoneNum, token;
+    private String phoneNum;
 
     private FirebaseAuth firebaseAuth;
 
@@ -49,7 +49,6 @@ public class PhoneVerificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_phone_verification);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_phone_verification);
 
@@ -236,8 +235,12 @@ public class PhoneVerificationActivity extends AppCompatActivity {
         if (isValidCode) {
             binding.codeErrorLayout.setVisibility(View.GONE);
 
-            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
-            verifyCode(credential);
+            try {
+                PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
+                verifyCode(credential);
+            } catch(Exception e) {
+                binding.codeErrorLayout.setVisibility(View.VISIBLE);
+            }
         } else {
             binding.codeErrorLayout.setVisibility(View.VISIBLE);
         }

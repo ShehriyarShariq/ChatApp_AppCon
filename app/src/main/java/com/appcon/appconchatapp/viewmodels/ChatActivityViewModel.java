@@ -18,12 +18,7 @@ public class ChatActivityViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public void sendMessage(){
+    public void sendMessage(Message message){
 
     }
-
-
-
-
-
 }

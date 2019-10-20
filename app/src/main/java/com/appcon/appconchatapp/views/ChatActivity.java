@@ -51,8 +51,6 @@ public class ChatActivity extends AppCompatActivity {
 
         EmojiManager.install(new GoogleEmojiProvider());
 
-        setContentView(R.layout.activity_chat);
-
         firebaseAuth = FirebaseAuth.getInstance();
 
         viewModel = ViewModelProviders.of(this).get(ChatActivityViewModel.class);
@@ -259,10 +257,6 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
     }
 
     private void clearTextInpFocus(View v){
