@@ -1,5 +1,6 @@
 package com.appcon.appconchatapp.views;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.provider.FontRequest;
 import androidx.databinding.DataBindingUtil;
@@ -11,6 +12,8 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -158,6 +161,28 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+
+        binding.textInp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length() == 0){ // Audio btn
+                    binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_audio));
+                } else { // Send btn
+                    binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_send));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         binding.textInpFocusNone.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -176,6 +201,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+        // Popup emoji keyboard
         binding.addEmojiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,6 +209,17 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+        // Send audio or msg
+        binding.audioOrSendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(binding.textInp.getText().length() == 0){ // Audio Btn
+
+                } else { // Send Btn
+
+                }
+            }
+        });
 
 
 

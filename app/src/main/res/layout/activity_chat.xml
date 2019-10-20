@@ -1606,7 +1606,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/audioBtn"
+                app:layout_constraintEnd_toStartOf="@+id/audioOrSendBtn"
                 android:layout_marginRight="5dp"
                 app:cardCornerRadius="30dp"
                 app:cardElevation="0dp"
@@ -1692,7 +1692,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/audioBtn"
+                android:id="@+id/audioOrSendBtn"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 app:cardCornerRadius="30dp"
@@ -1702,6 +1702,7 @@
                 app:cardBackgroundColor="@color/chat_list_item_select">
 
                 <ImageView
+                    android:id="@+id/audioOrSendBtnImg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"

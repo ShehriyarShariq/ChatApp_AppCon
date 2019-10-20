@@ -37,7 +37,7 @@
             android:id="@+id/login_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <RelativeLayout
                 android:id="@+id/logo_login_ic"
@@ -80,31 +80,31 @@
                         android:text="+92 123 1231231"
                         android:inputType="text"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:text="Password"
-                        android:layout_marginTop="10dp"/>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:text="Password"-->
+<!--                        android:layout_marginTop="10dp"/>-->
 
-                    <EditText
-                        android:id="@+id/password_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:paddingLeft="0dp"
-                        android:textSize="19sp"
-                        android:text="+92 123 1231231"
-                        android:inputType="textPassword"/>
+<!--                    <EditText-->
+<!--                        android:id="@+id/password_input"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:paddingLeft="0dp"-->
+<!--                        android:textSize="19sp"-->
+<!--                        android:text="+92 123 1231231"-->
+<!--                        android:inputType="textPassword"/>-->
 
-                    <TextView
-                        android:id="@+id/forgot_pass_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Forgot Password?"
-                        android:textAlignment="textEnd"
-                        android:textSize="16sp"
-                        android:textColor="@color/chat_list_item_read"
-                        android:layout_marginRight="5dp"/>
+<!--                    <TextView-->
+<!--                        android:id="@+id/forgot_pass_btn"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Forgot Password?"-->
+<!--                        android:textAlignment="textEnd"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textColor="@color/chat_list_item_read"-->
+<!--                        android:layout_marginRight="5dp"/>-->
 
                 </LinearLayout>
 
@@ -115,7 +115,7 @@
                     app:cardCornerRadius="40dp"
                     app:cardElevation="0dp"
                     app:cardBackgroundColor="@color/chat_list_item_read"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="40dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp">
 
@@ -160,7 +160,7 @@
             android:id="@+id/signup_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <RelativeLayout
                 android:id="@+id/logo_login_ic_new"
@@ -203,39 +203,39 @@
                         android:text="+92 123 1231231"
                         android:inputType="text"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:text="Email #"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="10dp"
-                        android:inputType="textEmailAddress"/>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:text="Email #"-->
+<!--                        android:layout_marginLeft="5dp"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:inputType="textEmailAddress"/>-->
 
-                    <EditText
-                        android:id="@+id/email_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:paddingLeft="0dp"
-                        android:textSize="19sp"
-                        android:text="+92 123 1231231"
-                        android:inputType="text"/>
+<!--                    <EditText-->
+<!--                        android:id="@+id/email_input"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:paddingLeft="0dp"-->
+<!--                        android:textSize="19sp"-->
+<!--                        android:text="+92 123 1231231"-->
+<!--                        android:inputType="text"/>-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:text="Password"
-                        android:layout_marginTop="10dp"/>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:text="Password"-->
+<!--                        android:layout_marginTop="10dp"/>-->
 
-                    <EditText
-                        android:id="@+id/password_input_new"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:paddingLeft="0dp"
-                        android:textSize="19sp"
-                        android:text="+92 123 1231231"
-                        android:inputType="textPassword"/>
+<!--                    <EditText-->
+<!--                        android:id="@+id/password_input_new"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:paddingLeft="0dp"-->
+<!--                        android:textSize="19sp"-->
+<!--                        android:text="+92 123 1231231"-->
+<!--                        android:inputType="textPassword"/>-->
 
                 </LinearLayout>
 
@@ -246,7 +246,7 @@
                     app:cardCornerRadius="40dp"
                     app:cardElevation="0dp"
                     app:cardBackgroundColor="@color/yellow_bright"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="40dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp">
 
