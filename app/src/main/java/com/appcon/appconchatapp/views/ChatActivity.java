@@ -49,6 +49,8 @@ import com.appcon.appconchatapp.viewmodels.ChatActivityViewModel;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.collection.LLRBNode;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -67,6 +69,8 @@ public class ChatActivity extends AppCompatActivity {
 
     private static final int RECORD_AUDIO_PERMISSION_REQUEST = 200;
     private static final int IMAGE_PICKER_REQUEST = 001;
+    private static final int ATTACH_DOCS_REQUEST = 010;
+    private static final int ATTACH_AUDIO_REQUEST = 011;
 
     ActivityChatBinding binding;
     ChatActivityViewModel viewModel;
@@ -77,16 +81,18 @@ public class ChatActivity extends AppCompatActivity {
     ChatMessagesListAdapter chatMessagesListAdapter;
 
     FirebaseAuth firebaseAuth;
+    StorageReference firebaseStorage;
 
     LiveData<Boolean> startAudioRecord;
 
     boolean lastAudioRecState = false;
     boolean isAudioBtnLongPressed = false;
-    boolean isSendAudio = false;
     boolean isAudioPlaying = false;
     boolean isAudioPaused = false;
 
+    boolean isSendAudio = false;
     boolean isSendImage = false;
+    boolean isSendDoc = false;
 
     private MediaRecorder recorder = null;
     private MediaPlayer player = null;
@@ -99,6 +105,10 @@ public class ChatActivity extends AppCompatActivity {
 
     private Handler mHandler;
 
+    LiveData<String> downloadUrl;
+
+    ArrayList<Message> pendingMessages;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +116,7 @@ public class ChatActivity extends AppCompatActivity {
         EmojiManager.install(new GoogleEmojiProvider());
 
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance().getReference();
 
         viewModel = ViewModelProviders.of(this).get(ChatActivityViewModel.class);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat);
@@ -114,6 +125,7 @@ public class ChatActivity extends AppCompatActivity {
 
         ImagePickerActivity.clearCache(this);
 
+        pendingMessages = new ArrayList<>();
         messages = new ArrayList<>();
         chatMessagesListAdapter = new ChatMessagesListAdapter(this, messages);
 
@@ -214,6 +226,76 @@ public class ChatActivity extends AppCompatActivity {
                 } else {
                     binding.additionalMenu.setVisibility(View.GONE);
                 }
+            }
+        });
+
+        binding.attachmentsDocsBtnLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                intent.setType("application/pdf");
+                intent.addCategory(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, ATTACH_DOCS_REQUEST);
+            }
+        });
+
+        binding.attachmentsImgCameraBtnLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dexter.withActivity(ChatActivity.this)
+                .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()) {
+                            launchCameraIntent();
+                        }
+
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            showSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
+            }
+        });
+
+        binding.attachmentsImgGalleryBtnLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dexter.withActivity(ChatActivity.this)
+                .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()) {
+                            launchGalleryIntent();
+                        }
+
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            showSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
+            }
+        });
+
+        binding.attachmentsAudioBtnLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                intent.setType("audio/wav");
+                intent.addCategory(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, ATTACH_AUDIO_REQUEST);
             }
         });
 
@@ -321,7 +403,7 @@ public class ChatActivity extends AppCompatActivity {
                     isSendAudio = false;
                     binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_mic));
                     binding.audioPlaybackBar.setVisibility(View.GONE);
-                    binding.defaultBottomBar.setVisibility(View.VISIBLE);
+                    binding.defaultTxtInpBar.setVisibility(View.VISIBLE);
                     fileName = null;
                     isAudioPlaying = false;
                     isAudioPaused = false;
@@ -333,8 +415,8 @@ public class ChatActivity extends AppCompatActivity {
                 } else if(isSendImage){
                     isSendImage = false;
                     binding.selecedImgPrevLayout.setVisibility(View.GONE);
-                    binding.txtAndAudioLayout.setVisibility(View.VISIBLE);
                     binding.defaultBottomBar.setVisibility(View.VISIBLE);
+                    binding.defaultTxtInpBar.setVisibility(View.VISIBLE);
 
                     String imgTxtMsg = binding.imgTextInp.getText().toString();
                     binding.imgTextInp.setText("");
@@ -343,6 +425,16 @@ public class ChatActivity extends AppCompatActivity {
                     binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_mic));
                 } else { // Audio Btn
                     Toast.makeText(ChatActivity.this, "Hold down to record audio", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        downloadUrl = viewModel.getDownloadUrl();
+        downloadUrl.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String url) {
+                if(!url.equals("none")){
+
                 }
             }
         });
@@ -363,7 +455,7 @@ public class ChatActivity extends AppCompatActivity {
 
                     stopRecording();
 
-                    binding.defaultBottomBar.setVisibility(View.GONE);
+                    binding.defaultTxtInpBar.setVisibility(View.GONE);
                     binding.audioPlaybackBar.setVisibility(View.VISIBLE);
                     binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_send));
                 }
@@ -411,7 +503,7 @@ public class ChatActivity extends AppCompatActivity {
                 isSendAudio = false;
                 binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_mic));
                 binding.audioPlaybackBar.setVisibility(View.GONE);
-                binding.defaultBottomBar.setVisibility(View.VISIBLE);
+                binding.defaultTxtInpBar.setVisibility(View.VISIBLE);
                 fileName = null;
                 isAudioPlaying = false;
                 isAudioPaused = false;
@@ -474,7 +566,7 @@ public class ChatActivity extends AppCompatActivity {
 
 //                    Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
-                    binding.txtAndAudioLayout.setVisibility(View.GONE);
+                    binding.defaultBottomBar.setVisibility(View.GONE);
                     binding.selecedImgPrevLayout.setVisibility(View.VISIBLE);
                     binding.audioOrSendBtnImg.setImageResource(R.drawable.ic_send);
 
@@ -483,6 +575,26 @@ public class ChatActivity extends AppCompatActivity {
                             .into(binding.selectedImg);
 
                     isSendImage = true;
+            }
+        } else if(requestCode == ATTACH_DOCS_REQUEST){
+            if(resultCode == Activity.RESULT_OK){
+                Uri uri = data.getData();
+
+                binding.additionalMenu.setVisibility(View.GONE);
+                binding.defaultTxtInpBar.setVisibility(View.GONE);
+                binding.selectedDocumentLayout.setVisibility(View.VISIBLE);
+
+                isSendDoc = true;
+            }
+        } else if(requestCode == ATTACH_AUDIO_REQUEST){
+            if(resultCode == Activity.RESULT_OK){
+                Uri uri = data.getData();
+
+                binding.additionalMenu.setVisibility(View.GONE);
+                binding.defaultTxtInpBar.setVisibility(View.GONE);
+                binding.selectedAudioLayout.setVisibility(View.VISIBLE);
+
+                isSendAudio = true;
             }
         }
 
