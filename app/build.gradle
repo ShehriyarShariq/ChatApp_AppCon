@@ -65,9 +65,6 @@ dependencies {
     // Gson
     implementation 'com.google.code.gson:gson:2.8.5'
 
-    // UCrop for cropping images
-    implementation 'com.github.yalantis:ucrop:2.2.4-native'
-
     //dexter permissions
     implementation "com.karumi:dexter:5.0.0"
 

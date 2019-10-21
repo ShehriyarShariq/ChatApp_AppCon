@@ -26,18 +26,27 @@
         <activity android:name=".views.ChatActivity" />
         <activity android:name=".views.LoginActivity" />
         <activity android:name=".views.SplashActivity" >
-
-        </activity>
-        <activity android:name=".views.MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".views.MainActivity">
 
         </activity>
         <activity android:name=".views.PhoneVerificationActivity"/>
+        <activity android:name=".views.ImagePickerActivity"/>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider" />
+        </provider>
 
     </application>
 
