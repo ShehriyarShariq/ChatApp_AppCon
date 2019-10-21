@@ -40,6 +40,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.appcon.appconchatapp.R;
 import com.appcon.appconchatapp.adapters.ChatMessagesListAdapter;
 import com.appcon.appconchatapp.databinding.ActivityChatBinding;

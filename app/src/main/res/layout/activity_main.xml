@@ -1,767 +1,680 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".views.MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/first_time_layout"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        tools:context=".views.MainActivity">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/first_time_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Before getting started, lets set a display image which will be visible to others."
-                android:textSize="20sp"
-                android:lineSpacingMultiplier="1.2"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="100dp"
-                android:textAlignment="center"/>
+            android:visibility="gone">
 
             <LinearLayout
-                android:id="@+id/display_img_inp_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="visible">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Display Image:"
+                    android:text="Before getting started, lets set a display name (and image) which will be visible to others."
                     android:textSize="20sp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="50dp"/>
+                    android:lineSpacingMultiplier="1.2"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="100dp"/>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
+                    android:id="@+id/display_name_inp_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp">
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintWidth_percent="0.4"
-                        app:layout_constraintDimensionRatio="H, 1:1"
-                        app:cardCornerRadius="50dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:cardBackgroundColor="@color/gray"
-                        app:cardElevation="0dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Display Name:"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="50dp"/>
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintWidth_percent="0.38"
-                        app:layout_constraintDimensionRatio="H, 1:1"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:cardCornerRadius="50dp"
-                        android:layout_margin="5dp"
-                        android:padding="10dp"
-                        app:cardElevation="0dp"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:textAlignment="center"
+                        android:hint="Name..."
+                        android:textSize="20sp"/>
 
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintWidth_percent="0.35"
-                        app:layout_constraintDimensionRatio="H, 1:1"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent">
+                </LinearLayout>
 
-                        <com.mikhaellopez.circularimageview.CircularImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_user"/>
+                <LinearLayout
+                    android:id="@+id/display_img_inp_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Display Image:"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="50dp"/>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp">
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:alpha="0.6"
-                            app:cardElevation="0dp"/>
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintWidth_percent="0.4"
+                            app:layout_constraintDimensionRatio="H, 1:1"
+                            app:cardCornerRadius="1000dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:cardBackgroundColor="@color/gray_light">
 
-                        <ImageView
-                            android:id="@+id/edit_img_btn"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_edit"
-                            android:layout_margin="30dp"/>
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="1000dp"
+                                android:layout_margin="5dp">
 
-                    </RelativeLayout>
+                                <com.mikhaellopez.circularimageview.CircularImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_user"/>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:alpha="0.6"
+                                    app:cardElevation="0dp"/>
+
+                                <ImageView
+                                    android:id="@+id/edit_img_btn"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_edit"
+                                    android:layout_margin="30dp"/>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.cardview.widget.CardView>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
 
 
             </LinearLayout>
 
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/display_img_layout_controls"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:gravity="bottom"
-            android:visibility="visible">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/skip_btn"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="5dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/yellow_bright"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:textSize="19sp"
-                    android:text="Skip"
-                    android:textColor="#fff"/>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/save_btn"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="5dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/chat_list_item_select"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:textSize="19sp"
-                    android:text="Save"
-                    android:textColor="#fff"/>
-
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <RelativeLayout
-        android:id="@+id/default_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <RelativeLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/controls_layout"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp">
+                android:layout_height="match_parent">
 
-                <RelativeLayout
-                    android:id="@+id/default_top_bar"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/display_name_layout_controls"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/next_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        app:layout_constraintWidth_percent="0.45"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_margin="10dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/chat_list_item_read">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:textSize="19sp"
+                            android:text="Next"
+                            android:textColor="#fff"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:id="@+id/display_img_layout_controls"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:gravity="bottom"
+                    android:visibility="gone">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/skip_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="5dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/yellow_bright"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:textSize="19sp"
+                            android:text="Skip"
+                            android:textColor="#fff"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/save_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="5dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/chat_list_item_select"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:textSize="19sp"
+                            android:text="Save"
+                            android:textColor="#fff"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <RelativeLayout
+                android:id="@+id/default_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
                     android:visibility="visible">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="30dp"
-                        android:text="@string/app_name"
-                        android:textColor="#000"
-                        android:textSize="22sp" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/camera_btn"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginRight="25dp"
-                            android:src="@drawable/ic_camera" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp">
 
-                        <ImageView
-                            android:id="@+id/search_btn"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginRight="25dp"
-                            android:src="@drawable/ic_search" />
+                        <RelativeLayout
+                            android:id="@+id/default_top_bar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="visible">
 
-                        <com.mikhaellopez.circularimageview.CircularImageView
-                            android:id="@+id/user_profile_btn"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginRight="15dp"
-                            android:src="@drawable/ic_user" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="30dp"
+                                android:text="@string/app_name"
+                                android:textColor="#000"
+                                android:textSize="22sp" />
 
-                    </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:orientation="horizontal">
 
-                </RelativeLayout>
+                                <ImageView
+                                    android:id="@+id/camera_btn"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginRight="25dp"
+                                    android:src="@drawable/ic_camera" />
+
+                                <ImageView
+                                    android:id="@+id/search_btn"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginRight="25dp"
+                                    android:src="@drawable/ic_search" />
+
+                                <com.mikhaellopez.circularimageview.CircularImageView
+                                    android:id="@+id/user_profile_btn"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginRight="15dp"
+                                    android:src="@drawable/ic_user" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:id="@+id/back_btn"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:src="@drawable/ic_back"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="20dp"/>
+
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                app:cardBackgroundColor="@color/chat_list_item_select"
+                                app:cardCornerRadius="20dp"
+                                android:layout_toRightOf="@+id/back_btn"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:cardBackgroundColor="@color/chat_list_item_select_inner"
+                                    app:cardCornerRadius="20dp"
+                                    android:layout_toRightOf="@+id/back_btn"
+                                    android:layout_centerVertical="true"
+                                    android:layout_margin="2dp">
+
+                                    <TextView
+                                        android:id="@+id/selected_count"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:text="10"
+                                        android:textSize="17sp"
+                                        android:gravity="center"
+                                        android:textColor="@color/chat_list_item_select"/>
+
+                                </androidx.cardview.widget.CardView>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_alignParentRight="true"
+                                android:gravity="center_vertical"
+                                android:layout_marginRight="15dp">
+
+                                <ImageView
+                                    android:id="@+id/delete_btn"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/ic_delete"
+                                    android:layout_marginRight="22.5dp"/>
+
+                                <ImageView
+                                    android:id="@+id/mute_btn"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/ic_mute"
+                                    android:layout_marginRight="22.5dp"/>
+
+                                <ImageView
+                                    android:id="@+id/archive_btn"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/ic_archive"
+                                    android:layout_marginRight="22.5dp"/>
+
+                                <ImageView
+                                    android:id="@+id/more_btn"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/ic_more" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        </RelativeLayout>
+
+                </LinearLayout>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+            </androidx.viewpager.widget.ViewPager>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="20dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="parent"
+                        app:layout_constraintHeight_percent="0.1">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardView3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            app:cardBackgroundColor="#F7FF00"
+                            app:cardCornerRadius="40dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintDimensionRatio="W,1:1"
+                            android:visibility="invisible"/>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cardView"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            app:layout_constraintEnd_toStartOf="@+id/cardView2"
+                            app:layout_constraintStart_toEndOf="@+id/cardView3"
+                            app:layout_constraintWidth_percent="0.6"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/tabs"
+                            android:outlineSpotShadowColor="#000">
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                app:layout_constraintWidth_percent="0.5"
+                                android:background="@drawable/tab_selection"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginBottom="15dp"
+                                android:layout_marginLeft="20dp"
+                                app:layout_constraintStart_toStartOf="@+id/cardView">
+
+
+                            </RelativeLayout>
+
+                            <com.google.android.material.tabs.TabLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#00000000"
+                                app:tabIndicatorHeight="0dp"
+                                app:tabSelectedTextColor="#2AC690"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp">
+
+                                <com.google.android.material.tabs.TabItem
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Chats" />
+
+                                <com.google.android.material.tabs.TabItem
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Calls"/>
+
+                            </com.google.android.material.tabs.TabLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardView2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            app:cardCornerRadius="1000dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintDimensionRatio="W,1:1"
+                            android:layout_marginRight="10dp"
+                            android:padding="10dp">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/newBtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="1000dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                android:layout_margin="4dp"
+                                app:cardBackgroundColor="#F7FF00">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_add_black"
+                                    android:layout_margin="15dp"/>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:visibility="gone">
 
-                    <ImageView
-                        android:id="@+id/back_btn"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:src="@drawable/ic_back"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/dialog_background"
+                        android:alpha="0.5"/>
 
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        app:cardBackgroundColor="@color/chat_list_item_select"
-                        app:cardCornerRadius="20dp"
-                        android:layout_toRightOf="@+id/back_btn"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_alignParentBottom="true"
+                        android:orientation="vertical">
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:cardBackgroundColor="@color/chat_list_item_select_inner"
-                            app:cardCornerRadius="20dp"
-                            android:layout_toRightOf="@+id/back_btn"
-                            android:layout_centerVertical="true"
-                            android:layout_margin="2dp">
+                            android:layout_height="30dp"
+                            app:cardCornerRadius="15dp"
+                            app:cardBackgroundColor="#FFF"/>
 
-                            <TextView
-                                android:id="@+id/selected_count"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#fff"
+                            android:layout_marginTop="15dp"
+                            android:elevation="10dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/delete_conv_layout"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="10"
-                                android:textSize="17sp"
-                                android:gravity="center"
-                                android:textColor="@color/chat_list_item_select"/>
+                                android:orientation="vertical"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_marginTop="10dp"
+                                android:visibility="gone">
 
-                        </androidx.cardview.widget.CardView>
+                                <TextView
+                                    android:id="@+id/delete_heading"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Delete X Selected Chat(s)"
+                                    android:textSize="17sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#000"
+                                    android:layout_marginLeft="5dp"/>
 
-                    </androidx.cardview.widget.CardView>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="This action cannot be undone"
+                                    android:textSize="17sp"
+                                    android:layout_marginTop="12dp"
+                                    android:textColor="#000"
+                                    android:layout_marginLeft="5dp"/>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_alignParentRight="true"
-                        android:gravity="center_vertical"
-                        android:layout_marginRight="15dp">
 
-                        <ImageView
-                            android:id="@+id/delete_btn"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_delete"
-                            android:layout_marginRight="22.5dp"/>
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="30dp">
 
-                        <ImageView
-                            android:id="@+id/mute_btn"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_mute"
-                            android:layout_marginRight="22.5dp"/>
+                                    <CheckBox
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Delete Media"
+                                        android:textStyle="bold"
+                                        android:textSize="17sp"/>
 
-                        <ImageView
-                            android:id="@+id/archive_btn"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_archive"
-                            android:layout_marginRight="22.5dp"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="17sp"
+                                        android:textColor="@color/chat_list_item_read"
+                                        android:text="Cancel"
+                                        android:layout_toLeftOf="@+id/confirm_delete_btn"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginRight="20dp"/>
 
-                        <ImageView
-                            android:id="@+id/more_btn"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/ic_more" />
+                                    <androidx.cardview.widget.CardView
+                                        android:id="@+id/confirm_delete_btn"
+                                        android:layout_width="90dp"
+                                        android:layout_height="40dp"
+                                        android:layout_alignParentRight="true"
+                                        app:cardBackgroundColor="@color/chat_list_item_delete"
+                                        app:cardCornerRadius="5dp"
+                                        android:layout_centerVertical="true">
 
-                    </LinearLayout>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Delete"
+                                            android:textColor="#FFF"
+                                            android:textSize="17sp"
+                                            android:layout_margin="10dp"
+                                            android:layout_gravity="center_horizontal"
+                                            android:translationY="-2dp"/>
+
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/archive_conv_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_marginTop="10dp">
+
+                                <TextView
+                                    android:id="@+id/archive_heading"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Archive X Selected Chat(s)"
+                                    android:textSize="17sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#000"
+                                    android:layout_marginLeft="5dp"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Selected chat(s) will be hidden"
+                                    android:textSize="17sp"
+                                    android:layout_marginTop="12dp"
+                                    android:textColor="#000"
+                                    android:layout_marginLeft="5dp"/>
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="30dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="17sp"
+                                        android:textColor="@color/chat_list_item_read"
+                                        android:text="Cancel"
+                                        android:layout_toLeftOf="@+id/confirm_archive_btn"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginRight="20dp"/>
+
+                                    <androidx.cardview.widget.CardView
+                                        android:id="@+id/confirm_archive_btn"
+                                        android:layout_width="90dp"
+                                        android:layout_height="40dp"
+                                        android:layout_alignParentRight="true"
+                                        app:cardBackgroundColor="@color/chat_list_item_select"
+                                        app:cardCornerRadius="5dp"
+                                        android:layout_centerVertical="true">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Archive"
+                                            android:textColor="#FFF"
+                                            android:textSize="17sp"
+                                            android:layout_margin="10dp"
+                                            android:layout_gravity="center_horizontal"
+                                            android:translationY="-2dp"/>
+
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                 </RelativeLayout>
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:layout_marginTop="10dp">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/all_stories_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="2dp" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:id="@+id/public_groups"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="vertical"
-                        android:visibility="visible">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="25dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/group_img"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:src="@drawable/ic_group"
-                                android:gravity="center_vertical"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Public Groups"
-                                android:textColor="#000"
-                                android:textSize="17sp"
-                                android:gravity="center_vertical"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/group_img"
-                                android:layout_marginLeft="10dp"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="View All"
-                                android:textColor="@color/chat_list_item_read"
-                                android:textSize="17sp"
-                                android:gravity="center_vertical"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"/>
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/public_groups_list"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/all_chats"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="25dp"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/msg_img"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:src="@drawable/ic_msg"
-                                android:gravity="center_vertical"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="All Chats"
-                                android:textColor="#000"
-                                android:textSize="17sp"
-                                android:gravity="center_vertical"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/msg_img"
-                                android:layout_marginLeft="10dp"/>
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/all_chats_list"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="20dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintHeight_percent="0.1">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    app:cardBackgroundColor="#F7FF00"
-                    app:cardCornerRadius="40dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintDimensionRatio="W,1:1"
-                    android:visibility="invisible"/>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cardView"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    app:layout_constraintEnd_toStartOf="@+id/newBtn"
-                    app:layout_constraintStart_toEndOf="@+id/cardView3"
-                    app:layout_constraintWidth_percent="0.6"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/tabs"
-                    android:outlineSpotShadowColor="#000">
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        app:layout_constraintWidth_percent="0.5"
-                        android:background="@drawable/tab_selection"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:layout_marginLeft="20dp"
-                        app:layout_constraintStart_toStartOf="@+id/cardView">
-
-
-                    </RelativeLayout>
-
-                    <com.google.android.material.tabs.TabLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#00000000"
-                        app:tabIndicatorHeight="0dp"
-                        app:tabSelectedTextColor="#2AC690"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp">
-
-                        <com.google.android.material.tabs.TabItem
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Chats" />
-
-                        <com.google.android.material.tabs.TabItem
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Calls"/>
-
-                    </com.google.android.material.tabs.TabLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/newBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    app:layout_constraintDimensionRatio="W, 1:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginRight="10dp">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        app:cardCornerRadius="10dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintDimensionRatio="W,1:1"
-                        android:padding="10dp"
-                        app:cardElevation="0dp"/>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <androidx.cardview.widget.CardView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:cardCornerRadius="10dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:cardBackgroundColor="#F7FF00"
-                            app:cardElevation="0dp"/>
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_add_black"
-                            android:layout_margin="15dp"/>
-
-                    </RelativeLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/dialog_background"
-                android:alpha="0.5"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_alignParentBottom="true"
-                android:orientation="vertical">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    app:cardCornerRadius="15dp"
-                    app:cardBackgroundColor="#FFF"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#fff"
-                    android:layout_marginTop="15dp"
-                    android:elevation="10dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:id="@+id/delete_conv_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="10dp"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:id="@+id/delete_heading"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Delete X Selected Chat(s)"
-                            android:textSize="17sp"
-                            android:textStyle="bold"
-                            android:textColor="#000"
-                            android:layout_marginLeft="5dp"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="This action cannot be undone"
-                            android:textSize="17sp"
-                            android:layout_marginTop="12dp"
-                            android:textColor="#000"
-                            android:layout_marginLeft="5dp"/>
-
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp">
-
-                            <CheckBox
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Delete Media"
-                                android:textStyle="bold"
-                                android:textSize="17sp"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="17sp"
-                                android:textColor="@color/chat_list_item_read"
-                                android:text="Cancel"
-                                android:layout_toLeftOf="@+id/confirm_delete_btn"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="20dp"/>
-
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/confirm_delete_btn"
-                                android:layout_width="90dp"
-                                android:layout_height="40dp"
-                                android:layout_alignParentRight="true"
-                                app:cardBackgroundColor="@color/chat_list_item_delete"
-                                app:cardCornerRadius="5dp"
-                                android:layout_centerVertical="true">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Delete"
-                                    android:textColor="#FFF"
-                                    android:textSize="17sp"
-                                    android:layout_margin="10dp"
-                                    android:layout_gravity="center_horizontal"
-                                    android:translationY="-2dp"/>
-
-                            </androidx.cardview.widget.CardView>
-
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/archive_conv_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:id="@+id/archive_heading"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Archive X Selected Chat(s)"
-                            android:textSize="17sp"
-                            android:textStyle="bold"
-                            android:textColor="#000"
-                            android:layout_marginLeft="5dp"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Selected chat(s) will be hidden"
-                            android:textSize="17sp"
-                            android:layout_marginTop="12dp"
-                            android:textColor="#000"
-                            android:layout_marginLeft="5dp"/>
-
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="17sp"
-                                android:textColor="@color/chat_list_item_read"
-                                android:text="Cancel"
-                                android:layout_toLeftOf="@+id/confirm_archive_btn"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="20dp"/>
-
-                            <androidx.cardview.widget.CardView
-                                android:id="@+id/confirm_archive_btn"
-                                android:layout_width="90dp"
-                                android:layout_height="40dp"
-                                android:layout_alignParentRight="true"
-                                app:cardBackgroundColor="@color/chat_list_item_select"
-                                app:cardCornerRadius="5dp"
-                                android:layout_centerVertical="true">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Archive"
-                                    android:textColor="#FFF"
-                                    android:textSize="17sp"
-                                    android:layout_margin="10dp"
-                                    android:layout_gravity="center_horizontal"
-                                    android:translationY="-2dp"/>
-
-                            </androidx.cardview.widget.CardView>
-
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </RelativeLayout>
 
     </RelativeLayout>
-
-
-
-</RelativeLayout>
+</layout>

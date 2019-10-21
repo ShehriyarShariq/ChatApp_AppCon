@@ -9,8 +9,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,8 +48,8 @@ public class PhoneVerificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_phone_verification);
 
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_phone_verification);
         firebaseAuth = FirebaseAuth.getInstance();
 
         // UI
