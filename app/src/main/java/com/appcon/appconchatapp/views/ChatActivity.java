@@ -43,6 +43,7 @@ import android.widget.Toast;
 import com.appcon.appconchatapp.R;
 import com.appcon.appconchatapp.adapters.ChatMessagesListAdapter;
 import com.appcon.appconchatapp.databinding.ActivityChatBinding;
+import com.appcon.appconchatapp.model.AudioMessage;
 import com.appcon.appconchatapp.model.Message;
 import com.appcon.appconchatapp.model.TextMessage;
 import com.appcon.appconchatapp.viewmodels.ChatActivityViewModel;
@@ -60,9 +61,11 @@ import com.vanniktech.emoji.EmojiManager;
 import com.vanniktech.emoji.EmojiPopup;
 import com.vanniktech.emoji.google.GoogleEmojiProvider;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
@@ -105,7 +108,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private Handler mHandler;
 
-    LiveData<String> downloadUrl;
+    LiveData<HashMap<String, String>> downloadUrl;
 
     ArrayList<Message> pendingMessages;
 
@@ -400,6 +403,11 @@ public class ChatActivity extends AppCompatActivity {
 
                     binding.chatList.scrollToPosition(messages.size() - 1);
                 } else if(isSendAudio){ // Send Audio Btn
+
+                    File file = new File(fileName);
+                    AudioMessage audioMessage = new AudioMessage(String.valueOf((Math.random() * 1000000)), firebaseAuth.getCurrentUser().getUid(), firebaseAuth.getCurrentUser().getDisplayName(), firebaseAuth.getCurrentUser().getPhoneNumber(), "time", "url", getFormattedAudioDuration(player.getDuration() / 1000), file.length());
+                    pendingMessages.add(audioMessage);
+
                     isSendAudio = false;
                     binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_mic));
                     binding.audioPlaybackBar.setVisibility(View.GONE);
@@ -410,7 +418,6 @@ public class ChatActivity extends AppCompatActivity {
                     binding.audioLength.setText("00:00");
                     binding.audioSeekbar.setProgress(0);
                     binding.playbackAudioBtnImg.setImageResource(R.drawable.ic_play);
-
 
                 } else if(isSendImage){
                     isSendImage = false;
@@ -423,6 +430,9 @@ public class ChatActivity extends AppCompatActivity {
 
                     binding.selectedImg.setImageURI(null);
                     binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_mic));
+
+
+
                 } else { // Audio Btn
                     Toast.makeText(ChatActivity.this, "Hold down to record audio", Toast.LENGTH_SHORT).show();
                 }
@@ -430,10 +440,10 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         downloadUrl = viewModel.getDownloadUrl();
-        downloadUrl.observe(this, new Observer<String>() {
+        downloadUrl.observe(this, new Observer<HashMap<String, String>>() {
             @Override
-            public void onChanged(String url) {
-                if(!url.equals("none")){
+            public void onChanged(HashMap<String, String> downloadUrls) {
+                if(!downloadUrls.isEmpty()){
 
                 }
             }
@@ -775,5 +785,9 @@ public class ChatActivity extends AppCompatActivity {
         Uri uri = Uri.fromParts("package", this.getPackageName(), null);
         intent.setData(uri);
         startActivityForResult(intent, 101);
+    }
+
+    public void uploadPendingMessages(){
+
     }
 }

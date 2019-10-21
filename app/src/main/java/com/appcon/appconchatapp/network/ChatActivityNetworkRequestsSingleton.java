@@ -10,14 +10,20 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.HashMap;
+
 public class ChatActivityNetworkRequestsSingleton {
 
     StorageReference firebaseStorage;
 
-    private MutableLiveData<String> downloadUrl = new MutableLiveData<>();
+    private MutableLiveData<HashMap<String, String>> downloadUrl = new MutableLiveData<>();
+
+    HashMap<String, String> downloadURLMap;
 
     ChatActivityNetworkRequestsSingleton(){
-        downloadUrl.setValue("none");
+        downloadUrl.setValue(new HashMap<String, String>());
+
+        downloadURLMap = new HashMap<>();
 
         firebaseStorage = FirebaseStorage.getInstance().getReference();
     }
@@ -27,22 +33,24 @@ public class ChatActivityNetworkRequestsSingleton {
         return holder;
     }
 
-    public MutableLiveData<String> getDownloadUrl() {
+    public MutableLiveData<HashMap<String, String>> getDownloadUrl() {
         return downloadUrl;
     }
 
-    public void setDownloadUrl(String downloadUrl) {
+    public void setDownloadUrl(HashMap<String, String> downloadUrl) {
         this.downloadUrl.postValue(downloadUrl);
     }
 
-    public void uploadFiles(Uri fileUri, String type, String uid, String extension){
+    public void uploadFiles(Uri fileUri, final String messageID, String type, String uid, String extension){
         StorageReference ref = firebaseStorage.child(type + "/" + uid + "_" + System.currentTimeMillis() + extension);
         ref.putFile(fileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Task<Uri> resultUri = taskSnapshot.getStorage().getDownloadUrl();
                 while (!resultUri.isComplete());
-                setDownloadUrl(resultUri.getResult().toString());
+
+                downloadURLMap.put(messageID, resultUri.getResult().toString());
+                setDownloadUrl(downloadURLMap);
             }
         });
     }
