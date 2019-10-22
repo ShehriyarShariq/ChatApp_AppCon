@@ -7,7 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.appcon.appconchatapp.model.AudioMessage;
+import com.appcon.appconchatapp.model.ImageMessage;
 import com.appcon.appconchatapp.model.Message;
+import com.appcon.appconchatapp.model.TextMessage;
 import com.appcon.appconchatapp.network.ChatActivityNetworkRequestsSingleton;
 
 import java.util.ArrayList;
@@ -29,7 +32,13 @@ public class ChatActivityViewModel extends AndroidViewModel {
     }
 
     public void sendMessage(Message message){
+        if(message instanceof TextMessage){
 
+        } else if(message instanceof AudioMessage){
+
+        } else if(message instanceof ImageMessage){
+
+        } else
     }
 
     public void uploadFile(Uri fileUri, String messageID, String type, String uid, String extension){

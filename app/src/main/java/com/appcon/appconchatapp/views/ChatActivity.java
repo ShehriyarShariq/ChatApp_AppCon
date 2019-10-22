@@ -787,7 +787,7 @@ public class ChatActivity extends AppCompatActivity {
         startActivityForResult(intent, 101);
     }
 
-    public void uploadPendingMessages(){
+    public void uploadPendingMessages(HashMap<String, String> downloadURLs){
 
     }
 }
