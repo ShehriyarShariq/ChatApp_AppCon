@@ -1,25 +1,19 @@
 package com.appcon.appconchatapp.views;
 
-import androidx.annotation.NonNull;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
-
-import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
 import com.appcon.appconchatapp.R;
 import com.appcon.appconchatapp.adapters.FeaturesImagesViewPagerAdapter;
@@ -28,11 +22,6 @@ import com.appcon.appconchatapp.model.User;
 import com.appcon.appconchatapp.utils.CONSTANTS;
 import com.appcon.appconchatapp.utils.LoaderDialog;
 import com.appcon.appconchatapp.viewmodels.LoginActivityViewModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.tabs.TabItem;
-import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
