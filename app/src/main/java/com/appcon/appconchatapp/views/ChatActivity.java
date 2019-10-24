@@ -49,6 +49,8 @@ import com.appcon.appconchatapp.R;
 import com.appcon.appconchatapp.adapters.ChatMessagesListAdapter;
 import com.appcon.appconchatapp.databinding.ActivityChatBinding;
 import com.appcon.appconchatapp.model.AudioMessage;
+import com.appcon.appconchatapp.model.FileMessage;
+import com.appcon.appconchatapp.model.ImageMessage;
 import com.appcon.appconchatapp.model.Message;
 import com.appcon.appconchatapp.model.TextMessage;
 import com.appcon.appconchatapp.viewmodels.ChatActivityViewModel;
@@ -72,6 +74,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -85,6 +88,7 @@ public class ChatActivity extends AppCompatActivity {
 
     EmojiPopup emojiPopup;
 
+    String chatID;
     ArrayList<Message> messages;
     ChatMessagesListAdapter chatMessagesListAdapter;
 
@@ -110,10 +114,12 @@ public class ChatActivity extends AppCompatActivity {
     private String [] permissions = {Manifest.permission.RECORD_AUDIO};
 
     String fileName;
+    Uri imageUri, audioUri, fileUri;
 
     private Handler mHandler;
 
     LiveData<HashMap<String, String>> downloadUrl;
+    LiveData<String> messageSent;
 
     ArrayList<Message> pendingMessages;
 
@@ -413,6 +419,9 @@ public class ChatActivity extends AppCompatActivity {
                     AudioMessage audioMessage = new AudioMessage(String.valueOf((Math.random() * 1000000)), firebaseAuth.getCurrentUser().getUid(), firebaseAuth.getCurrentUser().getDisplayName(), firebaseAuth.getCurrentUser().getPhoneNumber(), "time", "url", getFormattedAudioDuration(player.getDuration() / 1000), file.length());
                     pendingMessages.add(audioMessage);
 
+                    String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+                    viewModel.uploadFile(Uri.fromFile(file), audioMessage.getMessageID(), "audio", firebaseAuth.getCurrentUser().getUid(), extension);
+
                     isSendAudio = false;
                     binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_mic));
                     binding.audioPlaybackBar.setVisibility(View.GONE);
@@ -424,19 +433,54 @@ public class ChatActivity extends AppCompatActivity {
                     binding.audioSeekbar.setProgress(0);
                     binding.playbackAudioBtnImg.setImageResource(R.drawable.ic_play);
 
-                } else if(isSendImage){
+                } else if(isSendImage) {
                     isSendImage = false;
                     binding.selecedImgPrevLayout.setVisibility(View.GONE);
                     binding.defaultBottomBar.setVisibility(View.VISIBLE);
                     binding.defaultTxtInpBar.setVisibility(View.VISIBLE);
 
-                    String imgTxtMsg = binding.imgTextInp.getText().toString();
+                    String imgTxtMsg = binding.imgTextInp.getText().toString().isEmpty() ? "none" : binding.imgTextInp.getText().toString();
+
+                    File file = new File(imageUri.getPath());
+
+                    ImageMessage imageMessage = new ImageMessage(
+                            String.valueOf((Math.random() * 1000000)),
+                            firebaseAuth.getCurrentUser().getUid(),
+                            firebaseAuth.getCurrentUser().getDisplayName(),
+                            firebaseAuth.getCurrentUser().getPhoneNumber(),
+                            "time",
+                            "url",
+                            imgTxtMsg,
+                            file.length());
+
+                    String extension = (file.getName()).substring((file.getName()).lastIndexOf(".") + 1);
+                    viewModel.uploadFile(Uri.fromFile(file), imageMessage.getMessageID(), "audio", firebaseAuth.getCurrentUser().getUid(), extension);
+
                     binding.imgTextInp.setText("");
 
                     binding.selectedImg.setImageURI(null);
                     binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_mic));
 
+                } else if(isSendDoc){
+                    isSendDoc = false;
 
+                    File file = new File(fileUri.getPath());
+
+                    FileMessage fileMessage = new FileMessage(
+                            String.valueOf((Math.random() * 1000000)),
+                            firebaseAuth.getCurrentUser().getUid(),
+                            firebaseAuth.getCurrentUser().getDisplayName(),
+                            firebaseAuth.getCurrentUser().getPhoneNumber(),
+                            "time",
+                            "url",
+                            file.length());
+
+                    String extension = (file.getName()).substring((file.getName()).lastIndexOf(".") + 1);
+                    viewModel.uploadFile(Uri.fromFile(file), fileMessage.getMessageID(), "audio", firebaseAuth.getCurrentUser().getUid(), extension);
+
+                    binding.selectedDocumentLayout.setVisibility(View.GONE);
+                    binding.defaultTxtInpBar.setVisibility(View.VISIBLE);
+                    fileUri = null;
 
                 } else { // Audio Btn
                     Toast.makeText(ChatActivity.this, "Hold down to record audio", Toast.LENGTH_SHORT).show();
@@ -449,10 +493,58 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onChanged(HashMap<String, String> downloadUrls) {
                 if(!downloadUrls.isEmpty()){
+                    String[] keys = (String[]) downloadUrls.keySet().toArray();
+                    for(int i = 0, n = keys.length; i < n; i++){
+                        String msgID = keys[i];
+                        String url = downloadUrls.get(msgID);
+                        Message message = null;
+                        for(int j = 0, m = pendingMessages.size(); j < m; i++){
+                            if(pendingMessages.get(j).getMessageID().equals(msgID)){
+                                message = pendingMessages.get(j);
+                                break;
+                            }
+                        }
 
+                        if(message != null){
+                            HashMap<String, String> msgMap;
+                            if(message instanceof AudioMessage){
+                                ((AudioMessage) message).setAudioURL(url);
+                            } else if(message instanceof ImageMessage){
+                                ((ImageMessage) message).setImageURL(url);
+                            } else if(message instanceof FileMessage){
+                                ((FileMessage) message).setFileURL(url);
+                            }
+
+                            viewModel.sendMessage(chatID, message);
+                        }
+
+                    }
                 }
             }
         });
+
+        messageSent = viewModel.getMessageSent();
+        messageSent.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String msgID) {
+                if(!msgID.equals("none")){
+                    int index = -1;
+                    for(int i = 0, n = pendingMessages.size(); i < n; i++){
+                        if(pendingMessages.get(i).getMessageID().equals(msgID)){
+                            index = i;
+                            break;
+                        }
+                    }
+
+                    if(index != -1){
+                        pendingMessages.remove(index);
+                    }
+                    binding.chatList.scrollToPosition(messages.size() - 1);
+                }
+            }
+        });
+
+
 
         startAudioRecord = viewModel.getStartAudioRecord();
         startAudioRecord.observe(this, new Observer<Boolean>() {
@@ -468,7 +560,9 @@ public class ChatActivity extends AppCompatActivity {
                     lastAudioRecState = false;
                     binding.audioOrSendBtn.setCardBackgroundColor(getResources().getColor(R.color.chat_list_item_select));
 
-                    stopRecording();
+                    if(recorder != null){
+                        stopRecording();
+                    }
 
                     binding.defaultTxtInpBar.setVisibility(View.GONE);
                     binding.audioPlaybackBar.setVisibility(View.VISIBLE);
@@ -571,25 +665,21 @@ public class ChatActivity extends AppCompatActivity {
         if (requestCode == IMAGE_PICKER_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = data.getParcelableExtra("path");
-//                try {
-//                    // You can update this bitmap to your server
-//                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
 
-                    Matrix matrix = new Matrix();
+                Matrix matrix = new Matrix();
 
-                    matrix.postRotate(90);
+                matrix.postRotate(90);
 
-//                    Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+                binding.defaultBottomBar.setVisibility(View.GONE);
+                binding.selecedImgPrevLayout.setVisibility(View.VISIBLE);
+                binding.audioOrSendBtnImg.setImageResource(R.drawable.ic_send);
 
-                    binding.defaultBottomBar.setVisibility(View.GONE);
-                    binding.selecedImgPrevLayout.setVisibility(View.VISIBLE);
-                    binding.audioOrSendBtnImg.setImageResource(R.drawable.ic_send);
+                Glide.with(ChatActivity.this)
+                        .load(uri)
+                        .into(binding.selectedImg);
 
-                    Glide.with(ChatActivity.this)
-                            .load(uri)
-                            .into(binding.selectedImg);
-
-                    isSendImage = true;
+                isSendImage = true;
+                imageUri = uri;
             }
         } else if(requestCode == ATTACH_DOCS_REQUEST){
             if(resultCode == Activity.RESULT_OK){
@@ -600,6 +690,7 @@ public class ChatActivity extends AppCompatActivity {
                 binding.selectedDocumentLayout.setVisibility(View.VISIBLE);
 
                 isSendDoc = true;
+                fileUri = uri;
             }
         } else if(requestCode == ATTACH_AUDIO_REQUEST){
             if(resultCode == Activity.RESULT_OK){
@@ -610,6 +701,7 @@ public class ChatActivity extends AppCompatActivity {
                 binding.selectedAudioLayout.setVisibility(View.VISIBLE);
 
                 isSendAudio = true;
+                audioUri = uri;
             }
         }
 
@@ -639,22 +731,6 @@ public class ChatActivity extends AppCompatActivity {
         }
         if (!permissionToRecordAccepted ) finish();
 
-    }
-
-    private void onRecord(boolean start) {
-        if (start) {
-            startRecording();
-        } else {
-            stopRecording();
-        }
-    }
-
-    private void onPlay(boolean start) {
-        if (start) {
-            startPlaying();
-        } else {
-            stopPlaying();
-        }
     }
 
     private void startPlaying() {
@@ -790,9 +866,5 @@ public class ChatActivity extends AppCompatActivity {
         Uri uri = Uri.fromParts("package", this.getPackageName(), null);
         intent.setData(uri);
         startActivityForResult(intent, 101);
-    }
-
-    public void uploadPendingMessages(HashMap<String, String> downloadURLs){
-
     }
 }

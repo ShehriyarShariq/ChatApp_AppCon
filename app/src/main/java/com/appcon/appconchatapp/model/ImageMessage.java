@@ -1,33 +1,39 @@
 package com.appcon.appconchatapp.model;
 
+import java.util.HashMap;
+
 public class ImageMessage extends Message {
 
     String imageURL;
     String text;
-    int size;
-    boolean downloaded;
+    long size;
 
-    public ImageMessage(String messageID, String senderID, String senderName, String senderPhoneNumber, String time, String imageURL, String text, int size, boolean downloaded) {
+    public ImageMessage(String messageID, String senderID, String senderName, String senderPhoneNumber, String time, String imageURL, String text, long size) {
         super(messageID, senderID, senderName, senderPhoneNumber, time);
         this.imageURL = imageURL;
         this.text = text;
         this.size = size;
-        this.downloaded = downloaded;
     }
 
     public String getImageURL() {
         return imageURL;
     }
 
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
     public String getText() {
         return text;
     }
 
-    public int getSize() {
+    public long getSize() {
         return size;
     }
 
-    public boolean isDownloaded() {
-        return downloaded;
+    public HashMap<String, String> getMap(){
+        HashMap<String, String> map = new HashMap<>();
+
+        return map;
     }
 }

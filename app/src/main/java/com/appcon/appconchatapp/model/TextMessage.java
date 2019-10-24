@@ -1,5 +1,7 @@
 package com.appcon.appconchatapp.model;
 
+import java.util.HashMap;
+
 public class TextMessage extends Message {
 
     String text;
@@ -15,5 +17,11 @@ public class TextMessage extends Message {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public HashMap<String, String> getMap(){
+        HashMap<String, String> map = new HashMap<>();
+
+        return map;
     }
 }

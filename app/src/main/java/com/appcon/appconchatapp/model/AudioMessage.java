@@ -1,5 +1,8 @@
 package com.appcon.appconchatapp.model;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class AudioMessage extends Message {
 
     String audioURL;
@@ -23,5 +26,15 @@ public class AudioMessage extends Message {
 
     public long getSize() {
         return size;
+    }
+
+    public void setAudioURL(String audioURL) {
+        this.audioURL = audioURL;
+    }
+
+    public HashMap<String, String> getMap(){
+        HashMap<String, String> map = new HashMap<>();
+
+        return map;
     }
 }

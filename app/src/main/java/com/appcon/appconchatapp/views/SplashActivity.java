@@ -107,7 +107,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void loginSuccess() {
-        startActivity(new Intent(SplashActivity.this, ChatActivity.class));
+        startActivity(new Intent(SplashActivity.this, MainActivity.class));
         finish();
     }
 

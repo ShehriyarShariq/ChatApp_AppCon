@@ -4,11 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" >
 
-    <data>
-        <variable
-            name="viewModel"
-            type="com.appcon.appconchatapp.viewmodels.ConversationViewModel" />
-    </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +36,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            app:cardCornerRadius="40dp"
+                            app:cardCornerRadius="30dp"
                             app:cardElevation="0dp"
                             app:cardBackgroundColor="@color/chat_list_item_read_inner">
 
@@ -53,6 +48,7 @@
                                 android:orientation="horizontal">
 
                                 <androidx.cardview.widget.CardView
+                                    android:id="@+id/chatVideoCallBtn"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     app:cardCornerRadius="20dp"
@@ -68,6 +64,7 @@
                                 </androidx.cardview.widget.CardView>
 
                                 <androidx.cardview.widget.CardView
+                                    android:id="@+id/chatAudioCallBtn"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     app:cardCornerRadius="20dp"
@@ -89,7 +86,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            app:cardCornerRadius="40dp"
+                            app:cardCornerRadius="30dp"
                             app:cardElevation="0dp"
                             app:cardBackgroundColor="@color/chat_list_item_delete_inner">
 
@@ -102,6 +99,7 @@
                                 android:orientation="horizontal">
 
                                 <androidx.cardview.widget.CardView
+                                    android:id="@+id/muteChatBtn"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     app:cardCornerRadius="20dp"
@@ -117,6 +115,7 @@
                                 </androidx.cardview.widget.CardView>
 
                                 <androidx.cardview.widget.CardView
+                                    android:id="@+id/deleteChatBtn"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     app:cardCornerRadius="20dp"
@@ -138,24 +137,25 @@
 
                     </LinearLayout>
 
-
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/itemOuter"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="2dp"
                     android:layout_marginRight="2dp"
-                    app:cardCornerRadius="40dp"
+                    app:cardCornerRadius="30dp"
                     app:cardElevation="0dp"
                     android:translationX="0dp"
                     android:visibility="visible">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/itemInner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="2dp"
-                        app:cardCornerRadius="40dp"
+                        app:cardCornerRadius="30dp"
                         app:cardElevation="0dp">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -163,7 +163,7 @@
                             android:layout_height="match_parent">
 
                             <RelativeLayout
-                                android:id="@+id/display_img_layout"
+                                android:id="@+id/displayImgLayout"
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
                                 app:layout_constraintBottom_toTopOf="parent"
@@ -178,7 +178,7 @@
                                     android:layout_margin="5dp">
 
                                     <com.mikhaellopez.circularimageview.CircularImageView
-                                        android:id="@+id/display_img"
+                                        android:id="@+id/displayImg"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:src="@drawable/ic_user" />
@@ -192,22 +192,21 @@
                                             android:layout_height="0dp"
                                             app:layout_constraintHeight_percent="0.45"
                                             app:layout_constraintDimensionRatio="W, 1:1"
-                                            app:layout_constraintBottom_toTopOf="parent"
-                                            app:layout_constraintStart_toEndOf="parent"
-                                            app:cardCornerRadius="1000dp"
-                                            android:translationY="25dp"
-                                            android:translationX="-25dp"
+                                            app:layout_constraintTop_toTopOf="parent"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:cardCornerRadius="50dp"
                                             app:cardElevation="0dp">
 
                                             <androidx.cardview.widget.CardView
                                                 android:layout_width="match_parent"
                                                 android:layout_height="match_parent"
-                                                app:cardCornerRadius="1000dp"
+                                                app:cardCornerRadius="50dp"
                                                 app:cardBackgroundColor="@color/chat_list_item_select"
                                                 android:layout_margin="2dp"
                                                 app:cardElevation="0dp">
 
                                                 <TextView
+                                                    android:id="@+id/newMessagesCount"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="match_parent"
                                                     android:text="122"
@@ -232,8 +231,8 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/side_menu"
-                                app:layout_constraintStart_toEndOf="@+id/display_img_layout"
+                                app:layout_constraintEnd_toStartOf="@+id/sideMenu"
+                                app:layout_constraintStart_toEndOf="@+id/displayImgLayout"
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
@@ -242,21 +241,19 @@
                                     android:layout_height="wrap_content"
                                     android:ellipsize="end"
                                     android:maxLines="1"
-                                    android:text="@{viewModel.displayName}"
-                                    tools:text="Friend Name"
+                                    android:text="Friend Name"
                                     android:textSize="16sp"
-                                    app:layout_constraintBottom_toTopOf="@+id/last_msg"
+                                    app:layout_constraintBottom_toTopOf="@+id/lastMsg"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
                                 <TextView
-                                    android:id="@+id/last_msg"
+                                    android:id="@+id/lastMsg"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:ellipsize="end"
                                     android:maxLines="1"
-                                    android:text="@{viewModel.lastMessage}"
-                                    tools:text="This was the last received message asasdasdasdasdasdasdasdasd"
+                                    android:text="This was the last received message asasdasdasdasdasdasdasdasd"
                                     android:textSize="16sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -265,45 +262,64 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <RelativeLayout
-                                android:id="@+id/side_menu"
+                                android:id="@+id/sideMenu"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 app:layout_constraintBottom_toTopOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toBottomOf="parent"
-                                android:layout_marginRight="10dp">
+                                android:layout_marginRight="15dp">
 
                                 <LinearLayout
-                                    android:id="@+id/default_layout"
+                                    android:id="@+id/defaultLayout"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    android:orientation="vertical"
+                                    android:orientation="horizontal"
                                     android:gravity="center_vertical"
                                     android:visibility="visible">
 
-                                    <TextView
+                                    <ImageView
+                                        android:id="@+id/muteIc"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="@{viewModel.time}"
-                                        tools:text="Mon"/>
+                                        android:src="@drawable/ic_mute"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/lastMessageDay"
+                                        android:layout_marginRight="15dp"/>
 
-                                    <ImageView
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:src="@drawable/ic_pin"
-                                        android:layout_gravity="center_horizontal"
-                                        android:layout_marginTop="5dp"/>
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:gravity="center_vertical">
+
+                                        <TextView
+                                            android:id="@+id/lastMessageDay"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Mon"/>
+
+                                        <ImageView
+                                            android:id="@+id/isPinned"
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            android:src="@drawable/ic_pin"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_marginTop="5dp"/>
+
+                                    </LinearLayout>
 
                                 </LinearLayout>
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:id="@+id/selected_layout"
+                                    android:id="@+id/selectedLayout"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:visibility="gone">
 
                                     <androidx.cardview.widget.CardView
-                                        android:id="@+id/pin"
+                                        android:id="@+id/pinBtn"
                                         android:layout_width="0dp"
                                         android:layout_height="0dp"
                                         android:layout_marginRight="30dp"
@@ -313,7 +329,7 @@
                                         app:cardElevation="0dp"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintDimensionRatio="W,1:1"
-                                        app:layout_constraintEnd_toStartOf="@+id/mark_read"
+                                        app:layout_constraintEnd_toStartOf="@+id/markReadBtn"
                                         app:layout_constraintHeight_percent="0.5"
                                         app:layout_constraintTop_toTopOf="parent">
 
@@ -326,7 +342,7 @@
                                     </androidx.cardview.widget.CardView>
 
                                     <androidx.cardview.widget.CardView
-                                        android:id="@+id/mark_read"
+                                        android:id="@+id/markReadBtn"
                                         android:layout_width="0dp"
                                         android:layout_height="0dp"
                                         android:visibility="visible"
@@ -342,7 +358,7 @@
                                         <ImageView
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
-                                            android:src="@drawable/ic_tick"
+                                            android:src="@drawable/ic_tick_white"
                                             android:layout_margin="5dp"/>
 
                                     </androidx.cardview.widget.CardView>

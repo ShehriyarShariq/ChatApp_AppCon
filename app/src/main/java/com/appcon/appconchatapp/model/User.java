@@ -97,12 +97,12 @@ public class User {
         dbMap.put("about", about);
 
         HashMap<String, Object> userGroups = new HashMap<>();
-        Chat dummyGroupChat = new Chat("chatID", "messageID", false, "UserID");
+        Chat dummyGroupChat = new Chat("chatID", "displayName", "lastMessageSeen", false, false, "UserID");
         userGroups.put(dummyGroupChat.getChatID(), dummyGroupChat.getDBMap("group"));
         dbMap.put("userGroups", userGroups);
 
         HashMap<String, Object> personalChats = new HashMap<>();
-        Chat dummyChat = new Chat("chatID", "messageID", false, "UserID");
+        Chat dummyChat = new Chat("chatID", "displayName", "lastMessageSeen", false, false, "UserID");
         personalChats.put(dummyChat.getChatID(), dummyChat.getDBMap("personal"));
         dbMap.put("personalChats", personalChats);
 
