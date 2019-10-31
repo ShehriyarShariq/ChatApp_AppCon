@@ -8,23 +8,38 @@ import java.util.HashMap;
 
 public class Chat implements Parcelable {
 
-    private String chatID, displayName, lastMessageSeen, otherUser, time;
+    private String chatID, displayName, displayPicture, creationDate, description, lastMessageSeenID, lastMessageSeen, time;
     private boolean muted, pinned;
+    private HashMap<String, String> permissions;
+    private ArrayList<String> admins, otherUsers;
 
-    public Chat(String chatID, String displayName, String lastMessageSeen, boolean muted, boolean pinned, String otherUser) {
+    public Chat(String chatID, String displayName, String displayPicture, String creationDate, String description, String lastMessageSeenID, String lastMessageSeen, String time, boolean muted, boolean pinned, HashMap<String, String> permissions, ArrayList<String> admins, ArrayList<String> otherUsers) {
         this.chatID = chatID;
         this.displayName = displayName;
+        this.displayPicture = displayPicture;
+        this.creationDate = creationDate;
+        this.description = description;
+        this.lastMessageSeenID = lastMessageSeenID;
         this.lastMessageSeen = lastMessageSeen;
+        this.time = time;
         this.muted = muted;
         this.pinned = pinned;
-        this.otherUser = otherUser;
+        this.permissions = permissions;
+        this.admins = admins;
+        this.otherUsers = otherUsers;
     }
 
     protected Chat(Parcel in) {
         chatID = in.readString();
         displayName = in.readString();
+        displayPicture = in.readString();
+        creationDate = in.readString();
+        description = in.readString();
+        lastMessageSeenID = in.readString();
         lastMessageSeen = in.readString();
-        otherUser = in.readString();
+        admins = in.readArrayList(String.class.getClassLoader());
+        otherUsers = in.readArrayList(String.class.getClassLoader());
+        permissions = in.readHashMap(String.class.getClassLoader());
         time = in.readString();
         muted = in.readByte() != 0;
         pinned = in.readByte() != 0;
@@ -50,12 +65,24 @@ public class Chat implements Parcelable {
         return displayName;
     }
 
-    public String getLastMessageSeen() {
-        return lastMessageSeen;
+    public String getDisplayPicture() {
+        return displayPicture;
     }
 
-    public String getOtherUser() {
-        return otherUser;
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getLastMessageSeenID() {
+        return lastMessageSeenID;
+    }
+
+    public String getLastMessageSeen() {
+        return lastMessageSeen;
     }
 
     public String getTime() {
@@ -70,15 +97,24 @@ public class Chat implements Parcelable {
         return pinned;
     }
 
-    public HashMap<String, String> getDBMap(String type){
-        HashMap<String, String> dbMap = new HashMap<>();
+    public HashMap<String, String> getPermissions() {
+        return permissions;
+    }
+
+    public ArrayList<String> getAdmins() {
+        return admins;
+    }
+
+    public ArrayList<String> getOtherUsers() {
+        return otherUsers;
+    }
+
+    public HashMap<String, Object> getDBMap(){
+        HashMap<String, Object> dbMap = new HashMap<>();
 
         dbMap.put("lastMessageSeen", lastMessageSeen);
         dbMap.put("muted", String.valueOf(muted));
-
-        if(type.equals("personal")){
-            dbMap.put("otherUser", otherUser);
-        }
+        dbMap.put("otherUsers", otherUsers);
 
         return dbMap;
     }
@@ -92,10 +128,22 @@ public class Chat implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(chatID);
         dest.writeString(displayName);
+        dest.writeString(displayPicture);
+        dest.writeString(creationDate);
+        dest.writeString(description);
+        dest.writeString(lastMessageSeenID);
         dest.writeString(lastMessageSeen);
-        dest.writeString(otherUser);
+        dest.writeStringList(admins);
+        dest.writeStringList(otherUsers);
+        dest.writeSerializable(permissions);
         dest.writeString(time);
         dest.writeByte((byte) (muted ? 1 : 0));
         dest.writeByte((byte) (pinned ? 1 : 0));
+    }
+
+    public void setLastMessage(MessageDB message) {
+        this.lastMessageSeenID = message.getMessageID();
+        this.lastMessageSeen = message.getContent();
+        this.time = message.getTimeStamp();
     }
 }

@@ -372,12 +372,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/topBar"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:overScrollMode="never"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp">
+                android:layout_height="match_parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -385,7 +385,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintEnd_toStartOf="parent"
-                    app:layout_constraintHeight_percent="0.1">
+                    app:layout_constraintHeight_percent="0.11">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardView3"
@@ -395,7 +395,8 @@
                         app:cardCornerRadius="40dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintDimensionRatio="W,1:1"
-                        android:visibility="invisible"/>
+                        android:visibility="invisible"
+                        android:layout_marginBottom="10dp"/>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cardView"
@@ -406,7 +407,7 @@
                         app:layout_constraintWidth_percent="0.6"
                         android:layout_marginRight="10dp"
                         android:background="@drawable/tabs"
-                        android:outlineSpotShadowColor="#000">
+                        android:layout_marginBottom="10dp">
 
                         <RelativeLayout
                             android:id="@+id/tabSelector"
@@ -446,25 +447,19 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/newBtn"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        app:cardCornerRadius="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintDimensionRatio="W,1:1"
                         android:layout_marginRight="10dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"
-                        app:cardBackgroundColor="#F7FF00">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_add_black"
-                            android:layout_margin="10dp"/>
-
-                    </androidx.cardview.widget.CardView>
+                        android:src="@drawable/ic_add_black"
+                        android:backgroundTint="@color/games_btn"
+                        app:borderWidth="0dp"
+                        android:layout_marginBottom="10dp"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

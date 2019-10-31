@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -22,6 +23,9 @@ import com.appcon.appconchatapp.model.User;
 import com.appcon.appconchatapp.utils.CONSTANTS;
 import com.appcon.appconchatapp.utils.LoaderDialog;
 import com.appcon.appconchatapp.viewmodels.LoginActivityViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -35,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     LoginActivityViewModel viewModel;
 
     LiveData<String> authToken;
-    LiveData<Boolean> loginFailed, accCreationSuccess, accCreationFailed;
+    LiveData<Boolean> loginFailed, accCreationFailed;
 
     FirebaseAuth firebaseAuth;
 
@@ -127,14 +131,30 @@ public class LoginActivity extends AppCompatActivity {
 
         authToken = viewModel.getAuthToken();
         loginFailed = viewModel.getLoginFailed();
-        accCreationSuccess = viewModel.getAccCreationSuccess();
         accCreationFailed = viewModel.getAccCreationFailed();
 
         authToken.observe(this, new Observer<String>() {
             @Override
             public void onChanged(String token) {
                 if(!token.equals("none")){ // Valid login
-                    phoneVerificationCheck("+92" + binding.phoneNumInp.getText().toString().trim());
+                    editor.putString("token", token);
+                    editor.commit();
+
+                    final String phoneNum = !binding.phoneNumInp.getText().toString().trim().equals("") ? binding.phoneNumInp.getText().toString().trim() : binding.phoneNumberInputNew.getText().toString().trim();
+//                    phoneVerificationCheck("+92" + phoneNum);
+
+                    // DELETE THIS
+                    firebaseAuth.signInWithCustomToken(token).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                phoneVerifSuccess("+92" + phoneNum);
+                            } else {
+                            }
+                        }
+                    });
+
+
                 }
             }
         });
@@ -144,15 +164,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onChanged(Boolean failed) { // Failed to login
                 if(failed){
                     loginFailed();
-                }
-            }
-        });
-
-        accCreationSuccess.observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean success) { // New Account Creation Success
-                if(success){
-                    phoneVerificationCheck("+92" + binding.phoneNumberInputNew.getText().toString().trim());
                 }
             }
         });

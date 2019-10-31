@@ -52,6 +52,7 @@ import com.appcon.appconchatapp.model.AudioMessage;
 import com.appcon.appconchatapp.model.FileMessage;
 import com.appcon.appconchatapp.model.ImageMessage;
 import com.appcon.appconchatapp.model.Message;
+import com.appcon.appconchatapp.model.MessageDB;
 import com.appcon.appconchatapp.model.TextMessage;
 import com.appcon.appconchatapp.viewmodels.ChatActivityViewModel;
 import com.bumptech.glide.Glide;
@@ -122,6 +123,8 @@ public class ChatActivity extends AppCompatActivity {
     LiveData<String> messageSent;
 
     ArrayList<Message> pendingMessages;
+
+    LiveData<MessageDB> message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -655,6 +658,15 @@ public class ChatActivity extends AppCompatActivity {
                     isAudioPlaying = false;
                     isAudioPaused = true;
                 }
+            }
+        });
+
+        message = viewModel.getMessage();
+        message.observe(this, new Observer<MessageDB>() {
+            @Override
+            public void onChanged(MessageDB stringStringHashMap) {
+
+//                chatMessagesListAdapter.refreshMessagesList();
             }
         });
     }

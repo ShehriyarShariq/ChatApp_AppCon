@@ -45,6 +45,10 @@ public class ConvosAndCallsPageAdapter extends FragmentPagerAdapter {
         chatsFragment.clearAllSelection();
     }
 
+    public void setAllValidConversations(){
+        chatsFragment.setAllValidConversations();
+    }
+
     public ArrayList<Chat> getSelectedConvos(){
         return chatsFragment.getSelectedConvos();
     }

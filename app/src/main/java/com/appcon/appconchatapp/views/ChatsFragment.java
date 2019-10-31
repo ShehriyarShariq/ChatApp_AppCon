@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.appcon.appconchatapp.adapters.AllStoriesListAdapter;
@@ -20,10 +23,17 @@ import com.appcon.appconchatapp.listeners.ChatsFragmentListener;
 import com.appcon.appconchatapp.listeners.ConversationsListItemClickListener;
 import com.appcon.appconchatapp.listeners.StoriesItemListener;
 import com.appcon.appconchatapp.model.Chat;
+import com.appcon.appconchatapp.model.ChatDB;
+import com.appcon.appconchatapp.model.Message;
+import com.appcon.appconchatapp.model.MessageDB;
 import com.appcon.appconchatapp.model.PublicGroup;
 import com.appcon.appconchatapp.model.Story;
+import com.appcon.appconchatapp.utils.ChatAppRepository;
+import com.appcon.appconchatapp.viewmodels.ChatsFragmentViewModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ChatsFragment extends Fragment {
 
@@ -38,8 +48,22 @@ public class ChatsFragment extends Fragment {
     ArrayList<Chat> conversations;
 
     ChatsFragmentBinding binding;
+    ChatsFragmentViewModel viewModel;
 
     ArrayList<Chat> selectedChats;
+
+    LiveData<ArrayList<String>> allChats;
+    LiveData<Chat> chat;
+    LiveData<MessageDB> messageOnline;
+    ArrayList<String> observedChats;
+
+    ChatAppRepository repository;
+    LiveData<List<ChatDB>> chats;
+    LiveData<List<MessageDB>> message;
+
+    ArrayList<String> alreadyAddedMessageIDs;
+
+    int index = 0;
 
     public ChatsFragment(ChatsFragmentListener chatsFragmentListener) {
         this.chatsFragmentListener = chatsFragmentListener;
@@ -48,6 +72,251 @@ public class ChatsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.chats_fragment, container, false);
+        viewModel = ViewModelProviders.of(this).get(ChatsFragmentViewModel.class);
+
+        viewModel.getAllConversations();
+        repository = new ChatAppRepository(getActivity().getApplication());
+
+        observedChats = new ArrayList<>();
+        alreadyAddedMessageIDs = new ArrayList<>();
+
+        allChats = viewModel.getAllChats();
+        allChats.observe(this, new Observer<ArrayList<String>>() {
+            @Override
+            public void onChanged(ArrayList<String> chatIDs) {
+                if(chatIDs.size() > 0){
+                    for(String chatID : chatIDs){
+                        if(!observedChats.contains(chatID)){
+                            viewModel.addChatsListener(chatID);
+                            viewModel.addConversationListener(chatID);
+                        }
+                    }
+
+                    observedChats.addAll(chatIDs);
+                }
+            }
+        });
+
+        chat = viewModel.getChat();
+        chat.observe(this, new Observer<Chat>() {
+            @Override
+            public void onChanged(final Chat chat) {
+                LiveData<ChatDB> chatDB = repository.getChat(chat.getChatID());
+                chatDB.observe(getActivity(), new Observer<ChatDB>() {
+                    @Override
+                    public void onChanged(ChatDB chatDB) {
+                        if(chatDB == null){
+                            HashMap<String, String> permissions = chat.getPermissions();
+
+                            ArrayList<String> admins = chat.getAdmins();
+                            ArrayList<String> members = chat.getOtherUsers();
+
+                            String adminsStr = "", membersStr = "";
+
+                            for(int i = 0, n = admins.size(); i < n; i++){
+                                adminsStr += admins.get(i);
+
+                                if(i != (n - 1)){
+                                    adminsStr += ",";
+                                }
+                            }
+
+                            for(int i = 0, n = members.size(); i < n; i++){
+                                membersStr += members.get(i);
+
+                                if(i != (n - 1)){
+                                    membersStr += ",";
+                                }
+                            }
+
+                            chatDB = new ChatDB(
+                                    chat.getChatID(),
+                                    chat.getDisplayName(),
+                                    chat.getDisplayPicture(),
+                                    chat.getCreationDate(),
+                                    chat.getDescription(),
+                                    chat.getLastMessageSeenID(),
+                                    String.valueOf(chat.isMuted()),
+                                    String.valueOf(chat.isPinned()),
+                                    permissions.get("adminWriteOnly"),
+                                    permissions.get("adminSettingsEditOnly"),
+                                    adminsStr,
+                                    membersStr
+                            );
+
+                            repository.insertChat(chatDB);
+                        }
+                    }
+                });
+
+//                boolean hasChat = false;
+//                int index = -1;
+//                for(int i = 0, n = conversations.size(); i < n; i++){
+//                    Chat conversation = conversations.get(i);
+//                    if(conversation.getChatID().equals(chat.getChatID())){
+//                        hasChat = true;
+//                        index = i;
+//                        break;
+//                    }
+//                }
+//
+//                if(hasChat){
+//                    conversations.set(index, chat);
+//                } else {
+//                    conversations.add(chat);
+//                }
+//                conversationsListAdapter.refreshConversations(conversations);
+            }
+        });
+
+        messageOnline = viewModel.getMessage();
+        messageOnline.observe(this, new Observer<MessageDB>() {
+            @Override
+            public void onChanged(final MessageDB message) {
+                LiveData<ChatDB> chat = repository.getChat(message.getChatID());
+                chat.observe(getActivity(), new Observer<ChatDB>() {
+                    @Override
+                    public void onChanged(ChatDB chatDB) {
+                        if(chatDB != null){
+                            final LiveData<List<MessageDB>> msgs = repository.getChatMessages(message.getChatID());
+                            final ChatDB finalChatDB = chatDB;
+                            msgs.observe(getActivity(), new Observer<List<MessageDB>>() {
+                                @Override
+                                public void onChanged(List<MessageDB> messageDBS) {
+                                    if(messageDBS != null){
+                                        boolean hasMessage = false;
+                                        for(MessageDB messageDB : messageDBS){
+                                            if(messageDB.getMessageID().equals(message.getMessageID())){
+                                                hasMessage = true;
+                                                break;
+                                            }
+                                        }
+
+                                        if(!hasMessage){
+                                            finalChatDB.setLastMessageSeenID(message.getMessageID());
+
+                                            alreadyAddedMessageIDs.add(message.getMessageID());
+                                            repository.insertMessages(message);
+                                            repository.insertChat(finalChatDB);
+                                        }
+
+                                        msgs.removeObserver(this);
+                                    }
+                                }
+                            });
+//                            if(!chatDB.getLastMessageSeenID().equals(message.getMessageID()) && !alreadyAddedMessageIDs.contains(message.getMessageID())){
+//                                chatDB.setLastMessageSeenID(message.getMessageID());
+//
+//                                alreadyAddedMessageIDs.add(message.getMessageID());
+//                                repository.insertMessages(message);
+//                                repository.insertChat(chatDB);
+//                            }
+                        } else {
+                            // Add Chat to database
+                            chatDB = new ChatDB(
+                                    message.getChatID(),
+                                    "Shehriyar",
+                                    "none",
+                                    "none",
+                                    "none",
+                                    message.getMessageID(),
+                                    "false",
+                                    "false",
+                                    "false",
+                                    "false",
+                                    "none",
+                                    "none");
+                            repository.insertMessages(message);
+                            repository.insertChat(chatDB);
+                        }
+                    }
+                });
+//                for(int i = 0, n = conversations.size(); i < n; i++){
+//                    Chat conversation = conversations.get(i);
+//                    if(conversation.getChatID().equals(message.getChatID())){
+//                        conversation.setLastMessage(message);
+//                    }
+//                }
+//
+//                conversationsListAdapter.refreshConversations(conversations);
+
+//                conversationsListAdapter.refreshConversations(messageDB);
+                // Perform database shit here
+//                repository.insertMessages(message);
+            }
+        });
+
+        message = repository.getAllMessages();
+        message.observe(this, new Observer<List<MessageDB>>() {
+            @Override
+            public void onChanged(List<MessageDB> messages) {
+                if(messages.size() > 0){
+
+                }
+            }
+        });
+
+        chats = repository.getAllChats();
+        chats.observe(this, new Observer<List<ChatDB>>() {
+            @Override
+            public void onChanged(final List<ChatDB> chatDBS) {
+                conversations.clear();
+                index = 0;
+                for(int i = 0; i < chatDBS.size(); i++){
+                    final ChatDB chat = chatDBS.get(i);
+                    final LiveData<List<MessageDB>> msgs = repository.getChatMessages(chat.getChatID());
+                    msgs.observe(getActivity(), new Observer<List<MessageDB>>() {
+                        @Override
+                        public void onChanged(List<MessageDB> messageDBS) {
+                            if(messageDBS != null){
+                                MessageDB lastMsg = messageDBS.get(messageDBS.size() - 1);
+
+                                HashMap<String, String> permissions = new HashMap<>();
+                                permissions.put("adminWriteOnly", chat.getAdminWriteOnly());
+                                permissions.put("adminSettingsEditOnly", chat.getAdminSettingsEditOnly());
+
+                                ArrayList<String> admins = new ArrayList<>();
+                                String[] adminsArr = chat.getAdmins().split(",");
+                                for(String adminID : adminsArr){
+                                    admins.add(adminID);
+                                }
+
+                                ArrayList<String> members = new ArrayList<>();
+                                String[] membersArr = chat.getOtherUsers().split(",");
+                                for(String memberID : membersArr){
+                                    members.add(memberID);
+                                }
+
+                                conversations.add(new Chat(
+                                        chat.getChatID(),
+                                        chat.getDisplayName(),
+                                        chat.getDisplayPicture(),
+                                        chat.getCreationDate(),
+                                        chat.getDescription(),
+                                        chat.getLastMessageSeenID(),
+                                        lastMsg.getContent(),
+                                        lastMsg.getTimeStamp(),
+                                        Boolean.parseBoolean(chat.getMuted()),
+                                        Boolean.parseBoolean(chat.getPinned()),
+                                        permissions,
+                                        admins,
+                                        members
+                                ));
+
+                                if(index == (chatDBS.size() -1)){
+                                    conversationsListAdapter.refreshConversations(conversations);
+                                    msgs.removeObserver(this);
+                                } else {
+                                    index++;
+                                }
+
+
+                            }
+                        }
+                    });
+                }
+            }
+        });
 
         stories = new ArrayList<>();
         publicGroups = new ArrayList<>();
@@ -62,9 +331,9 @@ public class ChatsFragment extends Fragment {
         publicGroups.add(new PublicGroup("groupID", "NSFW", "none"));
         publicGroups.add(new PublicGroup("groupID", "Taha", "none"));
 
-        conversations.add(new Chat("chatID", "displayName", "lastMessageSeen", false, false, "UserID"));
-        conversations.add(new Chat("chatID", "displayName", "lastMessageSeen", false, false, "UserID"));
-        conversations.add(new Chat("chatID", "displayName", "lastMessageSeen", false, false, "UserID"));
+//        conversations.add(new Chat("chatID", "displayName", "lastMessageSeen", false, false, "UserID"));
+//        conversations.add(new Chat("chatID", "displayName", "lastMessageSeen", false, false, "UserID"));
+//        conversations.add(new Chat("chatID", "displayName", "lastMessageSeen", false, false, "UserID"));
 
         binding.allStoriesList.setHasFixedSize(true);
         binding.publicGroupsList.setHasFixedSize(true);
@@ -140,6 +409,9 @@ public class ChatsFragment extends Fragment {
         });
 
         binding.allChatsList.setAdapter(conversationsListAdapter);
+
+
+
         return binding.getRoot();
     }
 
@@ -150,5 +422,9 @@ public class ChatsFragment extends Fragment {
 
     public ArrayList<Chat> getSelectedConvos(){
         return conversationsListAdapter.getSelectedConvos();
+    }
+
+    public void setAllValidConversations() {
+
     }
 }

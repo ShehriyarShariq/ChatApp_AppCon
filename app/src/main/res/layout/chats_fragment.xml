@@ -28,7 +28,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="2dp" />
+                    android:layout_marginBottom="2dp"
+                    android:overScrollMode="never"/>
 
             </RelativeLayout>
 
@@ -60,8 +61,8 @@
 
                             <ImageView
                                 android:id="@+id/groupImg"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
+                                android:layout_width="17dp"
+                                android:layout_height="17dp"
                                 android:src="@drawable/ic_group"
                                 android:gravity="center_vertical"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +74,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Public Groups"
                                 android:textColor="#000"
-                                android:textSize="17sp"
+                                android:textSize="14sp"
                                 android:gravity="center_vertical"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -86,7 +87,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="View All"
                                 android:textColor="@color/chat_list_item_read"
-                                android:textSize="17sp"
+                                android:textSize="14sp"
                                 android:gravity="center_vertical"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -100,7 +101,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp" />
+                            android:layout_marginRight="10dp"
+                            android:overScrollMode="never"/>
 
                     </LinearLayout>
 
@@ -118,8 +120,8 @@
 
                             <ImageView
                                 android:id="@+id/msgImg"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
+                                android:layout_width="17dp"
+                                android:layout_height="17dp"
                                 android:src="@drawable/ic_msg"
                                 android:gravity="center_vertical"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -131,7 +133,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="All Chats"
                                 android:textColor="#000"
-                                android:textSize="17sp"
+                                android:textSize="14sp"
                                 android:gravity="center_vertical"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -146,7 +148,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_marginRight="10dp" />
+                            android:layout_marginRight="10dp"
+                            android:overScrollMode="never"/>
 
                     </LinearLayout>
 

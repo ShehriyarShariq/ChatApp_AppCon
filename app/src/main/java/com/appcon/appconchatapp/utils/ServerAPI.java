@@ -29,11 +29,11 @@ public interface ServerAPI {
 
 
     // USER_READ
-    @PUT("api/user/get_conversations")
-    Call<Result> getUserConversations();
+    @PUT("api/user/get_valid_contacts")
+    Call<Result> getAlLValidContacts(@Body HashMap<String, Object> contacts);
 
-    @PUT("api/user/get_friends")
-    Call<Result> getAddedFriends(@Body ArrayList<String> phoneNumbers);
+    @PUT("api/user/get_conversations")
+    Call<Result> getUserConversations(HashMap<String, String> user);
 
 
 }

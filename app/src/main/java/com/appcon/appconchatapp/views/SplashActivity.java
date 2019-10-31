@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.telephony.SmsManager;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +35,9 @@ public class SplashActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +47,10 @@ public class SplashActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         final String phoneNum = sharedPreferences.getString("phoneNum", "none");
+        final String authTokenStr = sharedPreferences.getString("token", "none");
 
         if(phoneNum.equals("none")){
             Timer timer = new Timer();
@@ -61,7 +68,11 @@ public class SplashActivity extends AppCompatActivity {
             };
             timer.schedule(loginTimer, 1500);
         } else {
-            sendLoginReq(phoneNum);
+            if(!authTokenStr.equals("none")){
+                signInWithToken(authTokenStr, phoneNum);
+            } else {
+                sendLoginReq(phoneNum);
+            }
         }
 
         authToken = viewModel.getAuthToken();
@@ -69,7 +80,10 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onChanged(String token) {
                 if(!token.equals("none")){ // Valid Token
-                    signInWithToken(token);
+                    editor.putString("token", token);
+                    editor.commit();
+
+                    signInWithToken(token, phoneNum);
                 }
             }
         });
@@ -93,14 +107,14 @@ public class SplashActivity extends AppCompatActivity {
         viewModel.sendLoginRequest(credentials);
     }
 
-    private void signInWithToken(String loginToken) {
+    private void signInWithToken(String loginToken, final String phoneNum) {
         firebaseAuth.signInWithCustomToken(loginToken).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     loginSuccess();
                 } else {
-                    loginFailed();
+                    sendLoginReq(phoneNum);
                 }
             }
         });

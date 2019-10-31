@@ -15,6 +15,7 @@ import com.appcon.appconchatapp.R;
 import com.appcon.appconchatapp.databinding.ChatsListSingleItemLayoutBinding;
 import com.appcon.appconchatapp.listeners.ConversationsListItemClickListener;
 import com.appcon.appconchatapp.model.Chat;
+import com.appcon.appconchatapp.model.MessageDB;
 
 import java.util.ArrayList;
 
@@ -52,7 +53,7 @@ public class ConversationsListAdapter extends RecyclerView.Adapter<Conversations
         if(chat.isPinned()){
             holder.binding.isPinned.setVisibility(View.VISIBLE);
         } else {
-            holder.binding.isPinned.setVisibility(View.GONE);
+            holder.binding.isPinned.setVisibility(View.INVISIBLE);
         }
 
         if(chat.isMuted()){
@@ -119,5 +120,10 @@ public class ConversationsListAdapter extends RecyclerView.Adapter<Conversations
 
             this.binding = binding;
         }
+    }
+
+    public void refreshConversations(ArrayList<Chat> conversations){
+        this.conversations = conversations;
+        notifyDataSetChanged();
     }
 }

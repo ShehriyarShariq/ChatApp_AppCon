@@ -1,29 +1,19 @@
 {
     "users":{
-        "UserID":{
+        "userID":{
             "displayName":"displayName",
             "phoneNumber":"phoneNumber",
             "displayPicture":"displayPicture",
             "creationDate":"creationDate",
             "score":"upvotes",
             "about":"about",
-            "userGroups":{
-                "chatIDs":{
-                    "lastMessageSeen":"messageID",
-                    "muted":"bool"
-                }
+            "chats":{
+                "chatID" : "lastMsgSeenID"
             },
-            "personalChats":{
-                "chatID":{
-                    "otherUser":"UserID",
-                    "lastMessageSeen":"messageID",
-                    "muted":"bool"
-                }
-            },
-            "status": "Online or Offline"
+            "status":"Online or Offline"
         }
     },
-    "groups":{
+    "conversations":{
         "chatID":{
             "displayName":"displayName",
             "displayPicture":"displayPicture",
@@ -35,7 +25,10 @@
             "members":[
                 "userID"
             ],
-            "permissions":"permissions",
+            "permissions": {
+		"adminWriteOnly" : "false",
+		"adminSettingsEditOnly" : "false"
+	    },
             "lastMessageSent":"MessageID"
         }
     },

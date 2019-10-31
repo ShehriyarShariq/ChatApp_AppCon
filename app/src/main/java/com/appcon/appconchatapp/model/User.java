@@ -11,7 +11,6 @@ public class User {
     boolean muted;
     int score;
 
-
     public User(String userID, String displayName, String phoneNumber, String profilePicture, int score, String about, String status) {
         this.userID = userID;
         this.displayName = displayName;
@@ -96,15 +95,10 @@ public class User {
         dbMap.put("score", score);
         dbMap.put("about", about);
 
-        HashMap<String, Object> userGroups = new HashMap<>();
-        Chat dummyGroupChat = new Chat("chatID", "displayName", "lastMessageSeen", false, false, "UserID");
-        userGroups.put(dummyGroupChat.getChatID(), dummyGroupChat.getDBMap("group"));
-        dbMap.put("userGroups", userGroups);
-
-        HashMap<String, Object> personalChats = new HashMap<>();
-        Chat dummyChat = new Chat("chatID", "displayName", "lastMessageSeen", false, false, "UserID");
-        personalChats.put(dummyChat.getChatID(), dummyChat.getDBMap("personal"));
-        dbMap.put("personalChats", personalChats);
+        HashMap<String, Object> chats = new HashMap<>();
+        HashMap<String, String> dummyChat = new HashMap<>();
+        dummyChat.put("chatID", "lastMsgSeenID");
+        dbMap.put("chats", dummyChat);
 
         dbMap.put("status", status);
 

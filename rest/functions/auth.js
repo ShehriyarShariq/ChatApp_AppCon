@@ -24,7 +24,6 @@ router.put("/api/auth/login", function(req, res){
                                 res.json(setResult(successID, customToken));
                         })
                         .catch(function(error){
-                                console.log(error);
                                 res.json(setResult(failureID, "Token creation failed"));
                         });
                 } else {
@@ -48,7 +47,13 @@ router.put("/api/auth/signup", function(req, res){
                                 if(error){
                                         res.json(setResult(failureID, "Failed to create user in database!"));
                                 } else {
-                                        res.json(setResult(successID, "Creation success!"));
+                                        firebaseAuth.createCustomToken(userRecord.uid)
+                                        .then(function(customToken){
+                                                res.json(setResult(successID, customToken));
+                                        })
+                                        .catch(function(error){
+                                                res.json(setResult(successID, "Token creation failed"));
+                                        });
                                 }
                         });
                 })
