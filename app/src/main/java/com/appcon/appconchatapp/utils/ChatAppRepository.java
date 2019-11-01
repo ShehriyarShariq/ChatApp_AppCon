@@ -17,7 +17,6 @@ public class ChatAppRepository {
 
     private LiveData<List<ChatDB>> allChats;
     private LiveData<List<MessageDB>> allMessages;
-    private LiveData<ChatDB> chat;
 
     public ChatAppRepository(Application application){
         ChatAppRoomDatabase database = ChatAppRoomDatabase.getDatabase(application);
@@ -35,6 +34,10 @@ public class ChatAppRepository {
         return chatDBDao.getChat(chatID);
     }
 
+    public LiveData<ChatDB> getChatByUser(String uid){
+        return chatDBDao.getChatByUser(uid);
+    }
+
     public LiveData<List<MessageDB>> getAllMessages() {
         return allMessages;
     }
@@ -43,12 +46,31 @@ public class ChatAppRepository {
         return messageDBDao.getChatMessages(chatID);
     }
 
+    public void insertChats(List<ChatDB> chatDBS){
+        new InsertChatsAsyncTask(chatDBDao).execute(chatDBS);
+    };
+
     public void insertChat(ChatDB chat){
         new InsertChatAsyncTask(chatDBDao).execute(chat);
     }
 
     public void insertMessages(MessageDB message){
         new InsertMessagesAsyncTask(messageDBDao).execute(message);
+    }
+
+    private static class InsertChatsAsyncTask extends AsyncTask<List<ChatDB>, Void, Void>{
+
+        private ChatDBDao chatDBDao;
+
+        public InsertChatsAsyncTask(ChatDBDao chatDBDao) {
+            this.chatDBDao = chatDBDao;
+        }
+
+        @Override
+        protected Void doInBackground(List<ChatDB>... chatDBS) {
+            chatDBDao.insertChats(chatDBS[0]);
+            return null;
+        }
     }
 
     private static class InsertChatAsyncTask extends AsyncTask<ChatDB, Void, Void>{

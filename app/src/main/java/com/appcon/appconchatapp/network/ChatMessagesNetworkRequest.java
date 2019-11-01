@@ -57,24 +57,26 @@ public class ChatMessagesNetworkRequest {
                 String chatID = dataSnapshot.getKey();
                 HashMap<String, Object> map = (HashMap<String, Object>) dataSnapshot.getValue();
 
-                Chat chat = new Chat(
-                        chatID,
-                        map.get("displayName").toString(),
-                        map.get("displayPicture").toString(),
-                        map.get("creationDate").toString(),
-                        map.get("description").toString(),
-                        "messageID",
-                        "none",
-                        "none",
-                        "none",
-                        false,
-                        false,
-                        (HashMap<String, String>) map.get("permissions"),
-                        (ArrayList<String>) map.get("admins"),
-                        (ArrayList<String>) map.get("members")
-                );
+                if(map != null){
+                    Chat chat = new Chat(
+                            chatID,
+                            map.get("displayName").toString(),
+                            map.get("displayPicture").toString(),
+                            map.get("creationDate").toString(),
+                            map.get("description").toString(),
+                            "messageID",
+                            "none",
+                            "none",
+                            "none",
+                            false,
+                            false,
+                            (HashMap<String, String>) map.get("permissions"),
+                            (ArrayList<String>) map.get("admins"),
+                            (ArrayList<String>) map.get("members")
+                    );
 
-                setChat(chat);
+                    setChat(chat);
+                }
             }
 
             @Override

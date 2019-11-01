@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.appcon.appconchatapp.listeners.ChatsFragmentListener;
 import com.appcon.appconchatapp.model.Chat;
+import com.appcon.appconchatapp.model.ChatDB;
 import com.appcon.appconchatapp.views.CallsFragment;
 import com.appcon.appconchatapp.views.ChatsFragment;
 
@@ -47,6 +48,10 @@ public class ConvosAndCallsPageAdapter extends FragmentPagerAdapter {
 
     public void setAllValidConversations(){
         chatsFragment.setAllValidConversations();
+    }
+
+    public void addNewConversations(ArrayList<ChatDB> newChats){
+        chatsFragment.addNewConversations(newChats);
     }
 
     public ArrayList<Chat> getSelectedConvos(){

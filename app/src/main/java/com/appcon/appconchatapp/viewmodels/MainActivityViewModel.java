@@ -20,6 +20,7 @@ public class MainActivityViewModel extends AndroidViewModel {
     MainActivityNetworkRequestsSingleton mainActivityNetworkRequestsSingleton = MainActivityNetworkRequestsSingleton.getInstance();
 
     private MutableLiveData<ArrayList<LocalContact>> allLocalContacts = new MutableLiveData<>();
+    private MutableLiveData<Boolean> addedNewChats = mainActivityNetworkRequestsSingleton.getAddedNewChats();
     private MutableLiveData<ArrayList<HashMap<String, String>>> allValidPhoneNumbers = mainActivityNetworkRequestsSingleton.getAllValidPhoneNumbers();
 
     Application application;
@@ -35,12 +36,20 @@ public class MainActivityViewModel extends AndroidViewModel {
         mainActivityNetworkRequestsSingleton.getAllValidContactsRequest(contacts);
     }
 
+    public void addNewChatsRequest(HashMap<String, Object> chats){
+        mainActivityNetworkRequestsSingleton.addNewChatsRequest(chats);
+    }
+
     public MutableLiveData<ArrayList<HashMap<String, String>>> getAllValidPhoneNumbers() {
         return allValidPhoneNumbers;
     }
 
     public MutableLiveData<ArrayList<LocalContact>> getAllLocalContacts() {
         return allLocalContacts;
+    }
+
+    public MutableLiveData<Boolean> getAddedNewChats() {
+        return addedNewChats;
     }
 
     public void setAllLocalContacts(ArrayList<LocalContact> allLocalContacts) {

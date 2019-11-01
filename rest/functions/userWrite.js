@@ -32,36 +32,36 @@ router.put("/api/user/create_user_chats", function(req, res){
                         var chatID = chatIDs[i];
                         firebaseDatabase.ref("users/" + userID + "/chats/" + chatID).set("lastMsgSeenID", function(error){
                                 if(error){
-                                        if(index = (n - 1)){
+                                        if(index == (n - 1)){
                                                 res.json(setResult(successID, "Success!"));
                                         }
 
-                                        index ++;
+                                        index++;
                                 } else {
                                         var chatID = chatIDs[index];
-                                        var userChat = userChats[chatID.userChat];
+                                        var userChat = userChats[chatID];
                                         var convo = userChat.convo;
                                         firebaseDatabase.ref("conversations/" + chatID).set(convo,function(error){
                                                 if(error){
-                                                        if(index = (n - 1)){
+                                                        if(index == (n - 1)){
                                                                 res.json(setResult(successID, "Success!"));
                                                         }
                 
-                                                        index ++;
+                                                        index++;
                                                 } else {
                                                         firebaseDatabase.ref("messages/" + chatID + "/messageID").set(dummyMsgMap, function(error){
                                                                 if(error){
-                                                                        if(index = (n - 1)){
+                                                                        if(index == (n - 1)){
                                                                                 res.json(setResult(successID, "Success!"));
                                                                         }
                                 
-                                                                        index ++;
+                                                                        index++;
                                                                 } else {
-                                                                        if(index = (n - 1)){
+                                                                        if(index == (n - 1)){
                                                                                 res.json(setResult(successID, "Success!"));
                                                                         }
                                 
-                                                                        index ++;
+                                                                        index++;
                                                                 }                                                                
                                                         });
                                                 }

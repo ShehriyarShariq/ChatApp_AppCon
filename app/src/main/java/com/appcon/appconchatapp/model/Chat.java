@@ -154,8 +154,17 @@ public class Chat implements Parcelable {
         dbMap.put("creationDate", creationDate);
         dbMap.put("description", description);
         dbMap.put("lastMessageSeen", lastMessageSeenID);
-        dbMap.put("admins", admins);
+
         dbMap.put("members", otherUsers);
+
+        ArrayList<String> admins = new ArrayList<>();
+        admins.add("userID");
+        dbMap.put("admins", admins);
+
+        HashMap<String, String> permissions = new HashMap<>();
+        permissions.put("adminWriteOnly", "false");
+        permissions.put("adminSettingsEditOnly", "false");
+
         dbMap.put("permissions", permissions);
 
         return dbMap;

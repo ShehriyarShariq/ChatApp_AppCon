@@ -429,4 +429,8 @@ public class ChatsFragment extends Fragment {
     public void setAllValidConversations() {
 
     }
+
+    public void addNewConversations(ArrayList<ChatDB> newChats) {
+        repository.insertChats(newChats);
+    }
 }

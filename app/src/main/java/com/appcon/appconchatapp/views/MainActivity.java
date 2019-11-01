@@ -24,7 +24,10 @@ import com.appcon.appconchatapp.adapters.ConvosAndCallsPageAdapter;
 import com.appcon.appconchatapp.databinding.ActivityMainBinding;
 import com.appcon.appconchatapp.listeners.ChatsFragmentListener;
 import com.appcon.appconchatapp.model.Chat;
+import com.appcon.appconchatapp.model.ChatDB;
 import com.appcon.appconchatapp.model.LocalContact;
+import com.appcon.appconchatapp.model.MessageDB;
+import com.appcon.appconchatapp.utils.ChatAppRepository;
 import com.appcon.appconchatapp.viewmodels.MainActivityViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +39,9 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -65,17 +70,30 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
+    ChatAppRepository repository;
+
+    LiveData<ChatDB> chatsByUser;
+    HashMap<String, Object> newContacts;
+
+    LiveData<Boolean> addedNewChats;
+    ArrayList<Chat> newlyCreatedChats;
+
+    int index = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        repository = new ChatAppRepository(this.getApplication());
 
         firebaseAuth = FirebaseAuth.getInstance();
 
         allLocalContacts = new ArrayList<>();
         allValidContacts = new ArrayList<>();
+        newContacts = new HashMap<>();
+        newlyCreatedChats = new ArrayList<>();
 
         Dexter.withActivity(MainActivity.this)
         .withPermissions(permissions)
@@ -127,6 +145,106 @@ public class MainActivity extends AppCompatActivity {
                         allValidContacts.add(allLocalContacts.get(allLocalPhoneNumbers.indexOf(contact.get("phoneNum"))));
                         allValidContacts.get(allValidContacts.size() - 1).setUid(contact.get("id"));
                     }
+
+                    newContacts.clear();
+                    newlyCreatedChats.clear();
+                    index = 0;
+                    for(int i = 0; i < allValidContacts.size(); i++){
+                        final LocalContact localContact = allValidContacts.get(i);
+                        final String uid = localContact.getUid();
+                        chatsByUser = repository.getChatByUser(uid + "," + firebaseAuth.getCurrentUser().getUid());
+                        chatsByUser.observe(MainActivity.this, new Observer<ChatDB>() {
+                            @Override
+                            public void onChanged(ChatDB chatDB) {
+                                if(chatDB == null){
+                                    String chatID = "chat_" + ((int) getRandomIntegerBetweenRange(10000000, 100000000));
+
+                                    ArrayList<String> members = new ArrayList<>();
+                                    members.add(uid);
+                                    members.add(firebaseAuth.getCurrentUser().getUid());
+
+                                    Calendar calendar = Calendar.getInstance();
+                                    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                                    String creationDate = format.format(calendar.getTime());
+
+                                    Chat chat = new Chat(
+                                            chatID,
+                                            localContact.getDisplayName(),
+                                            "none",
+                                            creationDate,
+                                            "none",
+                                            "MessageID",
+                                            "none",
+                                            "none",
+                                            "none",
+                                            false,
+                                            false,
+                                            new HashMap<String, String>(),
+                                            new ArrayList<String>(),
+                                            members
+                                    );
+
+                                    newlyCreatedChats.add(chat);
+
+                                    HashMap<String, Object> userChat = new HashMap<>();
+                                    userChat.put("convo", chat.getDBMap());
+
+                                    newContacts.put(chatID, userChat);
+
+                                    if(index == (allValidContacts.size() - 1)){
+                                        HashMap<String, Object> chats = new HashMap<>();
+                                        chats.put("userID", firebaseAuth.getCurrentUser().getUid());
+                                        chats.put("userChats", newContacts);
+
+                                        chatsByUser.removeObservers(MainActivity.this);
+                                        chatsByUser = null;
+                                        viewModel.addNewChatsRequest(chats);
+                                    } else {
+                                        index++;
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
+        addedNewChats = viewModel.getAddedNewChats();
+        addedNewChats.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean added) {
+                if(added){
+//                    ArrayList<ChatDB> chatDBS = new ArrayList<>();
+//                    for(Chat chat : newlyCreatedChats){
+//                        String membersStr = "";
+//                        ArrayList<String> members = chat.getOtherUsers();
+//                        for(int i = 0, n = members.size(); i < n; i++){
+//                            membersStr += members.get(i);
+//
+//                            if(i != (n - 1)){
+//                                membersStr += ",";
+//                            }
+//                        }
+//
+//                        ChatDB chatDB = new ChatDB(
+//                                chat.getChatID(),
+//                                chat.getDisplayName(),
+//                                chat.getDisplayPicture(),
+//                                chat.getCreationDate(),
+//                                chat.getDescription(),
+//                                chat.getLastMessageSeenID(),
+//                                "false",
+//                                "false",
+//                                "false",
+//                                "false",
+//                                "userID",
+//                                membersStr);
+//
+//                        chatDBS.add(chatDB);
+//                    }
+//
+//                    convosAndCallsPageAdapter.addNewConversations(chatDBS);
                 }
             }
         });
@@ -274,5 +392,10 @@ public class MainActivity extends AppCompatActivity {
         Uri uri = Uri.fromParts("package", this.getPackageName(), null);
         intent.setData(uri);
         startActivityForResult(intent, OPEN_SETTINGS_REQUEST_CODE);
+    }
+
+    public double getRandomIntegerBetweenRange(double min, double max){
+        double x = (int)(Math.random()*((max-min)+1))+min;
+        return x;
     }
 }
