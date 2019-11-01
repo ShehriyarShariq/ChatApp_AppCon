@@ -47,8 +47,37 @@ public class ConversationsListAdapter extends RecyclerView.Adapter<Conversations
         Chat chat = conversations.get(position);
 
         holder.binding.name.setText(chat.getDisplayName());
-        holder.binding.lastMsg.setText(chat.getLastMessageSeen());
         holder.binding.lastMessageDay.setText(chat.getTime());
+
+        switch (chat.getLastMessageSeenType()){
+            case "text":
+                holder.binding.lastMsgTxt.setVisibility(View.VISIBLE);
+                holder.binding.lastMsgTxt.setText(chat.getLastMessageSeen());
+                holder.binding.lastMsgImg.setVisibility(View.GONE);
+                holder.binding.lastMsgAudio.setVisibility(View.GONE);
+                holder.binding.lastMsgFile.setVisibility(View.GONE);
+                break;
+            case "image":
+                holder.binding.lastMsgImg.setVisibility(View.VISIBLE);
+                holder.binding.lastMsgTxt.setVisibility(View.GONE);
+                holder.binding.lastMsgAudio.setVisibility(View.GONE);
+                holder.binding.lastMsgFile.setVisibility(View.GONE);
+                break;
+            case "audio":
+                holder.binding.lastMsgAudio.setVisibility(View.VISIBLE);
+                holder.binding.lastMsgImg.setVisibility(View.GONE);
+                holder.binding.lastMsgTxt.setVisibility(View.GONE);
+                holder.binding.lastMsgFile.setVisibility(View.GONE);
+                break;
+            case "file":
+                holder.binding.lastMsgFile.setVisibility(View.VISIBLE);
+                holder.binding.lastMsgImg.setVisibility(View.GONE);
+                holder.binding.lastMsgTxt.setVisibility(View.GONE);
+                holder.binding.lastMsgAudio.setVisibility(View.GONE);
+                break;
+            case "game":
+                break;
+        }
 
         if(chat.isPinned()){
             holder.binding.isPinned.setVisibility(View.VISIBLE);

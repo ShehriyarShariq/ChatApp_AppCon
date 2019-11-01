@@ -33,7 +33,11 @@ public interface ServerAPI {
     Call<Result> getAlLValidContacts(@Body HashMap<String, Object> contacts);
 
     @PUT("api/user/get_conversations")
-    Call<Result> getUserConversations(HashMap<String, String> user);
+    Call<Result> getUserConversations(@Body HashMap<String, String> user);
 
+
+    // USER_WRITE
+    @PUT("api/user/create_user_chats")
+    Call<Result> addNewChats(@Body HashMap<String, Object> chats);
 
 }

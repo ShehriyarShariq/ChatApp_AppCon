@@ -61,7 +61,7 @@ public class ChatActivityNetworkRequestsSingleton {
     }
 
     public void sendMessage(String chatID, final String messageID, HashMap<String, String> message){
-        firebaseDatabase.child("messages").child(chatID).child(messageID).setValue(message).addOnCompleteListener(new OnCompleteListener<Void>() {
+        firebaseDatabase.child("messages").child(chatID).push().setValue(message).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){

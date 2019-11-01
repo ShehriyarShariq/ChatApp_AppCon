@@ -24,7 +24,10 @@ router.put("/api/user/get_valid_contacts", function(req, res){
                 for(var i = 0, n = allLocalContacts.length; i < n; i++){
                         firebaseAuth.getUserByPhoneNumber(allLocalContacts[i])
                         .then(function(userRecord){
-                                allValidContacts[j++] = userRecord.phoneNumber;
+                                allValidContacts[j++] = {
+                                        phoneNum : userRecord.phoneNumber,
+                                        id : userRecord.uid                                
+                                }
 
                                 if(index == (n - 1)){
                                         res.json(setResult(successID, allValidContacts));

@@ -97,6 +97,97 @@ public class ChatsFragment extends Fragment {
             }
         });
 
+        stories = new ArrayList<>();
+        publicGroups = new ArrayList<>();
+        conversations = new ArrayList<>();
+        selectedChats = new ArrayList<>();
+
+        stories.add(new Story("add", "none", "none"));
+
+        publicGroups.add(new PublicGroup("groupID", "Test Group", "none"));
+
+        binding.allStoriesList.setHasFixedSize(true);
+        binding.publicGroupsList.setHasFixedSize(true);
+        binding.allChatsList.setHasFixedSize(true);
+
+        LinearLayoutManager allStoriesListLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        allStoriesListLinearLayoutManager.setItemPrefetchEnabled(true);
+
+        LinearLayoutManager publicGroupsListLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        publicGroupsListLinearLayoutManager.setItemPrefetchEnabled(true);
+
+        LinearLayoutManager conversationsListLinearLayoutManager = new LinearLayoutManager(getActivity());
+        conversationsListLinearLayoutManager.setItemPrefetchEnabled(true);
+
+        binding.allStoriesList.setLayoutManager(allStoriesListLinearLayoutManager);
+        binding.publicGroupsList.setLayoutManager(publicGroupsListLinearLayoutManager);
+        binding.allChatsList.setLayoutManager(conversationsListLinearLayoutManager);
+
+        allStoriesListAdapter = new AllStoriesListAdapter(getActivity(), stories, new StoriesItemListener() {
+            @Override
+            public void OnAddStoryClicked() {
+
+            }
+
+            @Override
+            public void OnViewStoryClicked(Story story) {
+
+            }
+        });
+        binding.allStoriesList.setAdapter(allStoriesListAdapter);
+
+        publicGroupsListAdapter = new PublicGroupsListAdapter(getActivity(), publicGroups);
+        binding.publicGroupsList.setAdapter(publicGroupsListAdapter);
+
+        conversationsListAdapter = new ConversationsListAdapter(getActivity(), conversations, new ConversationsListItemClickListener() {
+            @Override
+            public void OnConversationClicked(int pos) {
+                Intent chatIntent = new Intent(getActivity(), ChatActivity.class);
+                chatIntent.putExtra("chatID", conversations.get(pos).getChatID());
+                startActivity(chatIntent);
+            }
+
+            @Override
+            public void OnLongPress(int pos) {
+                selectedChats.add(conversations.get(pos));
+                chatsFragmentListener.OnChatLongPress(pos);
+            }
+
+            @Override
+            public void updateSelected() {
+                chatsFragmentListener.updateSelected();
+            }
+
+            @Override
+            public void OnChatVideoBtnClicked(int pos) {
+
+            }
+
+            @Override
+            public void OnChatAudioBtnClicked(int pos) {
+
+            }
+
+            @Override
+            public void OnChatMuteBtnClicked(int pos) {
+
+            }
+
+            @Override
+            public void OnChatDeleteBtnClicked(int pos) {
+
+            }
+        });
+
+        binding.allChatsList.setAdapter(conversationsListAdapter);
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         chat = viewModel.getChat();
         chat.observe(this, new Observer<Chat>() {
             @Override
@@ -148,24 +239,6 @@ public class ChatsFragment extends Fragment {
                         }
                     }
                 });
-
-//                boolean hasChat = false;
-//                int index = -1;
-//                for(int i = 0, n = conversations.size(); i < n; i++){
-//                    Chat conversation = conversations.get(i);
-//                    if(conversation.getChatID().equals(chat.getChatID())){
-//                        hasChat = true;
-//                        index = i;
-//                        break;
-//                    }
-//                }
-//
-//                if(hasChat){
-//                    conversations.set(index, chat);
-//                } else {
-//                    conversations.add(chat);
-//                }
-//                conversationsListAdapter.refreshConversations(conversations);
             }
         });
 
@@ -200,7 +273,7 @@ public class ChatsFragment extends Fragment {
                                             repository.insertChat(finalChatDB);
                                         }
 
-                                        msgs.removeObserver(this);
+//                                        msgs.removeObserver(this);
                                     }
                                 }
                             });
@@ -231,18 +304,6 @@ public class ChatsFragment extends Fragment {
                         }
                     }
                 });
-//                for(int i = 0, n = conversations.size(); i < n; i++){
-//                    Chat conversation = conversations.get(i);
-//                    if(conversation.getChatID().equals(message.getChatID())){
-//                        conversation.setLastMessage(message);
-//                    }
-//                }
-//
-//                conversationsListAdapter.refreshConversations(conversations);
-
-//                conversationsListAdapter.refreshConversations(messageDB);
-                // Perform database shit here
-//                repository.insertMessages(message);
             }
         });
 
@@ -269,150 +330,91 @@ public class ChatsFragment extends Fragment {
                         @Override
                         public void onChanged(List<MessageDB> messageDBS) {
                             if(messageDBS != null){
-                                MessageDB lastMsg = messageDBS.get(messageDBS.size() - 1);
+                                if(!messageDBS.isEmpty()){
+                                    MessageDB lastMsg = messageDBS.get(messageDBS.size() - 1);
 
-                                HashMap<String, String> permissions = new HashMap<>();
-                                permissions.put("adminWriteOnly", chat.getAdminWriteOnly());
-                                permissions.put("adminSettingsEditOnly", chat.getAdminSettingsEditOnly());
+                                    HashMap<String, String> permissions = new HashMap<>();
+                                    permissions.put("adminWriteOnly", chat.getAdminWriteOnly());
+                                    permissions.put("adminSettingsEditOnly", chat.getAdminSettingsEditOnly());
 
-                                ArrayList<String> admins = new ArrayList<>();
-                                String[] adminsArr = chat.getAdmins().split(",");
-                                for(String adminID : adminsArr){
-                                    admins.add(adminID);
-                                }
+                                    ArrayList<String> admins = new ArrayList<>();
+                                    String[] adminsArr = chat.getAdmins().split(",");
+                                    for(String adminID : adminsArr){
+                                        admins.add(adminID);
+                                    }
 
-                                ArrayList<String> members = new ArrayList<>();
-                                String[] membersArr = chat.getOtherUsers().split(",");
-                                for(String memberID : membersArr){
-                                    members.add(memberID);
-                                }
+                                    ArrayList<String> members = new ArrayList<>();
+                                    String[] membersArr = chat.getOtherUsers().split(",");
+                                    for(String memberID : membersArr){
+                                        members.add(memberID);
+                                    }
 
-                                conversations.add(new Chat(
-                                        chat.getChatID(),
-                                        chat.getDisplayName(),
-                                        chat.getDisplayPicture(),
-                                        chat.getCreationDate(),
-                                        chat.getDescription(),
-                                        chat.getLastMessageSeenID(),
-                                        lastMsg.getContent(),
-                                        lastMsg.getTimeStamp(),
-                                        Boolean.parseBoolean(chat.getMuted()),
-                                        Boolean.parseBoolean(chat.getPinned()),
-                                        permissions,
-                                        admins,
-                                        members
-                                ));
+                                    conversations.add(new Chat(
+                                            chat.getChatID(),
+                                            chat.getDisplayName(),
+                                            chat.getDisplayPicture(),
+                                            chat.getCreationDate(),
+                                            chat.getDescription(),
+                                            chat.getLastMessageSeenID(),
+                                            lastMsg.getContent(),
+                                            lastMsg.getTimeStamp(),
+                                            lastMsg.getType(),
+                                            Boolean.parseBoolean(chat.getMuted()),
+                                            Boolean.parseBoolean(chat.getPinned()),
+                                            permissions,
+                                            admins,
+                                            members
+                                    ));
 
-                                if(index == (chatDBS.size() -1)){
+                                    if(index == (chatDBS.size() -1)){
+                                        conversationsListAdapter.refreshConversations(conversations);
+                                        msgs.removeObserver(this);
+                                    } else {
+                                        index++;
+                                    }
+                                } else {
+                                    HashMap<String, String> permissions = new HashMap<>();
+                                    permissions.put("adminWriteOnly", chat.getAdminWriteOnly());
+                                    permissions.put("adminSettingsEditOnly", chat.getAdminSettingsEditOnly());
+
+                                    ArrayList<String> admins = new ArrayList<>();
+                                    String[] adminsArr = chat.getAdmins().split(",");
+                                    for(String adminID : adminsArr){
+                                        admins.add(adminID);
+                                    }
+
+                                    ArrayList<String> members = new ArrayList<>();
+                                    String[] membersArr = chat.getOtherUsers().split(",");
+                                    for(String memberID : membersArr){
+                                        members.add(memberID);
+                                    }
+
+                                    conversations.add(new Chat(
+                                            chat.getChatID(),
+                                            chat.getDisplayName(),
+                                            chat.getDisplayPicture(),
+                                            chat.getCreationDate(),
+                                            chat.getDescription(),
+                                            chat.getLastMessageSeenID(),
+                                            "Say Hi to your new friend",
+                                            "None",
+                                            "text",
+                                            Boolean.parseBoolean(chat.getMuted()),
+                                            Boolean.parseBoolean(chat.getPinned()),
+                                            permissions,
+                                            admins,
+                                            members
+                                    ));
+
                                     conversationsListAdapter.refreshConversations(conversations);
                                     msgs.removeObserver(this);
-                                } else {
-                                    index++;
                                 }
-
-
                             }
                         }
                     });
                 }
             }
         });
-
-        stories = new ArrayList<>();
-        publicGroups = new ArrayList<>();
-        conversations = new ArrayList<>();
-        selectedChats = new ArrayList<>();
-
-        stories.add(new Story("add", "none", "none"));
-        stories.add(new Story("add", "none", "none"));
-        stories.add(new Story("add", "none", "none"));
-
-        publicGroups.add(new PublicGroup("groupID", "Anime", "none"));
-        publicGroups.add(new PublicGroup("groupID", "NSFW", "none"));
-        publicGroups.add(new PublicGroup("groupID", "Taha", "none"));
-
-//        conversations.add(new Chat("chatID", "displayName", "lastMessageSeen", false, false, "UserID"));
-//        conversations.add(new Chat("chatID", "displayName", "lastMessageSeen", false, false, "UserID"));
-//        conversations.add(new Chat("chatID", "displayName", "lastMessageSeen", false, false, "UserID"));
-
-        binding.allStoriesList.setHasFixedSize(true);
-        binding.publicGroupsList.setHasFixedSize(true);
-        binding.allChatsList.setHasFixedSize(true);
-
-        LinearLayoutManager allStoriesListLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        allStoriesListLinearLayoutManager.setItemPrefetchEnabled(true);
-
-        LinearLayoutManager publicGroupsListLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        publicGroupsListLinearLayoutManager.setItemPrefetchEnabled(true);
-
-        LinearLayoutManager conversationsListLinearLayoutManager = new LinearLayoutManager(getActivity());
-        conversationsListLinearLayoutManager.setItemPrefetchEnabled(true);
-
-        binding.allStoriesList.setLayoutManager(allStoriesListLinearLayoutManager);
-        binding.publicGroupsList.setLayoutManager(publicGroupsListLinearLayoutManager);
-        binding.allChatsList.setLayoutManager(conversationsListLinearLayoutManager);
-
-        allStoriesListAdapter = new AllStoriesListAdapter(getActivity(), stories, new StoriesItemListener() {
-            @Override
-            public void OnAddStoryClicked() {
-
-            }
-
-            @Override
-            public void OnViewStoryClicked(Story story) {
-
-            }
-        });
-        binding.allStoriesList.setAdapter(allStoriesListAdapter);
-
-        publicGroupsListAdapter = new PublicGroupsListAdapter(getActivity(), publicGroups);
-        binding.publicGroupsList.setAdapter(publicGroupsListAdapter);
-
-        conversationsListAdapter = new ConversationsListAdapter(getActivity(), conversations, new ConversationsListItemClickListener() {
-            @Override
-            public void OnConversationClicked(int pos) {
-                Intent chatIntent = new Intent(getActivity(), ChatActivity.class);
-                chatIntent.putExtra("chat", conversations.get(pos));
-                startActivity(chatIntent);
-            }
-
-            @Override
-            public void OnLongPress(int pos) {
-                selectedChats.add(conversations.get(pos));
-                chatsFragmentListener.OnChatLongPress(pos);
-            }
-
-            @Override
-            public void updateSelected() {
-                chatsFragmentListener.updateSelected();
-            }
-
-            @Override
-            public void OnChatVideoBtnClicked(int pos) {
-
-            }
-
-            @Override
-            public void OnChatAudioBtnClicked(int pos) {
-
-            }
-
-            @Override
-            public void OnChatMuteBtnClicked(int pos) {
-
-            }
-
-            @Override
-            public void OnChatDeleteBtnClicked(int pos) {
-
-            }
-        });
-
-        binding.allChatsList.setAdapter(conversationsListAdapter);
-
-
-
-        return binding.getRoot();
     }
 
     public void clearAllSelection() {

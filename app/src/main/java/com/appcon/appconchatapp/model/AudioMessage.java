@@ -35,6 +35,11 @@ public class AudioMessage extends Message {
     public HashMap<String, String> getMap(){
         HashMap<String, String> map = new HashMap<>();
 
+        map.put("content", audioLength + "_" + size + "_" + audioURL);
+        map.put("sentBy", super.senderID);
+        map.put("timeStamp", super.time);
+        map.put("type", "audio");
+
         return map;
     }
 }

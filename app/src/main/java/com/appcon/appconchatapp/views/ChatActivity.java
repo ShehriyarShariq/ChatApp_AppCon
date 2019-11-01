@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,6 +31,7 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -48,12 +50,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.appcon.appconchatapp.R;
 import com.appcon.appconchatapp.adapters.ChatMessagesListAdapter;
 import com.appcon.appconchatapp.databinding.ActivityChatBinding;
+import com.appcon.appconchatapp.listeners.ChatMessagesItemListener;
 import com.appcon.appconchatapp.model.AudioMessage;
+import com.appcon.appconchatapp.model.ChatDB;
 import com.appcon.appconchatapp.model.FileMessage;
 import com.appcon.appconchatapp.model.ImageMessage;
 import com.appcon.appconchatapp.model.Message;
 import com.appcon.appconchatapp.model.MessageDB;
 import com.appcon.appconchatapp.model.TextMessage;
+import com.appcon.appconchatapp.utils.ChatAppRepository;
 import com.appcon.appconchatapp.viewmodels.ChatActivityViewModel;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -124,7 +129,11 @@ public class ChatActivity extends AppCompatActivity {
 
     ArrayList<Message> pendingMessages;
 
+    LiveData<ChatDB> chat;
     LiveData<MessageDB> message;
+    LiveData<List<MessageDB>> messagesLive;
+
+    ChatAppRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,13 +147,56 @@ public class ChatActivity extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(ChatActivityViewModel.class);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat);
 
+        Intent intent = getIntent();
+        chatID = intent.getStringExtra("chatID");
+
+        repository = new ChatAppRepository(this.getApplication());
+
         emojiPopup = EmojiPopup.Builder.fromRootView(binding.getRoot()).build(binding.textInp);
 
         ImagePickerActivity.clearCache(this);
 
         pendingMessages = new ArrayList<>();
         messages = new ArrayList<>();
-        chatMessagesListAdapter = new ChatMessagesListAdapter(this, messages);
+        chatMessagesListAdapter = new ChatMessagesListAdapter(this, messages, new ChatMessagesItemListener() {
+            @Override
+            public void OnDocumentClicked(FileMessage fileMessage) {
+                String fileURL = fileMessage.getFileURL();
+                String fileName = fileURL.substring(fileURL.indexOf("%2F") + 3, fileURL.indexOf("?")) + ".pdf";
+                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/" + fileName);
+
+                if(file.exists()){
+                    Intent target = new Intent(Intent.ACTION_VIEW);
+                    target.setDataAndType(Uri.fromFile(file),"application/pdf");
+                    target.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                    Intent intent = Intent.createChooser(target, "Open File");
+                    try {
+                        startActivity(intent);
+                    } catch (ActivityNotFoundException e) {
+                        // Instruct the user to install a PDF reader here, or something
+                        Toast.makeText(ChatActivity.this, "No PDF Reacder found!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void OnAudioPlayPause(AudioMessage audioMessage) {
+                String audioURL = audioMessage.getAudioURL();
+                String audioName = audioURL.substring(audioURL.indexOf("%2F") + 3, audioURL.indexOf("?")) + ".3gp";
+                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/" + audioName);
+
+                if(file.exists()){
+                    fileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/" + audioName;
+
+                    if(isAudioPlaying){
+                        pausePlaying();
+                    } else if(isAudioPaused || !(isAudioPlaying || isAudioPaused)){} {
+                        startPlaying();
+                    }
+                }
+            }
+        });
 
         binding.chatList.setHasFixedSize(true);
         LinearLayoutManager chatMessagesListLinearLayoutManager = new LinearLayoutManager(this);
@@ -162,9 +214,15 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        // Set Convsation Name and User current status (Online or Last Seen At @Time)
-        binding.name.setText("Friend Name");
-        binding.status.setText("Online");
+        // Set Conversation Name and User current status (Online or Last Seen At @Time)
+        chat = repository.getChat(chatID);
+        chat.observe(this, new Observer<ChatDB>() {
+            @Override
+            public void onChanged(ChatDB chatDB) {
+                binding.name.setText(chatDB.getDisplayName());
+                binding.status.setText("Status");
+            }
+        });
 
         // Open game menu
         binding.gamesBtn.setOnClickListener(new View.OnClickListener() {
@@ -249,9 +307,8 @@ public class ChatActivity extends AppCompatActivity {
         binding.attachmentsDocsBtnLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("application/pdf");
-                intent.addCategory(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, ATTACH_DOCS_REQUEST);
             }
         });
@@ -260,7 +317,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Dexter.withActivity(ChatActivity.this)
-                .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
@@ -285,7 +342,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Dexter.withActivity(ChatActivity.this)
-                .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
@@ -382,7 +439,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Dexter.withActivity(ChatActivity.this)
-                .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
@@ -410,14 +467,14 @@ public class ChatActivity extends AppCompatActivity {
                 if(binding.textInp.getText().length() > 0){ // Send btn
                     TextMessage msg = new TextMessage("messageID", firebaseAuth.getUid(), firebaseAuth.getCurrentUser().getDisplayName(), firebaseAuth.getCurrentUser().getPhoneNumber(), "10:03 pm", binding.textInp.getText().toString());
                     messages.add(msg);
+
+                    viewModel.sendMessage(chatID, msg);
                     chatMessagesListAdapter.refreshMessagesList(messages);
+
                     binding.textInp.setText("");
-
                     clearTextInpFocus(v);
-
                     binding.chatList.scrollToPosition(messages.size() - 1);
                 } else if(isSendAudio){ // Send Audio Btn
-
                     File file = new File(fileName);
                     AudioMessage audioMessage = new AudioMessage(String.valueOf((Math.random() * 1000000)), firebaseAuth.getCurrentUser().getUid(), firebaseAuth.getCurrentUser().getDisplayName(), firebaseAuth.getCurrentUser().getPhoneNumber(), "time", "url", getFormattedAudioDuration(player.getDuration() / 1000), file.length());
                     pendingMessages.add(audioMessage);
@@ -425,6 +482,7 @@ public class ChatActivity extends AppCompatActivity {
                     String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
                     viewModel.uploadFile(Uri.fromFile(file), audioMessage.getMessageID(), "audio", firebaseAuth.getCurrentUser().getUid(), extension);
 
+                    player = null;
                     isSendAudio = false;
                     binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_mic));
                     binding.audioPlaybackBar.setVisibility(View.GONE);
@@ -455,9 +513,10 @@ public class ChatActivity extends AppCompatActivity {
                             "url",
                             imgTxtMsg,
                             file.length());
+                    pendingMessages.add(imageMessage);
 
-                    String extension = (file.getName()).substring((file.getName()).lastIndexOf(".") + 1);
-                    viewModel.uploadFile(Uri.fromFile(file), imageMessage.getMessageID(), "audio", firebaseAuth.getCurrentUser().getUid(), extension);
+                    String extension = ".jpg";//(file.getName()).substring((file.getName()).lastIndexOf(".") + 1);
+                    viewModel.uploadFile(imageUri, imageMessage.getMessageID(), "image", firebaseAuth.getCurrentUser().getUid(), extension);
 
                     binding.imgTextInp.setText("");
 
@@ -477,9 +536,10 @@ public class ChatActivity extends AppCompatActivity {
                             "time",
                             "url",
                             file.length());
+                    pendingMessages.add(fileMessage);
 
                     String extension = (file.getName()).substring((file.getName()).lastIndexOf(".") + 1);
-                    viewModel.uploadFile(Uri.fromFile(file), fileMessage.getMessageID(), "audio", firebaseAuth.getCurrentUser().getUid(), extension);
+                    viewModel.uploadFile(fileUri, fileMessage.getMessageID(), "file", firebaseAuth.getCurrentUser().getUid(), extension);
 
                     binding.selectedDocumentLayout.setVisibility(View.GONE);
                     binding.defaultTxtInpBar.setVisibility(View.VISIBLE);
@@ -496,9 +556,9 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onChanged(HashMap<String, String> downloadUrls) {
                 if(!downloadUrls.isEmpty()){
-                    String[] keys = (String[]) downloadUrls.keySet().toArray();
+                    Object[] keys = downloadUrls.keySet().toArray();
                     for(int i = 0, n = keys.length; i < n; i++){
-                        String msgID = keys[i];
+                        String msgID = keys[i].toString();
                         String url = downloadUrls.get(msgID);
                         Message message = null;
                         for(int j = 0, m = pendingMessages.size(); j < m; i++){
@@ -509,7 +569,6 @@ public class ChatActivity extends AppCompatActivity {
                         }
 
                         if(message != null){
-                            HashMap<String, String> msgMap;
                             if(message instanceof AudioMessage){
                                 ((AudioMessage) message).setAudioURL(url);
                             } else if(message instanceof ImageMessage){
@@ -517,6 +576,8 @@ public class ChatActivity extends AppCompatActivity {
                             } else if(message instanceof FileMessage){
                                 ((FileMessage) message).setFileURL(url);
                             }
+
+                            messages.add(message);
 
                             viewModel.sendMessage(chatID, message);
                         }
@@ -542,6 +603,10 @@ public class ChatActivity extends AppCompatActivity {
                     if(index != -1){
                         pendingMessages.remove(index);
                     }
+
+
+                    chatMessagesListAdapter.refreshMessagesList(messages);
+
                     binding.chatList.scrollToPosition(messages.size() - 1);
                 }
             }
@@ -587,7 +652,7 @@ public class ChatActivity extends AppCompatActivity {
 
                         // Record to the external cache directory for visibility
                         fileName = getExternalCacheDir().getAbsolutePath();
-                        fileName += "/audio" + (new Date()).getTime() + "_" + ((int) (Math.random() * 1000)) + ".3gp";
+                        fileName += "audio_" + ((int) (Math.random() * 1000)) + ".3gp";
                     }
                 }
                 return true;
@@ -664,11 +729,85 @@ public class ChatActivity extends AppCompatActivity {
         message = viewModel.getMessage();
         message.observe(this, new Observer<MessageDB>() {
             @Override
-            public void onChanged(MessageDB stringStringHashMap) {
-
-//                chatMessagesListAdapter.refreshMessagesList();
+            public void onChanged(MessageDB message) {
+                repository.insertMessages(message);
             }
         });
+
+        messagesLive = repository.getChatMessages(chatID);
+        messagesLive.observe(this, new Observer<List<MessageDB>>() {
+            @Override
+            public void onChanged(List<MessageDB> messageDBS) {
+                messages.clear();
+
+                for(MessageDB messageDB : messageDBS){
+                    if(messageDB.getType().equals("text")){
+                        messages.add(new TextMessage(
+                                messageDB.getMessageID(),
+                                messageDB.getSenderID(),
+                                "none",
+                                "none",
+                                messageDB.getTimeStamp(),
+                                messageDB.getContent()
+                        ));
+                    } else if(messageDB.getType().equals("audio")){
+                        String content = messageDB.getContent();
+                        String length = content.substring(0, content.indexOf("_"));
+                        long size = Long.parseLong(content.substring(content.indexOf("_") + 1, content.indexOf("_", content.indexOf("_") + 1)));
+                        String url = content.substring(content.indexOf("_", content.indexOf("_") + 1) + 1);
+
+                        messages.add(new AudioMessage(
+                                messageDB.getMessageID(),
+                                messageDB.getSenderID(),
+                                "none",
+                                "none",
+                                messageDB.getTimeStamp(),
+                                url,
+                                length,
+                                size
+                        ));
+                    } else if(messageDB.getType().equals("image")){
+                        String content = messageDB.getContent();
+                        String text = content.substring(0, content.indexOf("_"));
+                        long size = Long.parseLong(content.substring(content.indexOf("_") + 1, content.indexOf("_", content.indexOf("_") + 1)));
+                        String url = content.substring(content.indexOf("_", content.indexOf("_") + 1) + 1);
+
+                        messages.add(new ImageMessage(
+                                messageDB.getMessageID(),
+                                messageDB.getSenderID(),
+                                "none",
+                                "none",
+                                messageDB.getTimeStamp(),
+                                url,
+                                text,
+                                size
+                        ));
+                    } else if(messageDB.getType().equals("file")){
+                        String content = messageDB.getContent();
+                        long size = Long.parseLong(content.substring(0, content.indexOf("_")));
+                        String url = content.substring(content.indexOf("_") + 1);
+
+                        messages.add(new FileMessage(
+                                messageDB.getMessageID(),
+                                messageDB.getSenderID(),
+                                "none",
+                                "none",
+                                messageDB.getTimeStamp(),
+                                url,
+                                size
+                        ));
+                    }
+                }
+
+                chatMessagesListAdapter.refreshMessagesList(messages);
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        messagesLive.removeObservers(this);
     }
 
     @Override
@@ -690,6 +829,8 @@ public class ChatActivity extends AppCompatActivity {
                         .load(uri)
                         .into(binding.selectedImg);
 
+                binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_send));
+
                 isSendImage = true;
                 imageUri = uri;
             }
@@ -701,6 +842,8 @@ public class ChatActivity extends AppCompatActivity {
                 binding.defaultTxtInpBar.setVisibility(View.GONE);
                 binding.selectedDocumentLayout.setVisibility(View.VISIBLE);
 
+                binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_send));
+
                 isSendDoc = true;
                 fileUri = uri;
             }
@@ -711,6 +854,8 @@ public class ChatActivity extends AppCompatActivity {
                 binding.additionalMenu.setVisibility(View.GONE);
                 binding.defaultTxtInpBar.setVisibility(View.GONE);
                 binding.selectedAudioLayout.setVisibility(View.VISIBLE);
+
+                binding.audioOrSendBtnImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_send));
 
                 isSendAudio = true;
                 audioUri = uri;
@@ -752,10 +897,14 @@ public class ChatActivity extends AppCompatActivity {
                 player.setDataSource(fileName);
                 player.prepare();
                 player.start();
+                isAudioPlaying = true;
+                isAudioPaused = false;
             } catch (IOException e) {
 
             }
         } else if(isAudioPaused) {
+            isAudioPaused = false;
+            isAudioPlaying = true;
             player.start();
         }
     }
@@ -763,6 +912,8 @@ public class ChatActivity extends AppCompatActivity {
     private void pausePlaying(){
         if(player != null){
             player.pause();
+            isAudioPaused = true;
+            isAudioPlaying = false;
         }
     }
 

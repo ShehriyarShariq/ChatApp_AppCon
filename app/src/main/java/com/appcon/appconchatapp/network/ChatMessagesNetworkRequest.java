@@ -20,8 +20,6 @@ import java.util.HashMap;
 
 public class ChatMessagesNetworkRequest {
 
-    ChatMessagesNetworkRequest chatMessagesNetworkRequest = ChatMessagesNetworkRequest.getInstance();
-
     DatabaseReference firebaseDatabase;
     FirebaseAuth firebaseAuth;
 
@@ -68,6 +66,7 @@ public class ChatMessagesNetworkRequest {
                         "messageID",
                         "none",
                         "none",
+                        "none",
                         false,
                         false,
                         (HashMap<String, String>) map.get("permissions"),
@@ -89,20 +88,23 @@ public class ChatMessagesNetworkRequest {
         firebaseDatabase.child("messages").child(chatID).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                HashMap<String, String> msgMap = (HashMap<String, String>) dataSnapshot.getValue();
-                String chatID = dataSnapshot.getRef().getParent().getKey();
-                msgMap.put("chatID", chatID);
-                msgMap.put("messageID", dataSnapshot.getKey());
+                String messageID = dataSnapshot.getKey();
+                if(!messageID.equals("messageID")){
+                    HashMap<String, String> msgMap = (HashMap<String, String>) dataSnapshot.getValue();
+                    String chatID = dataSnapshot.getRef().getParent().getKey();
+                    msgMap.put("chatID", chatID);
+                    msgMap.put("messageID", dataSnapshot.getKey());
 
-                MessageDB message = new MessageDB(
-                        dataSnapshot.getKey(),
-                        chatID,
-                        msgMap.get("sentBy"),
-                        msgMap.get("type"),
-                        msgMap.get("content"),
-                        msgMap.get("timeStamp"));
+                    MessageDB message = new MessageDB(
+                            dataSnapshot.getKey(),
+                            chatID,
+                            msgMap.get("sentBy"),
+                            msgMap.get("type"),
+                            msgMap.get("content"),
+                            msgMap.get("timeStamp"));
 
-                setMessage(message);
+                    setMessage(message);
+                }
             }
 
             @Override

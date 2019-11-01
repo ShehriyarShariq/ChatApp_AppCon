@@ -22,6 +22,11 @@ public class TextMessage extends Message {
     public HashMap<String, String> getMap(){
         HashMap<String, String> map = new HashMap<>();
 
+        map.put("content", text);
+        map.put("sentBy", super.senderID);
+        map.put("timeStamp", super.time);
+        map.put("type", "text");
+
         return map;
     }
 }

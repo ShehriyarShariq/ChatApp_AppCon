@@ -2,9 +2,13 @@ package com.appcon.appconchatapp.adapters;
 
 import android.app.Activity;
 import android.app.DownloadManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -23,7 +28,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.appcon.appconchatapp.R;
 import com.appcon.appconchatapp.databinding.ChatListSingleItemLayoutBinding;
+import com.appcon.appconchatapp.listeners.ChatMessagesItemListener;
 import com.appcon.appconchatapp.model.AudioMessage;
+import com.appcon.appconchatapp.model.FileMessage;
 import com.appcon.appconchatapp.model.ImageMessage;
 import com.appcon.appconchatapp.model.Message;
 import com.appcon.appconchatapp.model.TextMessage;
@@ -35,9 +42,12 @@ import com.google.firebase.storage.StorageReference;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class ChatMessagesListAdapter extends RecyclerView.Adapter<ChatMessagesListAdapter.ChatMessagesListViewHolder> {
+
+    ChatMessagesItemListener chatMessagesItemListener;
 
     Activity activity;
     ArrayList<Message> messages;
@@ -45,9 +55,10 @@ public class ChatMessagesListAdapter extends RecyclerView.Adapter<ChatMessagesLi
     FirebaseAuth firebaseAuth;
     FirebaseStorage firebaseStorage;
 
-    public ChatMessagesListAdapter(Activity activity, ArrayList<Message> messages) {
+    public ChatMessagesListAdapter(Activity activity, ArrayList<Message> messages, ChatMessagesItemListener chatMessagesItemListener) {
         this.activity = activity;
         this.messages = messages;
+        this.chatMessagesItemListener = chatMessagesItemListener;
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
@@ -61,7 +72,7 @@ public class ChatMessagesListAdapter extends RecyclerView.Adapter<ChatMessagesLi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChatMessagesListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ChatMessagesListViewHolder holder, int position) {
         Message message = messages.get(position);
         if(message.getSenderID().equals(firebaseAuth.getCurrentUser().getUid())){ // Self message
             holder.binding.self.setVisibility(View.VISIBLE);
@@ -75,6 +86,7 @@ public class ChatMessagesListAdapter extends RecyclerView.Adapter<ChatMessagesLi
             } else if(message instanceof ImageMessage){
                 ImageMessage imgMsg = (ImageMessage) message;
                 holder.binding.imageMsgSelf.setVisibility(View.VISIBLE);
+                holder.binding.imgTxtSelf.setText(imgMsg.getText());
 
                 StorageReference imgRef = firebaseStorage.getReferenceFromUrl(imgMsg.getImageURL());
                 Glide.with(activity)
@@ -86,14 +98,61 @@ public class ChatMessagesListAdapter extends RecyclerView.Adapter<ChatMessagesLi
             } else if(message instanceof AudioMessage){
                 AudioMessage audioMsg = (AudioMessage) message;
                 holder.binding.audioSelf.setVisibility(View.VISIBLE);
+                holder.binding.audioLengthSelf.setText(audioMsg.getAudioLength());
 
-                DownloadManager downloadManager = (DownloadManager) activity.getSystemService(Context.DOWNLOAD_SERVICE);
-                Uri uri = Uri.parse(audioMsg.getAudioURL());
-                DownloadManager.Request request = new DownloadManager.Request(uri);
-                downloadManager.enqueue(request);
+                String audioURL = audioMsg.getAudioURL();
+                String fileName = audioURL.substring(audioURL.indexOf("%2F") + 3, audioURL.indexOf("?")) + ".3gp";
+
+                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/" + fileName);
+
+                if(!file.exists()){
+                    DownloadManager downloadManager = (DownloadManager) activity.getSystemService(Context.DOWNLOAD_SERVICE);
+                    Uri uri = Uri.parse(audioURL);
+                    DownloadManager.Request request = new DownloadManager.Request(uri);
+                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+                    downloadManager.enqueue(request);
+                }
 
                 setViewBackground(holder.binding.audioSelf, message, position, false);
 
+                holder.binding.audioControlBtnSelf.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(holder.binding.audioControlBtnSelf.getForeground().equals(activity.getDrawable(R.drawable.ic_play))){
+                            holder.binding.audioControlBtnSelf.setForeground(activity.getDrawable(R.drawable.ic_pause));
+                        } else {
+                            holder.binding.audioControlBtnSelf.setForeground(activity.getDrawable(R.drawable.ic_play));
+                        }
+
+                        chatMessagesItemListener.OnAudioPlayPause((AudioMessage) messages.get(holder.getLayoutPosition()));
+                    }
+                });
+
+            } else if(message instanceof FileMessage){
+                FileMessage fileMsg = (FileMessage) message;
+                holder.binding.fileMsgSelf.setVisibility(View.VISIBLE);
+
+                String fileURL = fileMsg.getFileURL();
+                String fileName = fileURL.substring(fileURL.indexOf("%2F") + 3, fileURL.indexOf("?")) + ".pdf";
+
+                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/" + fileName);
+
+                if(!file.exists()){
+                    DownloadManager downloadManager = (DownloadManager) activity.getSystemService(Context.DOWNLOAD_SERVICE);
+                    Uri uri = Uri.parse(fileURL);
+                    DownloadManager.Request request = new DownloadManager.Request(uri);
+                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+                    downloadManager.enqueue(request);
+                }
+
+                setViewBackground(holder.binding.fileMsgSelf, message, position, false);
+
+                holder.binding.fileMsgSelf.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        chatMessagesItemListener.OnDocumentClicked((FileMessage) messages.get(holder.getLayoutPosition()));
+                    }
+                });
             } else if(message instanceof VideoMessage){
 //                VideoMessage vidMsg = (VideoMessage) message;
             }
@@ -151,6 +210,7 @@ public class ChatMessagesListAdapter extends RecyclerView.Adapter<ChatMessagesLi
             } else if(message instanceof ImageMessage){
                 ImageMessage imgMsg = (ImageMessage) message;
                 holder.binding.imageLayoutOther.setVisibility(View.VISIBLE);
+                holder.binding.imgTxtOther.setText(imgMsg.getText());
 
                 StorageReference imgRef = firebaseStorage.getReferenceFromUrl(imgMsg.getImageURL());
                 Glide.with(activity)
@@ -169,6 +229,17 @@ public class ChatMessagesListAdapter extends RecyclerView.Adapter<ChatMessagesLi
                 downloadManager.enqueue(request);
 
                 setViewBackground(holder.binding.audioOther, message, position, true);
+
+            } else if(message instanceof FileMessage){
+                FileMessage fileMsg = (FileMessage) message;
+                holder.binding.fileMsgOther.setVisibility(View.VISIBLE);
+
+                DownloadManager downloadManager = (DownloadManager) activity.getSystemService(Context.DOWNLOAD_SERVICE);
+                Uri uri = Uri.parse(fileMsg.getFileURL());
+                DownloadManager.Request request = new DownloadManager.Request(uri);
+                downloadManager.enqueue(request);
+
+                setViewBackground(holder.binding.fileMsgOther, message, position, true);
 
             } else if(message instanceof VideoMessage){
 //                VideoMessage vidMsg = (VideoMessage) message;

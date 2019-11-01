@@ -8,12 +8,12 @@ import java.util.HashMap;
 
 public class Chat implements Parcelable {
 
-    private String chatID, displayName, displayPicture, creationDate, description, lastMessageSeenID, lastMessageSeen, time;
+    private String chatID, displayName, displayPicture, creationDate, description, lastMessageSeenID, lastMessageSeen, time, lastMessageSeenType;
     private boolean muted, pinned;
     private HashMap<String, String> permissions;
     private ArrayList<String> admins, otherUsers;
 
-    public Chat(String chatID, String displayName, String displayPicture, String creationDate, String description, String lastMessageSeenID, String lastMessageSeen, String time, boolean muted, boolean pinned, HashMap<String, String> permissions, ArrayList<String> admins, ArrayList<String> otherUsers) {
+    public Chat(String chatID, String displayName, String displayPicture, String creationDate, String description, String lastMessageSeenID, String lastMessageSeen, String time, String lastMessageSeenType, boolean muted, boolean pinned, HashMap<String, String> permissions, ArrayList<String> admins, ArrayList<String> otherUsers) {
         this.chatID = chatID;
         this.displayName = displayName;
         this.displayPicture = displayPicture;
@@ -22,6 +22,7 @@ public class Chat implements Parcelable {
         this.lastMessageSeenID = lastMessageSeenID;
         this.lastMessageSeen = lastMessageSeen;
         this.time = time;
+        this.lastMessageSeenType = lastMessageSeenType;
         this.muted = muted;
         this.pinned = pinned;
         this.permissions = permissions;
@@ -37,6 +38,8 @@ public class Chat implements Parcelable {
         description = in.readString();
         lastMessageSeenID = in.readString();
         lastMessageSeen = in.readString();
+        time = in.readString();
+        lastMessageSeenType = in.readString();
         admins = in.readArrayList(String.class.getClassLoader());
         otherUsers = in.readArrayList(String.class.getClassLoader());
         permissions = in.readHashMap(String.class.getClassLoader());
@@ -89,6 +92,10 @@ public class Chat implements Parcelable {
         return time;
     }
 
+    public String getLastMessageSeenType() {
+        return lastMessageSeenType;
+    }
+
     public boolean isMuted() {
         return muted;
     }
@@ -109,16 +116,6 @@ public class Chat implements Parcelable {
         return otherUsers;
     }
 
-    public HashMap<String, Object> getDBMap(){
-        HashMap<String, Object> dbMap = new HashMap<>();
-
-        dbMap.put("lastMessageSeen", lastMessageSeen);
-        dbMap.put("muted", String.valueOf(muted));
-        dbMap.put("otherUsers", otherUsers);
-
-        return dbMap;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -133,6 +130,8 @@ public class Chat implements Parcelable {
         dest.writeString(description);
         dest.writeString(lastMessageSeenID);
         dest.writeString(lastMessageSeen);
+        dest.writeString(time);
+        dest.writeString(lastMessageSeenType);
         dest.writeStringList(admins);
         dest.writeStringList(otherUsers);
         dest.writeSerializable(permissions);
@@ -145,5 +144,20 @@ public class Chat implements Parcelable {
         this.lastMessageSeenID = message.getMessageID();
         this.lastMessageSeen = message.getContent();
         this.time = message.getTimeStamp();
+    }
+
+    public HashMap<String, Object> getDBMap(){
+        HashMap<String, Object> dbMap = new HashMap<>();
+
+        dbMap.put("displayName", displayName);
+        dbMap.put("displayPicture", displayPicture);
+        dbMap.put("creationDate", creationDate);
+        dbMap.put("description", description);
+        dbMap.put("lastMessageSeen", lastMessageSeenID);
+        dbMap.put("admins", admins);
+        dbMap.put("members", otherUsers);
+        dbMap.put("permissions", permissions);
+
+        return dbMap;
     }
 }

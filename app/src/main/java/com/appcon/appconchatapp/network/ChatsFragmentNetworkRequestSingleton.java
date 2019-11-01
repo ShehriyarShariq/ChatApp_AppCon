@@ -59,8 +59,10 @@ public class ChatsFragmentNetworkRequestSingleton {
         firebaseDatabase.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("chats").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                allChatsList.add(dataSnapshot.getKey());
-                setAllChats(allChatsList);
+                if(!dataSnapshot.getKey().equals("chatID")){
+                    allChatsList.add(dataSnapshot.getKey());
+                    setAllChats(allChatsList);
+                }
             }
 
             @Override

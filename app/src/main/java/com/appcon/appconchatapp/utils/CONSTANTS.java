@@ -6,6 +6,7 @@ public final class CONSTANTS {
     public static final String SERVER_BASE_URL = "https://us-central1-connectme-7d022.cloudfunctions.net/";
     public static final String AUTH_URL = SERVER_BASE_URL + "auth/";
     public static final String USER_READ_URL = SERVER_BASE_URL + "userRead/";
+    public static final String USER_WRITE_URL = SERVER_BASE_URL + "userWrite/";
 
     // LOADER TYPES
     public static final String INFO_LOADER = "InfoLoader";

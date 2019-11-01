@@ -55,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
     int currentPage;
 
     LiveData<ArrayList<LocalContact>> allLocalContactsLive;
-    LiveData<ArrayList<String>> allValidContactsLive;
+    LiveData<ArrayList<HashMap<String, String>>> allValidContactsLive;
     ArrayList<LocalContact> allLocalContacts;
     ArrayList<String> allLocalPhoneNumbers;
     ArrayList<LocalContact> allValidContacts;
 
     // Requesting permission to RECORD_AUDIO
-    private String [] permissions = {Manifest.permission.READ_CONTACTS};
+    private String [] permissions = {Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
 
     private FirebaseAuth firebaseAuth;
 
@@ -119,13 +119,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         allValidContactsLive = viewModel.getAllValidPhoneNumbers();
-        allValidContactsLive.observe(this, new Observer<ArrayList<String>>() {
+        allValidContactsLive.observe(this, new Observer<ArrayList<HashMap<String, String>>>() {
             @Override
-            public void onChanged(ArrayList<String> contacts) {
+            public void onChanged(ArrayList<HashMap<String, String>> contacts) {
                 if(contacts.size() > 0){
-                    for(String contact : contacts){
-                        allValidContacts.add(allLocalContacts.get(allLocalPhoneNumbers.indexOf(contact)));
-
+                    for(HashMap<String, String> contact : contacts){
+                        allValidContacts.add(allLocalContacts.get(allLocalPhoneNumbers.indexOf(contact.get("phoneNum"))));
+                        allValidContacts.get(allValidContacts.size() - 1).setUid(contact.get("id"));
                     }
                 }
             }

@@ -28,6 +28,11 @@ public class FileMessage extends Message{
     public HashMap<String, String> getMap(){
         HashMap<String, String> map = new HashMap<>();
 
+        map.put("content", fileSize + "_" + fileURL);
+        map.put("sentBy", super.senderID);
+        map.put("timeStamp", super.time);
+        map.put("type", "file");
+
         return map;
     }
 }

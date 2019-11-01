@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class LocalContact {
 
-    private String displayName, phoneNumber;
+    private String displayName, phoneNumber, uid;
 
     public LocalContact(String displayName, String phoneNumber) {
         this.displayName = displayName;
@@ -17,5 +17,13 @@ public class LocalContact {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

@@ -34,6 +34,11 @@ public class ImageMessage extends Message {
     public HashMap<String, String> getMap(){
         HashMap<String, String> map = new HashMap<>();
 
+        map.put("content", text + "_" + size + "_" + imageURL );
+        map.put("sentBy", super.senderID);
+        map.put("timeStamp", super.time);
+        map.put("type", "image");
+
         return map;
     }
 }

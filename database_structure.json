@@ -29,7 +29,7 @@
 		"adminWriteOnly" : "false",
 		"adminSettingsEditOnly" : "false"
 	    },
-            "lastMessageSent":"MessageID"
+            "lastMessageSeen":"MessageID"
         }
     },
     "publicGroups":{
@@ -45,7 +45,7 @@
                 "userID"
             ],
             "permissions":"permissions",
-            "lastMessageSent":"MessageID"
+            "lastMessageSeen":"MessageID"
         }
     },
     "messages":{
