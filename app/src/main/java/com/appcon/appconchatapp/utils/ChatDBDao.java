@@ -25,8 +25,8 @@ public interface ChatDBDao {
     @Query("SELECT * FROM chat_table WHERE chatID = :chatID")
     LiveData<ChatDB> getChat(String chatID);
 
-    @Query("SELECT * FROM chat_table WHERE otherUsers = :uid")
-    LiveData<ChatDB> getChatByUser(String uid);
+    @Query("SELECT * FROM chat_table WHERE otherUsers IN(:uid)")
+    LiveData<ChatDB> getChatByUser(String[] uid);
 
     @Query("DELETE FROM chat_table WHERE chatID = :chatID")
     void deleteChat(String chatID);

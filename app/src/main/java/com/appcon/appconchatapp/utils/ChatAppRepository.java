@@ -34,7 +34,7 @@ public class ChatAppRepository {
         return chatDBDao.getChat(chatID);
     }
 
-    public LiveData<ChatDB> getChatByUser(String uid){
+    public LiveData<ChatDB> getChatByUser(String[] uid){
         return chatDBDao.getChatByUser(uid);
     }
 

@@ -41,7 +41,8 @@ router.put("/api/user/create_user_chats", function(req, res){
                                         var chatID = chatIDs[index];
                                         var userChat = userChats[chatID];
                                         var convo = userChat.convo;
-                                        firebaseDatabase.ref("conversations/" + chatID).set(convo,function(error){
+                                        var otherUser = userChat.otherUser;
+                                        firebaseDatabase.ref("users/" + otherUser + "/chats/" + chatID).set("lastMsgSeenID", function(error){
                                                 if(error){
                                                         if(index == (n - 1)){
                                                                 res.json(setResult(successID, "Success!"));
@@ -49,7 +50,7 @@ router.put("/api/user/create_user_chats", function(req, res){
                 
                                                         index++;
                                                 } else {
-                                                        firebaseDatabase.ref("messages/" + chatID + "/messageID").set(dummyMsgMap, function(error){
+                                                        firebaseDatabase.ref("conversations/" + chatID).set(convo,function(error){
                                                                 if(error){
                                                                         if(index == (n - 1)){
                                                                                 res.json(setResult(successID, "Success!"));
@@ -57,12 +58,22 @@ router.put("/api/user/create_user_chats", function(req, res){
                                 
                                                                         index++;
                                                                 } else {
-                                                                        if(index == (n - 1)){
-                                                                                res.json(setResult(successID, "Success!"));
-                                                                        }
-                                
-                                                                        index++;
-                                                                }                                                                
+                                                                        firebaseDatabase.ref("messages/" + chatID + "/messageID").set(dummyMsgMap, function(error){
+                                                                                if(error){
+                                                                                        if(index == (n - 1)){
+                                                                                                res.json(setResult(successID, "Success!"));
+                                                                                        }
+                                                
+                                                                                        index++;
+                                                                                } else {
+                                                                                        if(index == (n - 1)){
+                                                                                                res.json(setResult(successID, "Success!"));
+                                                                                        }
+                                                
+                                                                                        index++;
+                                                                                }                                                                
+                                                                        });
+                                                                }
                                                         });
                                                 }
                                         });

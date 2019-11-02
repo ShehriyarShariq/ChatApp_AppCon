@@ -152,7 +152,8 @@ public class MainActivity extends AppCompatActivity {
                     for(int i = 0; i < allValidContacts.size(); i++){
                         final LocalContact localContact = allValidContacts.get(i);
                         final String uid = localContact.getUid();
-                        chatsByUser = repository.getChatByUser(uid + "," + firebaseAuth.getCurrentUser().getUid());
+                        String[] searchBy = {uid + "," + firebaseAuth.getCurrentUser().getUid(), firebaseAuth.getCurrentUser().getUid() + "," + uid};
+                        chatsByUser = repository.getChatByUser(searchBy);
                         chatsByUser.observe(MainActivity.this, new Observer<ChatDB>() {
                             @Override
                             public void onChanged(ChatDB chatDB) {
@@ -188,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
 
                                     HashMap<String, Object> userChat = new HashMap<>();
                                     userChat.put("convo", chat.getDBMap());
+                                    userChat.put("otherUser", uid);
 
                                     newContacts.put(chatID, userChat);
 
